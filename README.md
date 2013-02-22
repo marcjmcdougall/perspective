@@ -5,7 +5,7 @@ Repository hosting both the development and release builds for the Android game 
 
 authored by
 ===========
-McDougall, Marc | Fick, Ronald | Wood, Jeffrey | Bass, Evan | Dubno, Brian |
+McDougall, Marc | Fick, Ronald | Wood, Jeffrey | Bass, Evan | Dubno, Brian
 
 advisor
 ===========
