@@ -46,7 +46,7 @@ public class GameScreen implements Screen{
 
 //        mCube.draw();
 
-        mAngle += 50.0f;
+        mAngle += 1.0f;
 	}
 
 	@Override
