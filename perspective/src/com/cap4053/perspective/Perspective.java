@@ -2,15 +2,18 @@ package com.cap4053.perspective;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.cap4053.perspective.screens.GameScreen;
+import com.badlogic.gdx.Screen;
+import com.cap4053.perspective.screens.SplashScreen;
 import com.cap4053.perspective.view.PerspectiveInputProcessor;
 
 public class Perspective extends Game {
 	
+	public static final String TAG = "Perspective: ";
+	
 	@Override
 	public void create() {		
 		
-		setScreen(new GameScreen());
+		setScreen(new SplashScreen(this));
 		Gdx.input.setInputProcessor(new PerspectiveInputProcessor(this));
 	}
 	
@@ -42,5 +45,10 @@ public class Perspective extends Game {
 	public void resume() {
 		
 		super.resume();
+	}
+	
+	public void setScreen(Screen screen){
+		
+		super.setScreen(screen);
 	}
 }

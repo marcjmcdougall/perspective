@@ -1,7 +1,7 @@
 package com.cap4053.perspective.view;
 
 import com.badlogic.gdx.Game;
-import com.cap4053.perspective.screens.GameScreen;
+import com.cap4053.perspective.screens.SplashScreen;
 
 public class PerspectiveInputProcessor implements com.badlogic.gdx.InputProcessor{
 

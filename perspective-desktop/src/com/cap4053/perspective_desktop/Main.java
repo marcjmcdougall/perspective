@@ -11,6 +11,6 @@ public class Main {
 		cfg.width = 480;
 		cfg.height = 320;
 		
-		new LwjglApplication(new com.cap4053.perspective.Main(), cfg);
+		new LwjglApplication(new com.cap4053.perspective.Perspective(), cfg);
 	}
 }
