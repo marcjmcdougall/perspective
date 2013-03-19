@@ -1,31 +1,35 @@
 package com.cap4053.perspective;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
-
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Mesh;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.VertexAttribute;
+import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 
 public class Cube {
 
-	private FloatBuffer   mVertexBuffer;
-    private FloatBuffer   mColorBuffer;
-    private ByteBuffer  mIndexBuffer;
+	private Mesh mesh;
+    private Texture mTexture;
     
 	public Cube(){
 		
-		 float vertices[] = {
+		// This array holds all the vertex information (all 8 "points" of a cube)
+		float vertices[] = {
 				 
-				 -1.0f, -1.0f, -1.0f,
-				 1.0f, -1.0f, -1.0f,
-				 1.0f, 1.0f, -1.0f,
-				 -1.0f, 1.0f, -1.0f,
-				 -1.0f, -1.0f, 1.0f,
-				 1.0f, -1.0f, 1.0f,
-				 1.0f, 1.0f, 1.0f,
-				 -1.0f, 1.0f, 1.0f
+				 -1.0f, -1.0f, -1.0f, Color.toFloatBits(255, 0, 0, 255),
+				 1.0f, -1.0f, -1.0f, Color.toFloatBits(0, 255, 0, 255),
+				 1.0f, 1.0f, -1.0f, Color.toFloatBits(0, 0, 255, 255),
+				 -1.0f, 1.0f, -1.0f, Color.toFloatBits(0, 255, 0, 255),
+				 -1.0f, -1.0f, 1.0f, Color.toFloatBits(255, 0, 0, 255),
+				 1.0f, -1.0f, 1.0f, Color.toFloatBits(0, 0, 255, 255),
+				 1.0f, 1.0f, 1.0f, Color.toFloatBits(0, 255, 0, 255),
+				 -1.0f, 1.0f, 1.0f, Color.toFloatBits(0, 0, 255, 255)
 		 };
 		 
+		// This array holds the color information for each vertex.  Note that each color will (by default)
+		// gradually blend into the other color as we progress from one vertext to another.
         float colors[] = {
         		
         		0.0f, 0.0f, 0.0f, 1.0f,
@@ -38,7 +42,11 @@ public class Cube {
         		0.0f, 1.0f, 1.0f, 1.0f
         };
 
-        byte indices[] = {
+        // This is the index information.  This is where we tell OpenGL HOW to draw the vertexes on screen.
+        // Basically, here, as you can see, it is separated into 2 columns, and therefore implies that each
+        // row represents one "face" of the cube.
+        short indices[] = {
+        		
                 0, 4, 5,    0, 5, 1,
                 1, 5, 6,    1, 6, 2,
                 2, 6, 7,    2, 7, 3,
@@ -47,66 +55,61 @@ public class Cube {
                 3, 0, 1,    3, 1, 2
         };
         
-        // Buffers to be passed to gl*Pointer() functions
-        // must be direct, i.e., they must be placed on the
-        // native heap where the garbage collector cannot
-        // move them.
-        //
-        // Buffers with multi-byte datatypes (e.g., short, int, float)
-        // must have their byte order set to native order
+        // This maps the texture to the cube.  Note that these values are all the same, because we are 
+        // placing the same image on each face of the cube.  This is known as UV mapping.
+        float texture[] = { 
+        		
+	    		0.0f, 0.0f,
+	    		0.0f, 1.0f,
+	    		1.0f, 0.0f,
+	    		1.0f, 1.0f, 
+	    		
+	    		0.0f, 0.0f,
+	    		0.0f, 1.0f,
+	    		1.0f, 0.0f,
+	    		1.0f, 1.0f,
+	    		
+	    		0.0f, 0.0f,
+	    		0.0f, 1.0f,
+	    		1.0f, 0.0f,
+	    		1.0f, 1.0f,
+	    		
+	    		0.0f, 0.0f,
+	    		0.0f, 1.0f,
+	    		1.0f, 0.0f,
+	    		1.0f, 1.0f,
+	    		
+	    		0.0f, 0.0f,
+	    		0.0f, 1.0f,
+	    		1.0f, 0.0f,
+	    		1.0f, 1.0f,
+	    		
+	    		0.0f, 0.0f,
+	    		0.0f, 1.0f,
+	    		1.0f, 0.0f,
+	    		1.0f, 1.0f,
 
-        ByteBuffer vbb = ByteBuffer.allocateDirect(vertices.length*4);
-        vbb.order(ByteOrder.nativeOrder());
-        mVertexBuffer = vbb.asFloatBuffer();
-        mVertexBuffer.put(vertices);
-        mVertexBuffer.position(0);
-
-        ByteBuffer cbb = ByteBuffer.allocateDirect(colors.length*4);
-        cbb.order(ByteOrder.nativeOrder());
-        mColorBuffer = cbb.asFloatBuffer();
-        mColorBuffer.put(colors);
-        mColorBuffer.position(0);
-
-        mIndexBuffer = ByteBuffer.allocateDirect(indices.length);
-        mIndexBuffer.put(indices);
-        mIndexBuffer.position(0);
+	    							};
+        
+        if(mesh == null){
+        	
+        	mesh = new Mesh(true, 36, indices.length, 
+        				new VertexAttribute(Usage.Position, 3, "a_position"),
+        				new VertexAttribute(Usage.ColorPacked, 4, "a_color"));
+//        				new VertexAttribute(Usage.TextureCoordinates, 2, "a_texture"));
+        	
+        	mesh.setVertices(vertices);
+        	mesh.setIndices(indices);
+        }
+        
+        mTexture = new Texture(Gdx.files.internal("data/libgdx.png"));
 	}
 	
 	public void draw(){
 		
-		
-		int[] textures = new int[1];
-		
-		Gdx.gl10.glFrontFace(Gdx.gl10.GL_CW);
-        Gdx.gl10.glVertexPointer(3, Gdx.gl10.GL_FLOAT, 0, mVertexBuffer);
-        
-//        Gdx.gl10.glColorPointer(4, Gdx.gl10.GL_FLOAT, 0, mColorBuffer);
-        
-//        for(i=0; i<6; ++i)
-//        {
-//            gl.glBindTexture(GL10.GL_TEXTURE_2D, texture[i]);   //use texture of ith face
-//            indexBuffer.position(6*i);                          //select ith face
-//
-//            //draw 2 triangles making up this face
-//            gl.glDrawElements(GL10.GL_TRIANGLES, 6, GL10.GL_UNSIGNED_BYTE, indexBuffer);
-//        }
-        
-        Gdx.gl10.glBindTexture(Gdx.gl10.GL_TEXTURE_2D, textures[0]);
-        
-        Gdx.gl10.glTexParameterf(Gdx.gl10.GL_TEXTURE_2D, Gdx.gl10.GL_TEXTURE_MIN_FILTER,
-                Gdx.gl10.GL_NEAREST);
-        Gdx.gl10.glTexParameterf(Gdx.gl10.GL_TEXTURE_2D,
-                Gdx.gl10.GL_TEXTURE_MAG_FILTER,
-                Gdx.gl10.GL_LINEAR);
-
-        Gdx.gl10.glTexParameterf(Gdx.gl10.GL_TEXTURE_2D, Gdx.gl10.GL_TEXTURE_WRAP_S,
-                Gdx.gl10.GL_CLAMP_TO_EDGE);
-        Gdx.gl10.glTexParameterf(Gdx.gl10.GL_TEXTURE_2D, Gdx.gl10.GL_TEXTURE_WRAP_T,
-                Gdx.gl10.GL_CLAMP_TO_EDGE);
-
-        Gdx.gl10.glTexEnvf(Gdx.gl10.GL_TEXTURE_ENV, Gdx.gl10.GL_TEXTURE_ENV_MODE,
-                Gdx.gl10.GL_REPLACE);
-        
-        Gdx.gl.glDrawElements(Gdx.gl10.GL_TRIANGLES, 6, Gdx.gl10.GL_UNSIGNED_BYTE, mIndexBuffer);
+		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+//		Gdx.graphics.getGL10().glEnable(GL10.GL_TEXTURE_2D);
+//		mTexture.bind();
+        mesh.render(GL10.GL_TRIANGLES, 0, 36);
 	}
 }

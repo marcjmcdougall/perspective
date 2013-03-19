@@ -35,15 +35,12 @@ public class SplashScreen extends PerspectiveScreen{
 		//Controls vertical rotation
 		Gdx.gl10.glRotatef(mAngle,  1, 0, 0);
 
-		Gdx.gl10.glEnableClientState(GL10.GL_VERTEX_ARRAY);
-		Gdx.gl10.glEnableClientState(GL10.GL_COLOR_ARRAY);
-		
         mCube.draw();
 
         Gdx.gl10.glRotatef(mAngle*2.0f, 0, 1, 1);
         Gdx.gl10.glTranslatef(0.5f, 0.5f, 0.5f);
 
-        mCube.draw();
+//        mCube.draw();
 
         mAngle += 1.0f;
 	}
