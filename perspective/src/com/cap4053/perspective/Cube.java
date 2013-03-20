@@ -12,7 +12,9 @@ public class Cube {
 	private Mesh mesh;
     private Texture mTexture;
     
-	public Cube(){
+	public Cube(Texture texture){
+		
+		this.mTexture = texture;
 		
 		// This array holds all the vertex information (all 8 "points" of a cube, meaning A, B, C, D, E, F, G, and H)
 		// Note, there are 3 sets of vertices for each because we want to map the texture differently each time!
@@ -75,8 +77,6 @@ public class Cube {
         	mesh.setVertices(vertices);
         	mesh.setIndices(indices);
         }
-        
-        mTexture = new Texture(Gdx.files.internal("data/libgdx_corrected.png"));
 	}
 	
 	public void draw(){

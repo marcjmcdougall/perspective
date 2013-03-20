@@ -2,6 +2,7 @@ package com.cap4053.perspective.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Texture;
 import com.cap4053.perspective.Cube;
 import com.cap4053.perspective.Perspective;
 
@@ -15,6 +16,8 @@ public class SplashScreen extends PerspectiveScreen{
     public SplashScreen(Perspective game){
     	
     	super(game);
+    	
+    	this.mTranslucentBackground = false;
     }
     
 	@Override
@@ -58,7 +61,7 @@ public class SplashScreen extends PerspectiveScreen{
 	@Override
 	public void show() {
 		
-		mCube = new Cube();
+		mCube = new Cube(new Texture(Gdx.files.internal("data/libgdx_corrected.png")));
 		
 		Gdx.gl10.glDisable(GL10.GL_DITHER);
 
@@ -66,8 +69,7 @@ public class SplashScreen extends PerspectiveScreen{
          * Some one-time OpenGL initialization can be made here
          * probably based on features of this particular context
          */
-        Gdx.gl10.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT,
-                 GL10.GL_FASTEST);
+        Gdx.gl10.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, GL10.GL_FASTEST);
 
 	    if (mTranslucentBackground) {
 	    	
