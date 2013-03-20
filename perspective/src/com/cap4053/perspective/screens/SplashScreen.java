@@ -56,7 +56,7 @@ public class SplashScreen extends PerspectiveScreen{
 	@Override
 	public void show() {
 		
-		this.mCube = new SpinningTexturedCube(new Texture(Gdx.files.internal("data/libgdx_corrected.png")), 1.0f);
+		this.mCube = new SpinningTexturedCube(new Texture(Gdx.files.internal("data/perspective_cube_front.png")), 1.0f);
 		
 		Gdx.gl10.glDisable(GL10.GL_DITHER);
 
