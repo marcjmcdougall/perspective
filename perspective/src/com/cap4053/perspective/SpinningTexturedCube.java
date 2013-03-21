@@ -8,7 +8,7 @@ public class SpinningTexturedCube extends TexturedCube {
 	
 	public SpinningTexturedCube(Texture texture, float spinSpeed) {
 		
-		super(texture);
+		super(texture, texture, texture, texture, texture, texture);
 		
 		this.speed = spinSpeed;
 	}
@@ -35,5 +35,4 @@ public class SpinningTexturedCube extends TexturedCube {
 //		DEBUG
 //		Gdx.app.log(Perspective.TAG, "New angleX: " + angleX + " Speed: "+ speed);
 	}
-
 }
