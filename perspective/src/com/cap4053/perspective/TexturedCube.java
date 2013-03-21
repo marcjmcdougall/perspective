@@ -29,7 +29,7 @@ public abstract class TexturedCube {
     private float angleX;
     private float angleY;
     
-	public TexturedCube(Texture frontTexture, Texture backTexture, Texture leftTexture, Texture rightTexture, Texture topTexture, Texture bottomTexture){
+	public TexturedCube(Texture frontTexture, Texture backTexture, Texture leftTexture, Texture rightTexture, Texture bottomTexture, Texture topTexture){
 		
 		this.frontTexture = frontTexture;
 		this.backTexture = backTexture;
