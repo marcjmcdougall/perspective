@@ -6,9 +6,9 @@ public class SpinningTexturedCube extends TexturedCube {
 
 	private float speed;
 	
-	public SpinningTexturedCube(Texture texture, float spinSpeed) {
+	public SpinningTexturedCube(Texture frontTexture, Texture backTexture, Texture leftTexture, Texture rightTexture, Texture topTexture, Texture bottomTexture, float spinSpeed) {
 		
-		super(texture, texture, texture, texture, texture, texture);
+		super(frontTexture, backTexture, leftTexture, rightTexture, topTexture, bottomTexture);
 		
 		this.speed = spinSpeed;
 	}
