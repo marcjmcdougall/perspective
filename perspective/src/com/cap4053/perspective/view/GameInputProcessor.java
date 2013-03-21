@@ -5,10 +5,11 @@ import com.cap4053.perspective.screens.GameScreen;
 
 public class GameInputProcessor extends PerspectiveInputProcessor {
 
-	private static final float TOUCH_SCALE_FACTOR = 180.0f / 320;
+	private static final float TOUCH_SCALE_FACTOR = 1.0f;
 	
 	private float previousY;
 	private float previousX;
+	private float previousZ;
 	
 	private GameScreen screen;
 	
