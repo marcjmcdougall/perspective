@@ -14,7 +14,9 @@ public abstract class PerspectiveScreen implements Screen {
 	public PerspectiveScreen(Perspective game){
 		
 		this.game = game;
+		
 		stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),true);
+		
 	}
 	
 	public String getName(){
@@ -37,6 +39,8 @@ public abstract class PerspectiveScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
+		
+		stage.setViewport(width, height, true);
 		
 //		DEBUG
 		Gdx.app.log(Perspective.TAG, "Resizing screen: " + getName() + " to: " + width + " x " + height );

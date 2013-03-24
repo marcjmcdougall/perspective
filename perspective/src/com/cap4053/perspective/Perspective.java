@@ -19,9 +19,9 @@ public class Perspective extends Game {
 		Gdx.input.setInputProcessor(new SplashScreenInputProcessor(this));
 		
 		//Get rid of this stuff below later
-		GameSave testSave = new GameSave();
-		testSave.save();
-		testSave.load();
+		//GameSave testSave = new GameSave();
+		//testSave.save();
+		//testSave.load();
 	}
 	
 	@Override

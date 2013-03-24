@@ -20,8 +20,7 @@ import com.cap4053.perspective.Perspective;
 
 public class MenuScreen extends PerspectiveScreen{
 	
-	Perspective game;
-	Stage stage;
+//	Stage stage;
 	BitmapFont black;
 	TextureAtlas atlas;
 	Skin skin;
@@ -35,20 +34,21 @@ public class MenuScreen extends PerspectiveScreen{
 	Image splashImage;
 	
 	public MenuScreen(Perspective game) {
-		super(game);
-		this.game = game;
 		
+		super(game);
 	}
 
 	@Override
 	public void render(float delta) {
 		
-		Gdx.gl.glClearColor(1,1,1,1);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		//Gdx.gl.glClearColor(1,1,1,1);
+		//Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
-		stage.act(delta);
+		//stage.act(delta);
 		
-		batch.begin();
+		super.render(delta);
+		
+		/*batch.begin();
 		sprite.draw(batch);
 		batch.end();
 		
@@ -56,7 +56,7 @@ public class MenuScreen extends PerspectiveScreen{
 		
 		stage.draw();
 			
-		batch.end();
+		batch.end();*/
 		
 		
 	}
@@ -66,27 +66,33 @@ public class MenuScreen extends PerspectiveScreen{
 		
 		super.resize(width, height);
 		
-		if(stage==null)
-			stage = new Stage(width,height,true);
+		//if(stage==null)
+			//stage = new Stage(width,height,true);
 		
+
 		stage.clear();
 		
 		Gdx.input.setInputProcessor(stage);
 		
-		TextButtonStyle style = new TextButtonStyle();
+		TextButtonStyle style1 = new TextButtonStyle();
+		TextButtonStyle style2 = new TextButtonStyle();
 		
-		style.up = skin.getDrawable("buttonnormal");
-		style.down = skin.getDrawable("buttonpressed");
-		style.font = black;
+		style1.up = skin.getDrawable("Play_Button");
+		style1.down = skin.getDrawable("Play_Button_Pushed");
+		style1.font = black;
 		
-		button = new TextButton("Play!",style);
-		button.setWidth(150);
+		button = new TextButton("",style1);
+		button.setWidth(120);
 		button.setHeight(50);
-		button.setX(Gdx.graphics.getWidth()/2-(button.getWidth()+button.getWidth()/2));
+		button.setX(Gdx.graphics.getWidth()/2-(button.getWidth()*2-button.getWidth()/2));
 		button.setY(Gdx.graphics.getHeight()/2-(button.getHeight()*2));
 		
-		options = new TextButton("Options",style);
-		options.setWidth(150);
+		style2.up = skin.getDrawable("Options_Button");
+		style2.down = skin.getDrawable("Options_Button_Pushed");
+		style2.font = black;
+		
+		options = new TextButton("",style2);
+		options.setWidth(120);
 		options.setHeight(50);
 		options.setX(Gdx.graphics.getWidth()/2+(button.getWidth()-button.getWidth()/2));
 		options.setY(Gdx.graphics.getHeight()/2-(button.getHeight()*2));
@@ -112,11 +118,10 @@ public class MenuScreen extends PerspectiveScreen{
 				game.setScreen(new OptionsScreen(game));
 			}
 		});
-		
+		stage.addActor(splashImage);
 		stage.addActor(button);
 		stage.addActor(options);
 		
-		stage.setViewport(width, height, true);
 	}
 
 	@Override
@@ -126,15 +131,18 @@ public class MenuScreen extends PerspectiveScreen{
 		background.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		sprite = new Sprite(background);
 		
+		splashImage = new Image(background);	
+		splashImage.setFillParent(true);
+		
+		
 		sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
 		
 		batch = new SpriteBatch();
-		atlas = new TextureAtlas("data/button.pack");
+		atlas = new TextureAtlas("data/MainMenu.pack");
 		skin = new Skin();
 		skin.addRegions(atlas);
 		black = new BitmapFont(Gdx.files.internal("data/blackfont.fnt"),false);
-		
 		
 	}
 
@@ -149,6 +157,5 @@ public class MenuScreen extends PerspectiveScreen{
 		skin.dispose();
 		atlas.dispose();
 		black.dispose();
-		stage.dispose();
 	}
 }
