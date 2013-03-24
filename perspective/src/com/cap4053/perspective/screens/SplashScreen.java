@@ -3,6 +3,7 @@ package com.cap4053.perspective.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.SpinningTexturedCube;
 import com.cap4053.perspective.view.SplashScreenInputProcessor;
@@ -10,6 +11,7 @@ import com.cap4053.perspective.view.SplashScreenInputProcessor;
 public class SplashScreen extends PerspectiveScreen{
 
 	private SpinningTexturedCube mCube;
+	private Label title;
 	
 	private boolean mTranslucentBackground;
 	
