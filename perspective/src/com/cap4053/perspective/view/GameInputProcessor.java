@@ -1,7 +1,7 @@
 package com.cap4053.perspective.view;
 
 import com.cap4053.perspective.Perspective;
-import com.cap4053.perspective.screens.GameScreen;
+import com.cap4053.perspective.screens.CubeGameScreen;
 
 public class GameInputProcessor extends PerspectiveInputProcessor {
 
@@ -10,13 +10,13 @@ public class GameInputProcessor extends PerspectiveInputProcessor {
 	private float previousY;
 	private float previousX;
 	
-	private GameScreen screen;
+	private CubeGameScreen screen;
 	
 	public GameInputProcessor(Perspective game) {
 		
 		super(game);
 		
-		this.screen = (GameScreen) game.getScreen();
+		this.screen = (CubeGameScreen) game.getScreen();
 	}
 
 	@Override

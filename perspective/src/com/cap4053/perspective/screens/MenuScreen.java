@@ -35,9 +35,9 @@ public class MenuScreen extends PerspectiveScreen{
 	Image splashImage;
 	
 	public MenuScreen(Perspective game) {
+		
 		super(game);
 		this.game = game;
-		
 	}
 
 	@Override

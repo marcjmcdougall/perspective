@@ -140,8 +140,10 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				
 				return true;
 			}
+			
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new GameScreen(game));
+				
+				game.setScreen(new FlatGameScreen(game));
 			}
 		});
 
@@ -152,9 +154,10 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new GameScreen(game));
+				game.setScreen(new CubeGameScreen(game));
 			}
 		});
+		
 		stage3.addListener(new InputListener()
 		{
 			public boolean touchDown(InputEvent even, float x, float y,int pointer, int button){
@@ -162,7 +165,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new GameScreen(game));
+				game.setScreen(new CubeGameScreen(game));
 			}
 		});
 		
@@ -173,9 +176,10 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new GameScreen(game));
+				game.setScreen(new CubeGameScreen(game));
 			}
 		});
+		
 		stage5.addListener(new InputListener()
 		{
 			public boolean touchDown(InputEvent even, float x, float y,int pointer, int button){
@@ -183,9 +187,10 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new GameScreen(game));
+				game.setScreen(new CubeGameScreen(game));
 			}
 		});
+		
 		stage6.addListener(new InputListener()
 		{
 			public boolean touchDown(InputEvent even, float x, float y,int pointer, int button){
@@ -193,7 +198,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new GameScreen(game));
+				game.setScreen(new CubeGameScreen(game));
 			}
 		});
 		
@@ -204,7 +209,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new GameScreen(game));
+				game.setScreen(new CubeGameScreen(game));
 			}
 		});
 		
@@ -215,7 +220,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new GameScreen(game));
+				game.setScreen(new CubeGameScreen(game));
 			}
 		});
 		stage9.addListener(new InputListener()
@@ -225,7 +230,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new GameScreen(game));
+				game.setScreen(new CubeGameScreen(game));
 			}
 		});
 		
