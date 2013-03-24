@@ -17,6 +17,11 @@ public class Perspective extends Game {
 		
 		setScreen(new SplashScreen(this));
 		Gdx.input.setInputProcessor(new SplashScreenInputProcessor(this));
+		
+		//Get rid of this stuff below later
+		GameSave testSave = new GameSave();
+		testSave.save();
+		testSave.load();
 	}
 	
 	@Override
