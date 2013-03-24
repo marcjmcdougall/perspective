@@ -9,7 +9,6 @@ public class GameInputProcessor extends PerspectiveInputProcessor {
 	
 	private float previousY;
 	private float previousX;
-	private float previousZ;
 	
 	private GameScreen screen;
 	

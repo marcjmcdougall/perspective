@@ -1,7 +1,5 @@
 package com.cap4053.perspective;
 
-import sun.reflect.generics.tree.BottomSignature;
-
 import com.badlogic.gdx.graphics.Texture;
 
 public class MoveableTexturedCube extends TexturedCube {

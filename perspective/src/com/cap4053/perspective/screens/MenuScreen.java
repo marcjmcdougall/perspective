@@ -64,9 +64,11 @@ public class MenuScreen extends PerspectiveScreen{
 	@Override
 	public void resize(int width, int height) {
 		
+		super.resize(width, height);
 		
 		if(stage==null)
 			stage = new Stage(width,height,true);
+		
 		stage.clear();
 		
 		Gdx.input.setInputProcessor(stage);
@@ -114,7 +116,7 @@ public class MenuScreen extends PerspectiveScreen{
 		stage.addActor(button);
 		stage.addActor(options);
 		
-		super.resize(width, height);
+		stage.setViewport(width, height, true);
 	}
 
 	@Override
