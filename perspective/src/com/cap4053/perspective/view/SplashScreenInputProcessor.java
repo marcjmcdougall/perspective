@@ -1,7 +1,7 @@
 package com.cap4053.perspective.view;
 
 import com.cap4053.perspective.Perspective;
-import com.cap4053.perspective.screens.GameScreen;
+import com.cap4053.perspective.screens.MenuScreen;
 
 public class SplashScreenInputProcessor extends PerspectiveInputProcessor {
 
@@ -31,7 +31,7 @@ public class SplashScreenInputProcessor extends PerspectiveInputProcessor {
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		
-		perspectiveGame.setScreen(new GameScreen(perspectiveGame));
+		perspectiveGame.setScreen(new MenuScreen(perspectiveGame));
 		
 		return true;
 	}
