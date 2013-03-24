@@ -3,8 +3,8 @@ package com.cap4053.perspective.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
-import com.cap4053.perspective.MoveableTexturedCube;
 import com.cap4053.perspective.Perspective;
+import com.cap4053.perspective.models.MoveableTexturedCube;
 import com.cap4053.perspective.view.GameInputProcessor;
 
 public class GameScreen extends PerspectiveScreen {

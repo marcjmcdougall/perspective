@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.cap4053.perspective.Perspective;
-import com.cap4053.perspective.SpinningTexturedCube;
+import com.cap4053.perspective.models.SpinningTexturedCube;
 import com.cap4053.perspective.view.SplashScreenInputProcessor;
 
 public class SplashScreen extends PerspectiveScreen{
