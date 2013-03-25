@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.cap4053.perspective.Perspective;
+import com.cap4053.perspective.models2D.Character;
 import com.cap4053.perspective.models2D.Block;
 import com.cap4053.perspective.models2D.PerspectiveImage;
 
@@ -36,20 +37,22 @@ public class FlatGameScreen extends PerspectiveScreen{
 		}
 	}
 	
+	public void resize(int width, int height){
+		
+		super.resize(width, height);
+	}
+	
 	private void initialize(){
 		
 		// Adds a single block to the ArrayList
-		images.add(Block.create(0, 0));
-		images.add(Block.create(0, 1));
-		images.add(Block.create(0, 2));
-		images.add(Block.create(0, 3));
-		images.add(Block.create(0, 4));
-		images.add(Block.create(0, 5));
-		images.add(Block.create(0, 6));
-		images.add(Block.create(1, 0));
-		images.add(Block.create(2, 1));
-		images.add(Block.create(3, 2));
-		images.add(Block.create(4, 3));
-		images.add(Block.create(5, 4));
+		for(int i = 0; i < 7; i++){
+			
+			for(int j = 0; j < 7; j++){
+				
+				images.add(Block.create(i, j));
+			}
+		}
+		
+		images.add(Character.create(4, 5));
 	}
 }
