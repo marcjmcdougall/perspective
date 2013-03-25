@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.models3D.MoveableTexturedCube;
-import com.cap4053.perspective.view.GameInputProcessor;
+import com.cap4053.perspective.view.GameInputProcessor3D;
 
 public class CubeGameScreen extends PerspectiveScreen {
 
@@ -25,7 +25,7 @@ public class CubeGameScreen extends PerspectiveScreen {
 //		DEBUG
 		Gdx.app.log(Perspective.TAG, "**Showing Game Screen Now**");
 		
-		Gdx.input.setInputProcessor(new GameInputProcessor(game));
+		Gdx.input.setInputProcessor(new GameInputProcessor3D(game));
 		
 		Texture front = new Texture(Gdx.files.internal("data/debug_front.png"));
 		Texture back = new Texture(Gdx.files.internal("data/debug_back.png"));

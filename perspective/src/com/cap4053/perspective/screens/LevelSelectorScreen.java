@@ -143,7 +143,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 			
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
 				
-				game.setScreen(new FlatGameScreen(game));
+				game.setScreen(new GameScreen2D(game));
 			}
 		});
 

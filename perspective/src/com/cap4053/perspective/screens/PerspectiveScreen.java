@@ -77,4 +77,11 @@ public abstract class PerspectiveScreen implements Screen {
 		
 		stage.dispose();
 	}
+
+	/**
+	 * @return the stage
+	 */
+	public Stage getStage() {
+		return stage;
+	}
 }
