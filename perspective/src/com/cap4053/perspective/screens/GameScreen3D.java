@@ -4,14 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.cap4053.perspective.Perspective;
-import com.cap4053.perspective.models.MoveableTexturedCube;
-import com.cap4053.perspective.view.GameInputProcessor;
+import com.cap4053.perspective.models3D.MoveableTexturedCube;
+import com.cap4053.perspective.view.GameInputProcessor3D;
 
-public class GameScreen extends PerspectiveScreen {
+public class GameScreen3D extends PerspectiveScreen {
 
 	private MoveableTexturedCube cube;
 	
-	public GameScreen(Perspective game) {
+	public GameScreen3D(Perspective game) {
 		
 		super(game);
 		
@@ -25,14 +25,14 @@ public class GameScreen extends PerspectiveScreen {
 //		DEBUG
 		Gdx.app.log(Perspective.TAG, "**Showing Game Screen Now**");
 		
-		Gdx.input.setInputProcessor(new GameInputProcessor(game));
+		Gdx.input.setInputProcessor(new GameInputProcessor3D(game));
 		
-		Texture front = new Texture(Gdx.files.internal("data/debug_front.png"));
-		Texture back = new Texture(Gdx.files.internal("data/debug_back.png"));
-		Texture left = new Texture(Gdx.files.internal("data/debug_left.png"));
-		Texture right = new Texture(Gdx.files.internal("data/debug_right.png"));;
-		Texture top = new Texture(Gdx.files.internal("data/debug_top.png"));
-		Texture bottom = new Texture(Gdx.files.internal("data/debug_bottom.png"));
+		Texture front = new Texture(Gdx.files.internal("data/sample_face.png"));
+		Texture back = new Texture(Gdx.files.internal("data/sample_face.png"));
+		Texture left = new Texture(Gdx.files.internal("data/sample_face.png"));
+		Texture right = new Texture(Gdx.files.internal("data/sample_face.png"));;
+		Texture top = new Texture(Gdx.files.internal("data/sample_face.png"));
+		Texture bottom = new Texture(Gdx.files.internal("data/sample_face.png"));
 		
 		cube = new MoveableTexturedCube(front, back, left, right, top, bottom);
 		

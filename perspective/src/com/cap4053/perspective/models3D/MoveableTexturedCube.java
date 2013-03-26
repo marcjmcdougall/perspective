@@ -1,4 +1,4 @@
-package com.cap4053.perspective;
+package com.cap4053.perspective.models3D;
 
 import com.badlogic.gdx.graphics.Texture;
 

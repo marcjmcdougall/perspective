@@ -12,7 +12,5 @@ public class Level {
 				map[i][j] = null;
 			}
 		}
-		
-		
 	}
 }

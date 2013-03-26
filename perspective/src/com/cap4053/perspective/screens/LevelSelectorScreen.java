@@ -1,16 +1,14 @@
 package com.cap4053.perspective.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
@@ -18,8 +16,8 @@ import com.cap4053.perspective.Perspective;
 
 public class LevelSelectorScreen extends PerspectiveScreen {
 	
-	Perspective game;
-	Stage stage;
+//	Perspective game;
+//	Stage stage;
 	BitmapFont black;
 	TextureAtlas atlas;
 	Skin skin;
@@ -33,43 +31,35 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 	TextButton stage7;
 	TextButton stage8;
 	TextButton stage9;
-	Sprite sprite;
+	Image sprite;
 
 	public LevelSelectorScreen(Perspective game) {
+		
 		super(game);
-		this.game = game;
 	}
 
 	@Override
-	public void render(float delta) {
+	public void show() {
 		
-		Gdx.gl.glClearColor(1,1,1,1);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		super.show();
 		
-		stage.act(delta);
+		Texture background = new Texture(Gdx.files.internal("data/perspective_cube_other.png"));
+		background.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		sprite = new Image(background);
 		
-		batch.begin();
-		sprite.draw(batch);
-		batch.end();
+		sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
-		batch.begin();
+		batch = new SpriteBatch();
+		atlas = new TextureAtlas("data/button.pack");
+		skin = new Skin();
+		skin.addRegions(atlas);
+		black = new BitmapFont(Gdx.files.internal("data/blackfont.fnt"),false);
 		
-		stage.draw();
-		
-		//Gdx.app.log(Perspective.TAG, "Drawing");
-				
-		batch.end();
-	}
-
-	@Override
-	public void resize(int width, int height) {
-		if(stage==null)
-			stage = new Stage(width,height,true);
 		stage.clear();
 		
+		int width = Gdx.graphics.getWidth();
+		int height = Gdx.graphics.getHeight();
 		int length = width/9;
-		
-		Gdx.input.setInputProcessor(stage);
 		
 		TextButtonStyle style = new TextButtonStyle();
 		
@@ -82,7 +72,6 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 		stage1.setHeight(length);
 		stage1.setX(width/2-stage1.getWidth()/2 - stage1.getWidth()*2);
 		stage1.setY(height/2-stage1.getHeight()/2 + stage1.getHeight()*2);
-		
 		
 		stage2 = new TextButton("2",style);
 		stage2.setWidth(length);
@@ -132,16 +121,16 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 		stage9.setX(width/2-stage3.getWidth()/2 + stage3.getWidth()*2);
 		stage9.setY(height/2-stage3.getHeight()/2 - stage3.getHeight()*2);
 		
-		
-		
 		stage1.addListener(new InputListener()
 		{
 			public boolean touchDown(InputEvent even, float x, float y,int pointer, int button){
 				
 				return true;
 			}
+			
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new GameScreen(game));
+				
+				game.setScreen(new GameScreen2D(game));
 			}
 		});
 
@@ -152,17 +141,21 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new GameScreen(game));
+				
+				game.setScreen(new GameScreen2D(game));
 			}
 		});
+		
 		stage3.addListener(new InputListener()
 		{
 			public boolean touchDown(InputEvent even, float x, float y,int pointer, int button){
 				
 				return true;
 			}
+			
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new GameScreen(game));
+				
+				game.setScreen(new GameScreen2D(game));
 			}
 		});
 		
@@ -173,9 +166,11 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new GameScreen(game));
+				
+				game.setScreen(new GameScreen2D(game));
 			}
 		});
+		
 		stage5.addListener(new InputListener()
 		{
 			public boolean touchDown(InputEvent even, float x, float y,int pointer, int button){
@@ -183,9 +178,11 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new GameScreen(game));
+				
+				game.setScreen(new GameScreen2D(game));
 			}
 		});
+		
 		stage6.addListener(new InputListener()
 		{
 			public boolean touchDown(InputEvent even, float x, float y,int pointer, int button){
@@ -193,7 +190,8 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new GameScreen(game));
+				
+				game.setScreen(new GameScreen2D(game));
 			}
 		});
 		
@@ -204,7 +202,8 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new GameScreen(game));
+				
+				game.setScreen(new GameScreen2D(game));
 			}
 		});
 		
@@ -215,7 +214,8 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new GameScreen(game));
+				
+				game.setScreen(new GameScreen2D(game));
 			}
 		});
 		stage9.addListener(new InputListener()
@@ -225,10 +225,12 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new GameScreen(game));
+				
+				game.setScreen(new GameScreen2D(game));
 			}
 		});
 		
+		stage.addActor(sprite);
 		stage.addActor(stage1);
 		stage.addActor(stage2);
 		stage.addActor(stage3);
@@ -238,38 +240,15 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 		stage.addActor(stage7);
 		stage.addActor(stage8);
 		stage.addActor(stage9);
-		
-		super.resize(width, height);
-	}
-
-	@Override
-	public void show() {
-		
-		Texture background = new Texture(Gdx.files.internal("data/perspective_cube_other.png"));
-		background.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		sprite = new Sprite(background);
-		
-		sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		batch = new SpriteBatch();
-		atlas = new TextureAtlas("data/button.pack");
-		skin = new Skin();
-		skin.addRegions(atlas);
-		black = new BitmapFont(Gdx.files.internal("data/blackfont.fnt"),false);
 	}
 	
 	@Override
-	public void hide() {
-		dispose();
-	}
-
-	@Override
 	public void dispose() {
-		batch.dispose();
+		
+		super.dispose();
+		
 		skin.dispose();
 		atlas.dispose();
 		black.dispose();
-		stage.dispose();
 	}
-	
-	
 }

@@ -2,7 +2,7 @@ package com.cap4053.perspective.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.cap4053.perspective.Perspective;
 
@@ -14,7 +14,8 @@ public abstract class PerspectiveScreen implements Screen {
 	public PerspectiveScreen(Perspective game){
 		
 		this.game = game;
-		stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),true);
+		
+		stage = new Stage(480, 320, true);
 	}
 	
 	public String getName(){
@@ -28,8 +29,8 @@ public abstract class PerspectiveScreen implements Screen {
 		stage.act(delta);
 	
 	    // clear the screen with the given RGB color (black)
-	    Gdx.gl.glClearColor( 0f, 0f, 0f, 1f );
-	    Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
+	    Gdx.gl.glClearColor( 1f, 1f, 1f, 1f );
+	    Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 	
 	    // draw the actors
 	    stage.draw();
@@ -37,6 +38,8 @@ public abstract class PerspectiveScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
+		
+		stage.setViewport(width, height, true);
 		
 //		DEBUG
 		Gdx.app.log(Perspective.TAG, "Resizing screen: " + getName() + " to: " + width + " x " + height );
@@ -71,5 +74,13 @@ public abstract class PerspectiveScreen implements Screen {
 	public void dispose() {
 		
 		stage.dispose();
+	}
+
+	/**
+	 * @return the stage
+	 */
+	public Stage getStage() {
+		
+		return stage;
 	}
 }

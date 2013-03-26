@@ -5,21 +5,17 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.cap4053.perspective.Perspective;
-import com.cap4053.perspective.SpinningTexturedCube;
+import com.cap4053.perspective.models3D.SpinningTexturedCube;
 import com.cap4053.perspective.view.SplashScreenInputProcessor;
 
 public class SplashScreen extends PerspectiveScreen{
 
 	private SpinningTexturedCube mCube;
-	private Label title;
-	
-	private boolean mTranslucentBackground;
 	
     public SplashScreen(Perspective game){
     	
     	super(game);
     	
-    	this.mTranslucentBackground = false;
     	Gdx.input.setInputProcessor(new SplashScreenInputProcessor(game));
     }
     
@@ -71,14 +67,7 @@ public class SplashScreen extends PerspectiveScreen{
          */
         Gdx.gl10.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, GL10.GL_FASTEST);
 
-	    if (mTranslucentBackground) {
-	    	
-	    	Gdx.gl10.glClearColor(0, 0, 0, 0);
-	    } 
-	    else {
-	    	
-	    	Gdx.gl10.glClearColor(1, 1, 1, 1);
-	    }
+    	Gdx.gl10.glClearColor(1, 1, 1, 1);
 	    
 	    Gdx.gl10.glEnable(GL10.GL_CULL_FACE);
 	    Gdx.gl10.glShadeModel(GL10.GL_SMOOTH);

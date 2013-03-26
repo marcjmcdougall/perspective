@@ -1,4 +1,4 @@
-package com.cap4053.perspective;
+package com.cap4053.perspective.models;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
