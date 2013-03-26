@@ -27,12 +27,12 @@ public class GameScreen3D extends PerspectiveScreen {
 		
 		Gdx.input.setInputProcessor(new GameInputProcessor3D(game));
 		
-		Texture front = new Texture(Gdx.files.internal("data/debug_front.png"));
-		Texture back = new Texture(Gdx.files.internal("data/debug_back.png"));
-		Texture left = new Texture(Gdx.files.internal("data/debug_left.png"));
-		Texture right = new Texture(Gdx.files.internal("data/debug_right.png"));;
-		Texture top = new Texture(Gdx.files.internal("data/debug_top.png"));
-		Texture bottom = new Texture(Gdx.files.internal("data/debug_bottom.png"));
+		Texture front = new Texture(Gdx.files.internal("data/sample_face.png"));
+		Texture back = new Texture(Gdx.files.internal("data/sample_face.png"));
+		Texture left = new Texture(Gdx.files.internal("data/sample_face.png"));
+		Texture right = new Texture(Gdx.files.internal("data/sample_face.png"));;
+		Texture top = new Texture(Gdx.files.internal("data/sample_face.png"));
+		Texture bottom = new Texture(Gdx.files.internal("data/sample_face.png"));
 		
 		cube = new MoveableTexturedCube(front, back, left, right, top, bottom);
 		

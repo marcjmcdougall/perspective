@@ -33,6 +33,7 @@ public class GameScreen2D extends PerspectiveScreen{
 		
 		super.show();
 		
+		// TODO: Set input processor to just the stage?
 		Gdx.input.setInputProcessor(new GameInputProcessor2D(game, this));
 	}
 	
