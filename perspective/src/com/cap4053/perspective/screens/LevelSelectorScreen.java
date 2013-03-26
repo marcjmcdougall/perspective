@@ -154,7 +154,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new CubeGameScreen(game));
+				game.setScreen(new GameScreen3D(game));
 			}
 		});
 		
@@ -165,7 +165,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new CubeGameScreen(game));
+				game.setScreen(new GameScreen3D(game));
 			}
 		});
 		
@@ -176,7 +176,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new CubeGameScreen(game));
+				game.setScreen(new GameScreen3D(game));
 			}
 		});
 		
@@ -187,7 +187,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new CubeGameScreen(game));
+				game.setScreen(new GameScreen3D(game));
 			}
 		});
 		
@@ -198,7 +198,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new CubeGameScreen(game));
+				game.setScreen(new GameScreen3D(game));
 			}
 		});
 		
@@ -209,7 +209,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new CubeGameScreen(game));
+				game.setScreen(new GameScreen3D(game));
 			}
 		});
 		
@@ -220,7 +220,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new CubeGameScreen(game));
+				game.setScreen(new GameScreen3D(game));
 			}
 		});
 		stage9.addListener(new InputListener()
@@ -230,7 +230,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new CubeGameScreen(game));
+				game.setScreen(new GameScreen3D(game));
 			}
 		});
 		
