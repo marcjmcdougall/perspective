@@ -10,6 +10,7 @@ import com.cap4053.perspective.models2D.Avatar;
 import com.cap4053.perspective.models2D.BlockTile;
 import com.cap4053.perspective.models2D.FloorTile;
 import com.cap4053.perspective.models2D.PerspectiveItem;
+import com.cap4053.perspective.models2D.PerspectiveObject;
 import com.cap4053.perspective.models2D.Tile;
 
 public class Plane {
@@ -48,29 +49,30 @@ public class Plane {
 		stage.addActor(character);
 	}
 
-	public void onTouch(int x, int y){
+	public void onTouch(float x, float y, Stage stage){
 		
 //		DEBUG
-		Gdx.app.log(Perspective.TAG, "Entered onTouch()!  X: " + x + " Y: " + y);
+//		Gdx.app.log(Perspective.TAG, "Entered onTouch()!  X: " + x + " Y: " + y);
 		
-		for(int i = 0; i < tiles.length; i++){
-			
-			for(int j = 0; j < tiles[i].length; j++){
-				
-				Tile tile = tiles[i][j];
-				
-				if(tile.hit(x, y, false) != null){
-					
-//					DEBUG
-					Gdx.app.log(Perspective.TAG, "Tile Touch Detected!  Row: " + tile.getRow() + " Column: " + tile.getColumn());
-				}
-			}
-		}
+		PerspectiveObject actor = (PerspectiveObject) stage.hit(x, y, false);
+		
+		int row = actor.getRow();
+		int column = actor.getColumn();
+		
+		moveCharacter(row, column);
+		
+//		DEBUG
+		Gdx.app.log(Perspective.TAG, "Tile Touch Detected!  Actor: " + actor.getSimpleName() + " Row: " + actor.getRow() + " Column: " + actor.getColumn());
 	}
 	
 	public void moveCharacter(int newRow, int newColumn){
 		
-		if(tiles[newRow][newColumn].canMoveTo()){
+		Validator v = new Validator();
+		
+		if(v.validateAvatarMove(newRow, newColumn, character, tiles)){
+			
+//			DEBUG
+//			Gdx.app.log(Perspective.TAG, "**Attempting to move character now**");
 			
 			character.moveTo(newRow, newColumn);
 		}

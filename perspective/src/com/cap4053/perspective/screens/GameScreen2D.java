@@ -20,7 +20,7 @@ public class GameScreen2D extends PerspectiveScreen{
 									"F F B F F B F\n" +
 									"F F B F F B F\n" +
 									"F F B F F B F\n" +
-									"B B B B B B B\n" +
+									"B B B F B B B\n" +
 									"F F F F B F F\n" +
 									"F B B B B F F\n";
 		

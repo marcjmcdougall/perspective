@@ -39,16 +39,14 @@ public class GameInputProcessor2D implements InputProcessor{
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		
-		//TODO: Everything is at 0, 0 ?
-		
 //		DEBUG
-		Gdx.app.log(Perspective.TAG, "Touch down received! X: " + screenX + ", Y: " + screenY);
+//		Gdx.app.log(Perspective.TAG, "Touch down received! X: " + screenX + ", Y: " + screenY);
 		
 		Plane plane = gameScreen.getLevel2D();
 		
 		Vector2 coords = gameScreen.getStage().screenToStageCoordinates(new Vector2(screenX, screenY));
 		
-		plane.onTouch((int) coords.x, (int) coords.y);
+		plane.onTouch(coords.x, coords.y, gameScreen.getStage());
 		
 		return true;
 	}

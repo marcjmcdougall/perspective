@@ -18,6 +18,8 @@ public class FloorTile extends Tile {
 		
 		FloorTile output = new FloorTile(texture, row, column);
 		
+		output.setCanMoveTo(true);
+		
 		return output;
 	}
 }

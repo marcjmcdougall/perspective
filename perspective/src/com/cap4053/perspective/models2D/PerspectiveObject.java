@@ -18,10 +18,15 @@ public abstract class PerspectiveObject extends Image {
 		this.row = row;
 		this.column = column;
 		
-		updateXYLocation();
-		
 		setWidth(SQUARE_DIMENSION);
 		setHeight(SQUARE_DIMENSION);
+		
+		updateXYLocation();
+	}
+	
+	public String getSimpleName(){
+		
+		return getClass().getSimpleName();
 	}
 	
 	private void updateXYLocation(){

@@ -18,8 +18,6 @@ public class BlockTile extends Tile {
 		
 		BlockTile output = new BlockTile(texture, row, column);
 		
-		output.setCanMoveTo(false);
-		
 		return output;
 	}
 }
