@@ -98,7 +98,8 @@ public class MenuScreen extends PerspectiveScreen{
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				game.setScreen(new LevelSelectorScreen(game));
+				//game.setScreen(new LevelSelectorScreen(game));
+				game.setScreen(new LevelTransitionScreen(game));
 			}
 		});
 		
