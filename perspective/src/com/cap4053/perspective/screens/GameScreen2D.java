@@ -16,13 +16,13 @@ public class GameScreen2D extends PerspectiveScreen{
 		
 		super(game);
 		
-		String tileDescription = 	"F F B F F B F\n" +
-									"F F B F F B F\n" +
-									"F F B F F B F\n" +
-									"F F B F F B F\n" +
-									"B B B F B B B\n" +
-									"F F F F B F F\n" +
-									"F B B B B F F\n";
+		String tileDescription = 	"F F F B F F F\n" +
+									"F B F B F B F\n" +
+									"F B F B F B F\n" +
+									"F B F B F B F\n" +
+									"F B F B F B B\n" +
+									"F B F B F B F\n" +
+									"F B F F F B F\n";
 		
 		level2D = new Plane();
 		level2D.initialize(0, 0, tileDescription, "", stage);

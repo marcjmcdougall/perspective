@@ -1,11 +1,11 @@
 package com.cap4053.perspective.view;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.backends.Plane;
 import com.cap4053.perspective.screens.GameScreen2D;
+import com.cap4053.perspective.screens.GameScreen3D;
 
 public class GameInputProcessor2D implements InputProcessor{
 
@@ -59,6 +59,8 @@ public class GameInputProcessor2D implements InputProcessor{
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		
+		game.setScreen(new GameScreen3D(game));
 		
 		return false;
 	}

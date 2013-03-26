@@ -30,7 +30,7 @@ public abstract class PerspectiveScreen implements Screen {
 	
 	    // clear the screen with the given RGB color (black)
 	    Gdx.gl.glClearColor( 1f, 1f, 1f, 1f );
-	    Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+	    Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 	
 	    // draw the actors
 	    stage.draw();
@@ -43,8 +43,6 @@ public abstract class PerspectiveScreen implements Screen {
 		
 //		DEBUG
 		Gdx.app.log(Perspective.TAG, "Resizing screen: " + getName() + " to: " + width + " x " + height );
-		
-		stage.setViewport(width, height, true);
 	}
 
 	@Override
@@ -82,6 +80,7 @@ public abstract class PerspectiveScreen implements Screen {
 	 * @return the stage
 	 */
 	public Stage getStage() {
+		
 		return stage;
 	}
 }

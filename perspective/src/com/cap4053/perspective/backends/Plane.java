@@ -3,7 +3,6 @@ package com.cap4053.perspective.backends;
 import java.util.Scanner;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.models2D.Avatar;
@@ -27,15 +26,15 @@ public class Plane {
 		this.items = new PerspectiveItem[DIMENSION][DIMENSION];
 	}
 	
-	public void initialize(int characterStartingRow, int characterStartingColumn, String tileDescription, String itemDescription, Stage stage){
+	public void initialize(int characterStartingRow, int characterStartingColumn, String tileMap, String itemMap, Stage stage){
 		
-		parseTilesAsString(tileDescription);
-		parseItemsAsString(itemDescription);
+		parseTilesAsString(tileMap);
+		parseItemsAsString(itemMap);
 		
-//		if(tiles[characterStartingRow][characterStartingColumn].canMoveTo()){
+		if(tiles[characterStartingRow][characterStartingColumn].canMoveTo()){
 			
 			this.character = Avatar.create(characterStartingRow, characterStartingColumn);
-//		}
+		}
 		
 		for(int i = 0; i < tiles.length; i++){
 			
@@ -56,13 +55,16 @@ public class Plane {
 		
 		PerspectiveObject actor = (PerspectiveObject) stage.hit(x, y, false);
 		
-		int row = actor.getRow();
-		int column = actor.getColumn();
+		if(actor != null){
 		
-		moveCharacter(row, column);
+			int row = actor.getRow();
+			int column = actor.getColumn();
 		
-//		DEBUG
-		Gdx.app.log(Perspective.TAG, "Tile Touch Detected!  Actor: " + actor.getSimpleName() + " Row: " + actor.getRow() + " Column: " + actor.getColumn());
+			moveCharacter(row, column);
+		
+//			DEBUG
+			Gdx.app.log(Perspective.TAG, "Tile Touch Detected!  Actor: " + actor.getSimpleName() + " Row: " + actor.getRow() + " Column: " + actor.getColumn());
+		}
 	}
 	
 	public void moveCharacter(int newRow, int newColumn){

@@ -1,7 +1,8 @@
 package com.cap4053.perspective.view;
 
 import com.cap4053.perspective.Perspective;
-import com.cap4053.perspective.screens.CubeGameScreen;
+import com.cap4053.perspective.screens.GameScreen2D;
+import com.cap4053.perspective.screens.GameScreen3D;
 
 public class GameInputProcessor3D extends PerspectiveInputProcessor {
 
@@ -10,13 +11,13 @@ public class GameInputProcessor3D extends PerspectiveInputProcessor {
 	private float previousY;
 	private float previousX;
 	
-	private CubeGameScreen screen;
+	private GameScreen3D screen;
 	
 	public GameInputProcessor3D(Perspective game) {
 		
 		super(game);
 		
-		this.screen = (CubeGameScreen) game.getScreen();
+		this.screen = (GameScreen3D) game.getScreen();
 	}
 
 	@Override
@@ -75,6 +76,8 @@ public class GameInputProcessor3D extends PerspectiveInputProcessor {
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 
+		perspectiveGame.setScreen(new GameScreen2D(perspectiveGame));
+		
 		return false;
 	}
 
