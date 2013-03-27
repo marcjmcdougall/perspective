@@ -1,8 +1,5 @@
 package com.cap4053.perspective.models2D;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
-
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.cap4053.perspective.screens.GameScreen2D;
 
@@ -35,9 +32,6 @@ public abstract class PerspectiveObject extends Image {
 		
 		setX(GameScreen2D.HORIZONTAL_MARGIN + SQUARE_DIMENSION * column);
 		setY(GameScreen2D.VERTICAL_MARGIN + SQUARE_DIMENSION * row);
-		
-//		DEBUG
-//		System.out.println("Animate to new location");
 	}
 	
 	/**
@@ -51,7 +45,7 @@ public abstract class PerspectiveObject extends Image {
 	/**
 	 * @param row the row to set
 	 */
-	protected void setRow(int row) {
+	public void setRow(int row) {
 		
 		this.row = row;
 		
@@ -69,7 +63,7 @@ public abstract class PerspectiveObject extends Image {
 	/**
 	 * @param column the column to set
 	 */
-	protected void setColumn(int column) {
+	public void setColumn(int column) {
 		
 		this.column = column;
 		
