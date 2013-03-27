@@ -2,8 +2,6 @@ package com.cap4053.perspective.backends;
 
 import java.util.Stack;
 
-import com.badlogic.gdx.Gdx;
-import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.models2D.Avatar;
 import com.cap4053.perspective.models2D.Tile;
 

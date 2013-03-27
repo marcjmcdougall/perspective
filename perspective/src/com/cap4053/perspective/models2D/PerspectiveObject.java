@@ -33,13 +33,11 @@ public abstract class PerspectiveObject extends Image {
 	
 	private void updateXYLocation(){
 		
-		//setX(GameScreen2D.HORIZONTAL_MARGIN + SQUARE_DIMENSION * column);
-		//setY(GameScreen2D.VERTICAL_MARGIN + SQUARE_DIMENSION * row);
+		setX(GameScreen2D.HORIZONTAL_MARGIN + SQUARE_DIMENSION * column);
+		setY(GameScreen2D.VERTICAL_MARGIN + SQUARE_DIMENSION * row);
 		
-		System.out.println("Animate to new location");
-		
-		// Still need to calculate path and appropriate timing
-		addAction(moveTo(GameScreen2D.HORIZONTAL_MARGIN + SQUARE_DIMENSION * column, GameScreen2D.VERTICAL_MARGIN + SQUARE_DIMENSION * row, 0.5f, Interpolation.linear)); 
+//		DEBUG
+//		System.out.println("Animate to new location");
 	}
 	
 	/**

@@ -1,8 +1,14 @@
 package com.cap4053.perspective.models2D;
 
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.cap4053.perspective.screens.GameScreen2D;
 
 public class Avatar extends PerspectiveObject {
 
@@ -22,7 +28,18 @@ public class Avatar extends PerspectiveObject {
 	
 	public void moveTo(int newRow, int newColumn){
 		
-		this.setRow(newRow);
-		this.setColumn(newColumn);
+		MoveToAction moveTo = new MoveToAction();
+		moveTo.setDuration(1.0f);
+		moveTo.setPosition(GameScreen2D.HORIZONTAL_MARGIN + SQUARE_DIMENSION * newColumn, GameScreen2D.VERTICAL_MARGIN + SQUARE_DIMENSION * newRow);
+		moveTo.setInterpolation(Interpolation.pow2);
+		
+		Game2DMoveCompletedAction completed = new Game2DMoveCompletedAction(this, newColumn, newRow);
+		
+		SequenceAction sequence = new SequenceAction();
+		sequence.addAction(moveTo);
+		sequence.addAction(completed);
+		
+		// Still need to calculate path and appropriate timing
+		this.addAction(sequence); 
 	}
 }
