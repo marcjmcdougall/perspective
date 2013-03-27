@@ -1,6 +1,8 @@
 package com.cap4053.perspective.models2D;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.cap4053.perspective.screens.GameScreen2D;
 
@@ -31,8 +33,13 @@ public abstract class PerspectiveObject extends Image {
 	
 	private void updateXYLocation(){
 		
-		setX(GameScreen2D.HORIZONTAL_MARGIN + SQUARE_DIMENSION * column);
-		setY(GameScreen2D.VERTICAL_MARGIN + SQUARE_DIMENSION * row);
+		//setX(GameScreen2D.HORIZONTAL_MARGIN + SQUARE_DIMENSION * column);
+		//setY(GameScreen2D.VERTICAL_MARGIN + SQUARE_DIMENSION * row);
+		
+		System.out.println("Animate to new location");
+		
+		// Still need to calculate path and appropriate timing
+		addAction(moveTo(GameScreen2D.HORIZONTAL_MARGIN + SQUARE_DIMENSION * column, GameScreen2D.VERTICAL_MARGIN + SQUARE_DIMENSION * row, 0.5f, Interpolation.linear)); 
 	}
 	
 	/**
