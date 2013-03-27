@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.cap4053.perspective.screens.GameScreen2D;
-import com.cap4053.perspective.view.GameMoveCompletedAction2D;
+import com.cap4053.perspective.view.CompletedAction;
 
 public class Avatar extends PerspectiveObject {
 
@@ -34,7 +34,9 @@ public class Avatar extends PerspectiveObject {
 		moveTo.setPosition(GameScreen2D.HORIZONTAL_MARGIN + SQUARE_DIMENSION * newColumn, GameScreen2D.VERTICAL_MARGIN + SQUARE_DIMENSION * newRow);
 		moveTo.setInterpolation(Interpolation.pow2);
 		
-		GameMoveCompletedAction2D completed = new GameMoveCompletedAction2D(this, newColumn, newRow);
+		CompletedAction completed = new CompletedAction(this);
+		completed.setTargetColumn(newColumn);
+		completed.setTargetRow(newRow);
 		
 		SequenceAction sequence = new SequenceAction();
 		sequence.addAction(moveTo);
