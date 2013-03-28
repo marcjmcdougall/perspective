@@ -6,7 +6,7 @@ import com.cap4053.perspective.screens.GameScreen2D;
 
 public abstract class PerspectiveObject extends Image {
 
-	public final float SQUARE_DIMENSION = 40.0f;
+	public final static float SQUARE_DIMENSION = 40.0f;
 	
 	private int row;
 	private int column;
