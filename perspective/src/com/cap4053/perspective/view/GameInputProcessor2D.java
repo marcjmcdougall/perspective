@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.backends.Plane;
 import com.cap4053.perspective.screens.GameScreen2D;
+import com.cap4053.perspective.screens.GameScreen3D;
 
 public class GameInputProcessor2D extends PerspectiveInputProcessor{
 
@@ -58,7 +59,7 @@ public class GameInputProcessor2D extends PerspectiveInputProcessor{
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
 		
-//		game.setScreen(new GameScreen3D(game));
+		perspectiveGame.setScreen(new GameScreen3D(perspectiveGame));
 		
 		return false;
 	}
