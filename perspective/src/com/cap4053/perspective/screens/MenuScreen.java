@@ -131,6 +131,7 @@ public class MenuScreen extends PerspectiveScreen{
 	
 	@Override
 	public void dispose() {
+		
 		batch.dispose();
 		skin.dispose();
 		atlas.dispose();

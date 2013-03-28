@@ -87,17 +87,32 @@ public class GameScreen3D extends PerspectiveScreen {
 
 		Gdx.gl10.glMatrixMode(GL10.GL_MODELVIEW);
 		Gdx.gl10.glLoadIdentity();
-
-		Gdx.gl10.glTranslatef(0, 0, -3.0f);
+		
+//		DEBUG
+//		Gdx.app.log(Perspective.TAG, "Scale: " + cube.getScale());
+		
+		Gdx.gl10.glTranslatef(0, 0, cube.getScale());
 		
 		//Controls horizontal rotation
 		Gdx.gl10.glRotatef(cube.getAngleX(), 0, 1, 0);
 		
+//		Gdx.app.log(Perspective.TAG, "Cube Angle X: " + cube.getAngleX());
+		
 		//Controls vertical rotation
 		Gdx.gl10.glRotatef(cube.getAngleY(),  1, 0, 0);
+		
+//		Gdx.app.log(Perspective.TAG, "Cube Angle Y: " + cube.getAngleY());
 
 		cube.update();
         cube.draw();
+	}
+	
+	@Override
+	public void dispose() {
+		
+		cube.dispose();
+		
+		super.dispose();
 	}
 	
 	public void resize(int width, int height) {

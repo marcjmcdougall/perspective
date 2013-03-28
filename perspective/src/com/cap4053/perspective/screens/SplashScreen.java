@@ -3,7 +3,6 @@ package com.cap4053.perspective.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.models3D.SpinningTexturedCube;
 import com.cap4053.perspective.view.SplashScreenInputProcessor;
@@ -49,6 +48,14 @@ public class SplashScreen extends PerspectiveScreen{
         Gdx.gl10.glMatrixMode(GL10.GL_PROJECTION);
         Gdx.gl10.glLoadIdentity();
         Gdx.gl10.glFrustumf(-ratio, ratio, -1, 1, 1, 10);
+	}
+	
+	@Override
+	public void dispose() {
+		
+		mCube.dispose();
+		
+		super.dispose();
 	}
 
 	@Override

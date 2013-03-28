@@ -1,6 +1,5 @@
 package com.cap4053.perspective.models3D;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 public class SpinningTexturedCube extends TexturedCube {

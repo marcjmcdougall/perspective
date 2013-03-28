@@ -142,6 +142,23 @@ public abstract class TexturedCube {
 	 */
 	public abstract void update();
 	
+	public void dispose(){
+		
+		frontMesh.dispose();
+		backMesh.dispose();
+		leftMesh.dispose();
+		rightMesh.dispose();
+		topMesh.dispose();
+		bottomMesh.dispose();
+		
+	    frontTexture.dispose();
+	    backTexture.dispose();
+	    leftTexture.dispose();
+	    rightTexture.dispose();
+	    topTexture.dispose();
+	    bottomTexture.dispose();
+	}
+	
 	public void draw(){
 		
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
