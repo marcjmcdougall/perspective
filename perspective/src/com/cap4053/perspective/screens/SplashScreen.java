@@ -49,6 +49,14 @@ public class SplashScreen extends PerspectiveScreen{
         Gdx.gl10.glLoadIdentity();
         Gdx.gl10.glFrustumf(-ratio, ratio, -1, 1, 1, 10);
 	}
+	
+	@Override
+	public void dispose() {
+		
+		mCube.dispose();
+		
+		super.dispose();
+	}
 
 	@Override
 	public void show() {

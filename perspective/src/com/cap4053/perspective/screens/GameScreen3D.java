@@ -82,6 +82,14 @@ public class GameScreen3D extends PerspectiveScreen {
         cube.draw();
 	}
 	
+	@Override
+	public void dispose() {
+		
+		cube.dispose();
+		
+		super.dispose();
+	}
+	
 	public void resize(int width, int height) {
 		
 		float ratio = (float) width / height;
