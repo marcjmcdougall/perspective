@@ -6,10 +6,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.cap4053.perspective.backends.Plane;
 import com.cap4053.perspective.backends.SimpleCoordinate;
 import com.cap4053.perspective.screens.GameScreen2D;
+import com.cap4053.perspective.view.AvatarMoveToAction;
 import com.cap4053.perspective.view.CompletedAction;
 
 public class Avatar extends PerspectiveObject {
@@ -17,21 +18,43 @@ public class Avatar extends PerspectiveObject {
 	private static final float DURATION_PER_SQUARE = 0.50f;
 	private static final Interpolation INTERPOLATOR = Interpolation.swing;
 	
-	private Avatar(Texture texture, int row, int column) {
+	private static final int MAX_HEALTH = 10;
+	
+	private int health;
+	
+	private Avatar(Texture texture, int row, int column, Plane level2D) {
 		
-		super(texture, row, column);
+		super(texture, row, column, level2D);
+		
+		this.health = MAX_HEALTH;
 	}
 	
-	public static Avatar create(int row, int column){
+	public static Avatar create(int row, int column, Plane level2D){
 		
 		Texture texture = new Texture(Gdx.files.internal("data/zen.png"));
 		
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		return new Avatar(texture, row, column);
+		return new Avatar(texture, row, column, level2D);
 	}
 	
-	public void moveTo(int newRow, int newColumn, ArrayList<SimpleCoordinate> path){
+	/**
+	 * @return the health
+	 */
+	public int getHealth() {
+		
+		return health;
+	}
+
+	/**
+	 * @param health the health to set
+	 */
+	public void setHealth(int health) {
+		
+		this.health = health;
+	}
+
+	public void moveTo(int newRow, int newColumn, ArrayList<SimpleCoordinate> path, PerspectiveItem[][] items){
 		
 		SimpleCoordinate cursor = null;
 		
@@ -41,10 +64,13 @@ public class Avatar extends PerspectiveObject {
 			
 			cursor = path.get(i);
 			
+			int targetRow = cursor.getRow();
+			int targetColumn = cursor.getColumn();
+			
 			float targetX = GameScreen2D.HORIZONTAL_MARGIN + SQUARE_DIMENSION * cursor.getColumn();
 			float targetY = GameScreen2D.VERTICAL_MARGIN + SQUARE_DIMENSION * cursor.getRow();
 			
-			MoveToAction m = new MoveToAction();
+			AvatarMoveToAction m = new AvatarMoveToAction(this, items, targetRow, targetColumn);
 			
 			m.setPosition(targetX, targetY);
 			m.setDuration(DURATION_PER_SQUARE);
@@ -60,5 +86,13 @@ public class Avatar extends PerspectiveObject {
 		sequence.addAction(complete);
 		
 		this.addAction(sequence);
+	}
+	
+	public void onPickUp(PerspectiveItem item){
+		
+//		DEBUG
+//		Gdx.app.log(Perspective.TAG, "**Updating drawable now**");
+		
+		this.setDrawable(item.getZenDrawable());
 	}
 }

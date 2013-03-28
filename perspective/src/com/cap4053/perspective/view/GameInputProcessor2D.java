@@ -1,10 +1,12 @@
 package com.cap4053.perspective.view;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.backends.Plane;
 import com.cap4053.perspective.screens.GameScreen2D;
 import com.cap4053.perspective.screens.GameScreen3D;
+import com.cap4053.perspective.screens.LevelSelectorScreen;
 
 public class GameInputProcessor2D extends PerspectiveInputProcessor{
 
@@ -19,12 +21,6 @@ public class GameInputProcessor2D extends PerspectiveInputProcessor{
 	
 	@Override
 	public boolean keyDown(int keycode) {
-		
-		return false;
-	}
-
-	@Override
-	public boolean keyUp(int keycode) {
 		
 		return false;
 	}
@@ -59,7 +55,7 @@ public class GameInputProcessor2D extends PerspectiveInputProcessor{
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
 		
-		perspectiveGame.setScreen(new GameScreen3D(perspectiveGame));
+//		perspectiveGame.setScreen(new GameScreen3D(perspectiveGame));
 		
 		return false;
 	}
@@ -74,5 +70,16 @@ public class GameInputProcessor2D extends PerspectiveInputProcessor{
 	public boolean scrolled(int amount) {
 		
 		return false;
+	}
+
+	@Override
+	public boolean keyUp(int keycode) {
+		
+		if(keycode == Input.Keys.BACK | keycode == Input.Keys.BACKSPACE){
+			
+			perspectiveGame.setScreen(new LevelSelectorScreen(perspectiveGame));
+		}
+		
+		return true;
 	}
 }

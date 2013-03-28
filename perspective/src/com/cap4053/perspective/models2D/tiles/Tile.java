@@ -1,15 +1,16 @@
 package com.cap4053.perspective.models2D.tiles;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.cap4053.perspective.backends.Plane;
 import com.cap4053.perspective.models2D.PerspectiveObject;
 
 public abstract class Tile extends PerspectiveObject {
 
 	private boolean canMoveTo;
 	
-	public Tile(Texture texture, int row, int column) {
+	public Tile(Texture texture, int row, int column, Plane level2D) {
 		
-		super(texture, row, column);
+		super(texture, row, column, level2D);
 	}
 
 	/**

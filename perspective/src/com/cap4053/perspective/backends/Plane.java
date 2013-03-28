@@ -33,12 +33,16 @@ public class Plane {
 	public void initialize(int characterStartingRow, int characterStartingColumn, String tileMap, String itemMap, Stage stage){
 		
 		parseTilesAsString(tileMap);
-		parseItemsAsString(itemMap);
 		
 		if(tiles[characterStartingRow][characterStartingColumn].canMoveTo()){
 			
-			this.character = Avatar.create(characterStartingRow, characterStartingColumn);
+			this.character = Avatar.create(characterStartingRow, characterStartingColumn, this);
 		}
+		
+		parseItemsAsString(itemMap);
+		
+//		DEBUG
+		Gdx.app.log(Perspective.TAG, "About to add tiles and items");
 		
 		for(int i = 0; i < tiles.length; i++){
 			
@@ -51,12 +55,24 @@ public class Plane {
 				
 				if(items[i][j] != null){
 					
+//					DEBUG
+					Gdx.app.log(Perspective.TAG, "Adding " + items[i][j].getClass().getSimpleName());
+					
+					//TODO: REMOVED IN HERE!
 					stage.addActor(items[i][j]);
+					
+//					DEBUG
+					Gdx.app.log(Perspective.TAG, "Added " + items[i][j].getClass().getSimpleName());
 				}
 			}
 		}
 		
+//		DEBUG
+		Gdx.app.log(Perspective.TAG, "Added tiles and items");
+		
 		stage.addActor(character);
+		
+
 	}
 
 	public void onTouch(float x, float y, Stage stage){
@@ -74,7 +90,7 @@ public class Plane {
 			moveCharacter(row, column);
 		
 //			DEBUG
-			Gdx.app.log(Perspective.TAG, "Tile Touch Detected!  Actor: " + actor.getSimpleName() + " Row: " + actor.getRow() + " Column: " + actor.getColumn());
+//			Gdx.app.log(Perspective.TAG, "Tile Touch Detected!  Actor: " + actor.getSimpleName() + " Row: " + actor.getRow() + " Column: " + actor.getColumn());
 		}
 	}
 	
@@ -90,7 +106,7 @@ public class Plane {
 			
 			path = v.getPath();
 			
-			character.moveTo(newRow, newColumn, path);
+			character.moveTo(newRow, newColumn, path, items);
 		}
 		
 //		character.moveTo(newRow, newColumn);
@@ -122,11 +138,11 @@ public class Plane {
 				
 				if(cursor.equals("B")){
 					
-					tiles[row][column] = BlockTile.create(row, column);
+					tiles[row][column] = BlockTile.create(row, column, this);
 				}
 				else if(cursor.equals("F")){
 					
-					tiles[row][column] = FloorTile.create(row, column);
+					tiles[row][column] = FloorTile.create(row, column, this);
 				}
 				
 				column ++;
@@ -166,15 +182,15 @@ public class Plane {
 				
 				if(cursor.equals("H")){
 					
-					items[row][column] = Heart.create(row, column);
+					items[row][column] = Heart.create(row, column, this);
 				}
 				else if(cursor.equals("S")){
 					
-					items[row][column] = Star.create(row, column);
+					items[row][column] = Star.create(row, column, this);
 				}
 				else if(cursor.equals("D")){
 					
-					items[row][column] = Diamond.create(row, column);
+					items[row][column] = Diamond.create(row, column, this);
 				}
 				else{
 					
