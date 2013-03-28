@@ -1,14 +1,19 @@
 package com.cap4053.perspective.backends;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Stack;
 
+import com.badlogic.gdx.Gdx;
+import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.models2D.Avatar;
-import com.cap4053.perspective.models2D.Tile;
+import com.cap4053.perspective.models2D.tiles.Tile;
 
 public class Validator {
 
 	private boolean[][] visited;
 	private Tile[][] tiles;
+	private ArrayList<SimpleCoordinate> path;
 	
 	public Validator(){
 		
@@ -17,12 +22,15 @@ public class Validator {
 	
 	public boolean validateAvatarMove(int targetRow, int targetColumn, Avatar a, Tile[][] tiles){
 		
+		path = new ArrayList<SimpleCoordinate>();
+		
 		Stack<Tile> cursor = new Stack<Tile>();
 		visited = new boolean[tiles.length][tiles[0].length];
 		this.tiles = tiles;
 		
 		// Push the starting Tile onto the Stack
 		cursor.push(tiles[a.getRow()][a.getColumn()]);
+		visited[a.getRow()][a.getColumn()] = true;
 		
 		int cursorRow = 0;
 		int cursorColumn = 0;
@@ -35,50 +43,70 @@ public class Validator {
 			// Test the value to the right
 			if(testRight(cursorRow, cursorColumn)){
 				
+//				DEBUG
+//				Gdx.app.log(Perspective.TAG, "Adding (" + (cursorRow) + ", " + (cursorColumn + 1) + ")");
+				
+				// If we haven't returned by now, then push the next value onto the Stack
+				cursor.push(tiles[cursorRow][cursorColumn + 1]);
+				
 				// If this location equals the target row column pair
 				if(cursorColumn + 1 == targetColumn && cursorRow == targetRow){
 					
+					storePath(cursor);
+					
 					return true;
 				}
-				
-				//If we haven't returned by now, then push the next value onto the Stack
-				cursor.push(tiles[cursorRow][cursorColumn + 1]);
 			}
 			// Test the value to the bottom
 			else if(testBottom(cursorRow, cursorColumn)){
 				
+//				DEBUG
+//				Gdx.app.log(Perspective.TAG, "Adding (" + (cursorRow - 1) + ", " + (cursorColumn) + ")");
+				
+				//If we haven't returned by now, then push the next value onto the Stack
+				cursor.push(tiles[cursorRow - 1][cursorColumn]);
+				
 				// If this location equals the target row column pair
 				if(cursorColumn == targetColumn && cursorRow - 1 == targetRow){
 					
+					storePath(cursor);
+					
 					return true;
 				}
-				
-				//If we haven't returned by now, then push the next value onto the Stack
-				cursor.push(tiles[cursorRow - 1][cursorColumn]);				
 			}
 			// Test the value to the left
 			else if(testLeft(cursorRow, cursorColumn)){
 				
+//				DEBUG
+//				Gdx.app.log(Perspective.TAG, "Adding (" + (cursorRow) + ", " + (cursorColumn - 1) + ")");
+				
+				//If we haven't returned by now, then push the next value onto the Stack
+				cursor.push(tiles[cursorRow][cursorColumn - 1]);
+				
 				// If this location equals the target row column pair
 				if(cursorColumn - 1 == targetColumn && cursorRow == targetRow){
 					
+					storePath(cursor);
+					
 					return true;
 				}
-				
-				//If we haven't returned by now, then push the next value onto the Stack
-				cursor.push(tiles[cursorRow][cursorColumn - 1]);				
 			}
 			// Test the value to the top
 			else if(testTop(cursorRow, cursorColumn)){
 				
+//				DEBUG
+//				Gdx.app.log(Perspective.TAG, "Adding (" + (cursorRow + 1) + ", " + (cursorColumn) + ")");
+				
+				//If we haven't returned by now, then push the next value onto the Stack
+				cursor.push(tiles[cursorRow + 1][cursorColumn]);
+				
 				// If this location equals the target row column pair
 				if(cursorColumn == targetColumn && cursorRow + 1 == targetRow){
 					
+					storePath(cursor);
+					
 					return true;
 				}
-				
-				//If we haven't returned by now, then push the next value onto the Stack
-				cursor.push(tiles[cursorRow + 1][cursorColumn]);				
 			}
 			// Otherwise...
 			else{
@@ -90,6 +118,25 @@ public class Validator {
 		
 		// If a solution has not been found by now, then return false
 		return false;
+	}
+
+	private void storePath(Stack<Tile> cursor) {
+		
+		Iterator<Tile> i = cursor.iterator();
+		Tile tileCursor = null;
+		
+		while(i.hasNext()){
+			
+			tileCursor = i.next();
+			
+			SimpleCoordinate coord = new SimpleCoordinate(tileCursor.getRow(), tileCursor.getColumn());
+			path.add(coord);
+		}
+	}
+	
+	public ArrayList<SimpleCoordinate> getPath(){
+		
+		return path;
 	}
 	
 	private boolean testRight(int currentRow, int currentColumn){

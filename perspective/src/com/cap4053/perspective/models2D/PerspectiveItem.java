@@ -9,5 +9,5 @@ public abstract class PerspectiveItem extends PerspectiveObject {
 		super(texture, row, column);
 	}
 
-	public abstract void onMoveOver();
+	public abstract void onMoveOver(PerspectiveObject collidedObject);
 }

@@ -3,7 +3,6 @@ package com.cap4053.perspective.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.models3D.SpinningTexturedCube;
 import com.cap4053.perspective.view.SplashScreenInputProcessor;
