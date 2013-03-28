@@ -71,12 +71,12 @@ public class GameScreen3D extends PerspectiveScreen {
 		//Controls horizontal rotation
 		Gdx.gl10.glRotatef(cube.getAngleX(), 0, 1, 0);
 		
-		Gdx.app.log(Perspective.TAG, "Cube Angle X: " + cube.getAngleX());
+//		Gdx.app.log(Perspective.TAG, "Cube Angle X: " + cube.getAngleX());
 		
 		//Controls vertical rotation
 		Gdx.gl10.glRotatef(cube.getAngleY(),  1, 0, 0);
 		
-		Gdx.app.log(Perspective.TAG, "Cube Angle Y: " + cube.getAngleY());
+//		Gdx.app.log(Perspective.TAG, "Cube Angle Y: " + cube.getAngleY());
 
 		cube.update();
         cube.draw();
