@@ -18,7 +18,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 	
 //	Perspective game;
 //	Stage stage;
-	BitmapFont black;
+	BitmapFont white;
 	TextureAtlas atlas;
 	Skin skin;
 	SpriteBatch batch;
@@ -50,22 +50,22 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 		sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
 		batch = new SpriteBatch();
-		atlas = new TextureAtlas("data/button.pack");
+		atlas = new TextureAtlas("data/graybutton.pack");
 		skin = new Skin();
 		skin.addRegions(atlas);
-		black = new BitmapFont(Gdx.files.internal("data/blackfont.fnt"),false);
+		white = new BitmapFont(Gdx.files.internal("data/whitefont.fnt"),false);
 		
 		stage.clear();
 		
 		int width = Gdx.graphics.getWidth();
 		int height = Gdx.graphics.getHeight();
-		int length = width/9;
+		int length = width/6;
 		
 		TextButtonStyle style = new TextButtonStyle();
 		
-		style.up = skin.getDrawable("buttonnormal");
-		style.down = skin.getDrawable("buttonpressed");
-		style.font = black;
+		style.up = skin.getDrawable("Button_Small");
+		//style.down = skin.getDrawable("buttonpressed");
+		style.font = white;
 		
 		stage1 = new TextButton("1",style);
 		stage1.setWidth(length);
@@ -249,6 +249,6 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 		
 		skin.dispose();
 		atlas.dispose();
-		black.dispose();
+		white.dispose();
 	}
 }
