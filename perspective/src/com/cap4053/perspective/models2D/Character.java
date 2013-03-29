@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 
-public class Character extends PerspectiveImage {
+public class Character extends Tile {
 
 	private Character(Texture texture, int row, int column) {
 		
