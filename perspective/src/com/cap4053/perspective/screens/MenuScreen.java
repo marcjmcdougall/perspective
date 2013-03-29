@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -82,7 +84,13 @@ public class MenuScreen extends PerspectiveScreen{
 		button.setWidth(120);
 		button.setHeight(50);
 		button.setX(Gdx.graphics.getWidth()/2-(button.getWidth()*2-button.getWidth()/2));
-		button.setY(Gdx.graphics.getHeight()/2-(button.getHeight()*2));
+		button.setY(Gdx.graphics.getHeight());
+		
+		MoveToAction playMove = new MoveToAction();
+		playMove.setPosition(button.getX(), Gdx.graphics.getHeight()/2-(button.getHeight()*2));
+		playMove.setDuration(1);
+		
+		button.addAction(playMove);
 		
 		style2.up = skin.getDrawable("Options_Button");
 		style2.down = skin.getDrawable("Options_Button_Pushed");
@@ -92,7 +100,12 @@ public class MenuScreen extends PerspectiveScreen{
 		options.setWidth(120);
 		options.setHeight(50);
 		options.setX(Gdx.graphics.getWidth()/2+(button.getWidth()-button.getWidth()/2));
-		options.setY(Gdx.graphics.getHeight()/2-(button.getHeight()*2));
+		options.setY(Gdx.graphics.getHeight());
+		
+		MoveToAction optionsMove = new MoveToAction();
+		optionsMove.setPosition(options.getX(), Gdx.graphics.getHeight()/2-(button.getHeight()*2));
+		optionsMove.setDuration(1);
+		options.addAction(Actions.sequence(Actions.delay(0.3f),optionsMove));
 		
 		button.addListener(new InputListener()
 		{
