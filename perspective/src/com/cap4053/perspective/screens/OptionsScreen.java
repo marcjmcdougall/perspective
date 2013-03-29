@@ -8,7 +8,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -73,10 +76,34 @@ public class OptionsScreen extends PerspectiveScreen{
 		
 		Gdx.input.setInputProcessor(stage);
 		
+		TextButtonStyle style1 = new TextButtonStyle();
+		style1.up = skin2.getDrawable("Button_Small");
+		black.setScale(0.6f);
+		style1.font = black;
+		
+		button = new TextButton("Back", style1);
+		button.setWidth(80);
+		button.setHeight(60);
+		button.setPosition(20, Gdx.graphics.getHeight()-80);
+		
+		button.addListener(new InputListener()
+		{
+			public boolean touchDown(InputEvent even, float x, float y,int pointer, int button){
+				
+				return true;
+			}
+			
+			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
+				
+				game.setScreen(new MenuScreen(game));
+			}
+		});
+		
 		Slider.SliderStyle style = new Slider.SliderStyle();
 		
 		style.background = (skin.getDrawable("buttonnormal"));
-		style.knob = skin2.getDrawable("knob");
+		style.knob = skin2.getDrawable("LED-Zen");
+		
 		
 		slider1 = new Slider(0, 20, 1, false, style);
 		slider2 = new Slider(0, 20, 1, false, style);
@@ -90,6 +117,7 @@ public class OptionsScreen extends PerspectiveScreen{
 		
 		stage.addActor(slider1);
 		stage.addActor(slider2);
+		stage.addActor(button);
 	}
 
 	@Override
@@ -103,7 +131,7 @@ public class OptionsScreen extends PerspectiveScreen{
 		
 		batch = new SpriteBatch();
 		atlas = new TextureAtlas("data/button.pack");
-		atlas2 = new TextureAtlas("data/buttonslider.pack");
+		atlas2 = new TextureAtlas("data/graybutton.pack");
 		skin = new Skin();
 		skin2 = new Skin();
 		skin.addRegions(atlas);

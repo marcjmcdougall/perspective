@@ -1,5 +1,6 @@
 package com.cap4053.perspective.view;
 
+import com.badlogic.gdx.Input;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.screens.GameScreen2D;
 import com.cap4053.perspective.screens.GameScreen3D;
@@ -22,12 +23,6 @@ public class GameInputProcessor3D extends PerspectiveInputProcessor {
 
 	@Override
 	public boolean keyDown(int keycode) {
-
-		return false;
-	}
-
-	@Override
-	public boolean keyUp(int keycode) {
 
 		return false;
 	}
@@ -76,9 +71,19 @@ public class GameInputProcessor3D extends PerspectiveInputProcessor {
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 
-		perspectiveGame.setScreen(new GameScreen2D(perspectiveGame));
+//		perspectiveGame.setScreen(new GameScreen2D(perspectiveGame));
 		
 		return false;
+	}
+	
+	public boolean keyUp(int keycode) {
+		
+		if(keycode == Input.Keys.NUM_2){
+			
+			perspectiveGame.setScreen(new GameScreen2D(perspectiveGame));
+		}
+		
+		return true;
 	}
 
 	@Override

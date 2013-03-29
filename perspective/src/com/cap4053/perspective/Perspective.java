@@ -1,8 +1,11 @@
 package com.cap4053.perspective;
 
+import java.util.Stack;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.cap4053.perspective.screens.PerspectiveScreen;
 import com.cap4053.perspective.screens.SplashScreen;
 import com.cap4053.perspective.view.SplashScreenInputProcessor;
 
@@ -10,7 +13,7 @@ public class Perspective extends Game {
 	
 	public static final String TAG = Perspective.class.getSimpleName();
 	
-	private Screen currentScreen;
+	private PerspectiveScreen currentScreen;
 	
 	@Override
 	public void create() {		
@@ -54,7 +57,7 @@ public class Perspective extends Game {
 		super.resume();
 	}
 	
-	public void setScreen(Screen screen){
+	public void setScreen(PerspectiveScreen screen){
 		
 		this.currentScreen = screen;
 		super.setScreen(screen);

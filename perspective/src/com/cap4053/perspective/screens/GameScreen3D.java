@@ -3,6 +3,7 @@ package com.cap4053.perspective.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.models3D.MoveableTexturedCube;
 import com.cap4053.perspective.view.GameInputProcessor3D;
@@ -10,10 +11,34 @@ import com.cap4053.perspective.view.GameInputProcessor3D;
 public class GameScreen3D extends PerspectiveScreen {
 
 	private MoveableTexturedCube cube;
+	Texture front, back, left, right, top, bottom;
 	
 	public GameScreen3D(Perspective game) {
 		
 		super(game);
+		
+		front = new Texture(Gdx.files.internal("data/sample_face.png"));
+		back = new Texture(Gdx.files.internal("data/sample_face.png"));
+		left = new Texture(Gdx.files.internal("data/sample_face.png"));
+		right = new Texture(Gdx.files.internal("data/sample_face.png"));;
+		top = new Texture(Gdx.files.internal("data/sample_face.png"));
+		bottom = new Texture(Gdx.files.internal("data/sample_face.png"));
+		
+//		DEBUG
+		Gdx.app.log(Perspective.TAG, "**New Default Game Screen Created**");
+	}
+	
+	public GameScreen3D(Perspective game, Texture front, Texture back, Texture left, Texture right, Texture top, Texture bottom) {
+		//overloaded non-default constructor
+		
+		super(game);
+		
+		this.front = front;
+		this.back = back;
+		this.left = left;
+		this.right = right;
+		this.top = top;
+		this.bottom = bottom;
 		
 //		DEBUG
 		Gdx.app.log(Perspective.TAG, "**New Game Screen Created**");
@@ -27,12 +52,12 @@ public class GameScreen3D extends PerspectiveScreen {
 		
 		Gdx.input.setInputProcessor(new GameInputProcessor3D(game));
 		
-		Texture front = new Texture(Gdx.files.internal("data/sample_face.png"));
-		Texture back = new Texture(Gdx.files.internal("data/sample_face.png"));
-		Texture left = new Texture(Gdx.files.internal("data/sample_face.png"));
-		Texture right = new Texture(Gdx.files.internal("data/sample_face.png"));;
-		Texture top = new Texture(Gdx.files.internal("data/sample_face.png"));
-		Texture bottom = new Texture(Gdx.files.internal("data/sample_face.png"));
+//		Texture front = new Texture(Gdx.files.internal("data/sample_face.png"));
+//		Texture back = new Texture(Gdx.files.internal("data/sample_face.png"));
+//		Texture left = new Texture(Gdx.files.internal("data/sample_face.png"));
+//		Texture right = new Texture(Gdx.files.internal("data/sample_face.png"));;
+//		Texture top = new Texture(Gdx.files.internal("data/sample_face.png"));
+//		Texture bottom = new Texture(Gdx.files.internal("data/sample_face.png"));
 		
 		cube = new MoveableTexturedCube(front, back, left, right, top, bottom);
 		
@@ -62,17 +87,32 @@ public class GameScreen3D extends PerspectiveScreen {
 
 		Gdx.gl10.glMatrixMode(GL10.GL_MODELVIEW);
 		Gdx.gl10.glLoadIdentity();
-
-		Gdx.gl10.glTranslatef(0, 0, -3.0f);
+		
+//		DEBUG
+//		Gdx.app.log(Perspective.TAG, "Scale: " + cube.getScale());
+		
+		Gdx.gl10.glTranslatef(0, 0, cube.getScale());
 		
 		//Controls horizontal rotation
 		Gdx.gl10.glRotatef(cube.getAngleX(), 0, 1, 0);
 		
+//		Gdx.app.log(Perspective.TAG, "Cube Angle X: " + cube.getAngleX());
+		
 		//Controls vertical rotation
 		Gdx.gl10.glRotatef(cube.getAngleY(),  1, 0, 0);
+		
+//		Gdx.app.log(Perspective.TAG, "Cube Angle Y: " + cube.getAngleY());
 
 		cube.update();
         cube.draw();
+	}
+	
+	@Override
+	public void dispose() {
+		
+		cube.dispose();
+		
+		super.dispose();
 	}
 	
 	public void resize(int width, int height) {
