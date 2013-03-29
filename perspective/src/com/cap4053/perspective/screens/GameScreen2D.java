@@ -1,6 +1,9 @@
 package com.cap4053.perspective.screens;
 
+import java.nio.ByteBuffer;
+
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -63,9 +66,31 @@ public class GameScreen2D extends PerspectiveScreen{
 		return level2D;
 	}
 
-	public Texture getScreen() {
+	public Texture getScreen(/*int x, int y, int w, int h, boolean flipY*/) {
 		TextureRegion front = ScreenUtils.getFrameBufferTexture((int)HORIZONTAL_MARGIN, (int)VERTICAL_MARGIN,
-										(int)PerspectiveObject.SQUARE_DIMENSION * 7, (int)PerspectiveObject.SQUARE_DIMENSION * 7);
+										256, 256);
 		return front.getTexture();
+//		Gdx.gl.glPixelStorei(GL10.GL_PACK_ALIGNMENT, 1);
+//        
+//        final Pixmap pixmap = new Pixmap(w, h, Pixmap.Format.RGBA8888);
+//        ByteBuffer pixels = pixmap.getPixels();
+//        Gdx.gl.glReadPixels(x, y, w, h, GL10.GL_RGBA, GL10.GL_UNSIGNED_BYTE, pixels);
+//        
+//        final int numBytes = w * h * 4;
+//        byte[] lines = new byte[numBytes];
+//        if (flipY) {
+//                final int numBytesPerLine = w * 4;
+//                for (int i = 0; i < h; i++) {
+//                        pixels.position((h - i - 1) * numBytesPerLine);
+//                        pixels.get(lines, i * numBytesPerLine, numBytesPerLine);
+//                }
+//                pixels.clear();
+//                pixels.put(lines);
+//        } else {
+//                pixels.clear();
+//                pixels.get(lines);
+//        }
+//        
+//        return new Texture(pixmap);
 	}
 }
