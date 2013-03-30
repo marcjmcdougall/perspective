@@ -53,6 +53,9 @@ public class MenuScreen extends PerspectiveScreen{
 		
 		super.show();
 		
+		int width = Gdx.graphics.getWidth();
+		int height = Gdx.graphics.getHeight();
+		
 		//Texture.setEnforcePotImages(false);
 		background = new Texture(Gdx.files.internal("data/perspective_cube_other.png"));
 		background.setFilter(TextureFilter.Linear, TextureFilter.Linear);
@@ -61,7 +64,7 @@ public class MenuScreen extends PerspectiveScreen{
 		splashImage = new Image(background);	
 		splashImage.setFillParent(true);
 		
-		sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		sprite.setSize(width, height);
 		
 		batch = new SpriteBatch();
 		atlas = new TextureAtlas("data/MainMenu.pack");
@@ -83,11 +86,11 @@ public class MenuScreen extends PerspectiveScreen{
 		button = new TextButton("",style1);
 		button.setWidth(120);
 		button.setHeight(50);
-		button.setX(Gdx.graphics.getWidth()/2-(button.getWidth()*2-button.getWidth()/2));
-		button.setY(Gdx.graphics.getHeight());
+		button.setX((width/2)-(button.getWidth()*5)/4);
+		button.setY(height);
 		
 		MoveToAction playMove = new MoveToAction();
-		playMove.setPosition(button.getX(), Gdx.graphics.getHeight()/2-(button.getHeight()*2));
+		playMove.setPosition(button.getX(),height/2-button.getHeight()*2 );
 		playMove.setDuration(1);
 		
 		button.addAction(playMove);
@@ -99,8 +102,8 @@ public class MenuScreen extends PerspectiveScreen{
 		options = new TextButton("",style2);
 		options.setWidth(120);
 		options.setHeight(50);
-		options.setX(Gdx.graphics.getWidth()/2+(button.getWidth()-button.getWidth()/2));
-		options.setY(Gdx.graphics.getHeight());
+		options.setX((width/2)+(button.getWidth()*1)/4);
+		options.setY(height);
 		
 		MoveToAction optionsMove = new MoveToAction();
 		optionsMove.setPosition(options.getX(), Gdx.graphics.getHeight()/2-(button.getHeight()*2));

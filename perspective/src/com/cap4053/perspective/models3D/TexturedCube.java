@@ -26,8 +26,8 @@ public abstract class TexturedCube {
     private Texture topTexture;
     private Texture bottomTexture;
     
-    private float angleX;
-    private float angleY;
+    protected float angleX;
+    protected float angleY;
     
 	public TexturedCube(Texture frontTexture, Texture backTexture, Texture leftTexture, Texture rightTexture, Texture bottomTexture, Texture topTexture){
 		
