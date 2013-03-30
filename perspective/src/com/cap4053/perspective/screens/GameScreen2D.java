@@ -12,8 +12,8 @@ import com.cap4053.perspective.view.GameInputProcessor2D;
 
 public class GameScreen2D extends PerspectiveScreen{
 
-	public static final float HORIZONTAL_MARGIN = 100.0f;
-	public static final float VERTICAL_MARGIN = 20.0f;
+	public static final float HORIZONTAL_MARGIN = 20.0f;
+	public static final float VERTICAL_MARGIN = 100.0f;
 	
 	private Plane level2D;
 	
