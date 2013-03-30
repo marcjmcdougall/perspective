@@ -50,7 +50,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 		sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
 		batch = new SpriteBatch();
-		atlas = new TextureAtlas("data/graybutton.pack");
+		atlas = new TextureAtlas("data/button.pack");
 		skin = new Skin();
 		skin.addRegions(atlas);
 		white = new BitmapFont(Gdx.files.internal("data/whitefont.fnt"),false);
@@ -63,8 +63,8 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 		
 		TextButtonStyle style = new TextButtonStyle();
 		
-		style.up = skin.getDrawable("Button_Small");
-		//style.down = skin.getDrawable("buttonpressed");
+		style.up = skin.getDrawable("buttonnormal");
+		style.down = skin.getDrawable("buttonpressed");
 		style.font = white;
 		
 		stage1 = new TextButton("1",style);
