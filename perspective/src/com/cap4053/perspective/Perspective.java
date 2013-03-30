@@ -12,6 +12,7 @@ import com.cap4053.perspective.view.SplashScreenInputProcessor;
 public class Perspective extends Game {
 	
 	public static final String TAG = Perspective.class.getSimpleName();
+	public static final boolean DEBUG = true;
 	
 	private PerspectiveScreen currentScreen;
 	
