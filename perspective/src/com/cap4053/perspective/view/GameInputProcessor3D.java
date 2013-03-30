@@ -2,7 +2,7 @@ package com.cap4053.perspective.view;
 
 import com.badlogic.gdx.Input;
 import com.cap4053.perspective.Perspective;
-import com.cap4053.perspective.screens.GameScreen2D;
+import com.cap4053.perspective.backends.LevelManager;
 import com.cap4053.perspective.screens.GameScreen3D;
 
 public class GameInputProcessor3D extends PerspectiveInputProcessor {
@@ -12,12 +12,15 @@ public class GameInputProcessor3D extends PerspectiveInputProcessor {
 	private float previousY;
 	private float previousX;
 	
+	private LevelManager manager;
+	
 	private GameScreen3D screen;
 	
-	public GameInputProcessor3D(Perspective game) {
+	public GameInputProcessor3D(Perspective game, LevelManager manager) {
 		
 		super(game);
 		
+		this.manager = manager;
 		this.screen = (GameScreen3D) game.getScreen();
 	}
 
@@ -78,12 +81,44 @@ public class GameInputProcessor3D extends PerspectiveInputProcessor {
 	
 	public boolean keyUp(int keycode) {
 		
-		if(keycode == Input.Keys.NUM_2){
+		if(keycode == Input.Keys.NUM_1){
 			
-			perspectiveGame.setScreen(new GameScreen2D(perspectiveGame));
+			manager.setScreen(2);
+			switchPerspective();
+		}
+		else if(keycode == Input.Keys.NUM_2){
+			
+			manager.setScreen(2);
+			switchPerspective();
+		}
+		else if(keycode == Input.Keys.NUM_3){
+			
+			manager.setScreen(2);
+			switchPerspective();
+		}
+		else if(keycode == Input.Keys.NUM_4){
+			
+			manager.setScreen(2);
+			switchPerspective();
+		}
+		else if(keycode == Input.Keys.NUM_5){
+			
+			manager.setScreen(2);
+			switchPerspective();
+		}
+		else if(keycode == Input.Keys.NUM_6){
+			
+			manager.setScreen(2);
+			switchPerspective();
 		}
 		
 		return true;
+	}
+	
+	private void switchPerspective(){
+		
+		manager.togglePerspective();
+		manager.showScreen();
 	}
 
 	@Override

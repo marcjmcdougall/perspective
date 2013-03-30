@@ -37,7 +37,7 @@ public abstract class PerspectiveObject extends Image {
 	private void updateXYLocation(){
 		
 //		DEBUG
-		Gdx.app.log(Perspective.TAG, "**Updating XY Location For " + getClass().getSimpleName() + " Now**");
+//		Gdx.app.log(Perspective.TAG, "**Updating XY Location For " + getClass().getSimpleName() + " Now**");
 		
 		setX(GameScreen2D.HORIZONTAL_MARGIN + SQUARE_DIMENSION * column);
 		setY(GameScreen2D.VERTICAL_MARGIN + SQUARE_DIMENSION * row);
