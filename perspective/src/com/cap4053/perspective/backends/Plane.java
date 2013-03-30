@@ -117,25 +117,6 @@ public class Plane {
 //		character.moveTo(newRow, newColumn);
 	}
 	
-	private Tile findTileAt(int row, int column){
-		
-		Iterator<Tile> iter = tiles.iterator();
-		
-		Tile output = null;
-		
-		while(iter.hasNext()){
-			
-			output = iter.next();
-			
-			if(output.getRow() == row && output.getColumn() == column){
-				
-				return output;
-			}
-		}
-		
-		return null;
-	}
-	
 	private void parseTilesAsString(String input){
 		
 		int row = 6;
