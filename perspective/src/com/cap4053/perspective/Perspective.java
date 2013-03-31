@@ -8,6 +8,11 @@ import com.cap4053.perspective.screens.PerspectiveScreen;
 import com.cap4053.perspective.screens.SplashScreen;
 import com.cap4053.perspective.view.SplashScreenInputProcessor;
 
+/**
+ * Main Game class that contains most of the functionality for working the game Screens.
+ * 
+ * @author Marc J McDougall
+ */
 public class Perspective extends Game {
 	
 	// Public class variable that is used for debugging
@@ -35,8 +40,12 @@ public class Perspective extends Game {
 		// Set the volume to be very quiet
 		musicPlayer.setVolume(0.15f);
 		
-		// Start playing the music as soon as the Game begins 
-		musicPlayer.play();
+		// Only play the music if you are NOT in developer mode
+		if(!DEVELOPER_MODE){
+			
+			// Start playing the music as soon as the Game begins 
+			musicPlayer.play();
+		}
 		
 		// Set the screen to the SplashScreen initially
 		setScreen(new SplashScreen(this));
@@ -47,6 +56,10 @@ public class Perspective extends Game {
 	
 	@Override
 	public void dispose() {
+		
+		// Remember to dispose the objects allocated within this class
+		musicPlayer.dispose();
+		currentScreen.dispose();
 		
 		super.dispose();
 	}
