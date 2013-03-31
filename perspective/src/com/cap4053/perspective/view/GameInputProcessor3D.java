@@ -120,6 +120,12 @@ public class GameInputProcessor3D extends PerspectiveInputProcessor {
 //			switchPerspective();
 //		}
 //		
+		if(keycode == Input.Keys.NUM_2){
+			
+			//perspectiveGame.setScreen(new GameScreen2D(perspectiveGame));
+			
+			screen.getCube().transitionTo2D();
+		}
 		return false;
 	}
 	
