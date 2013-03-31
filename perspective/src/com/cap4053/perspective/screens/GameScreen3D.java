@@ -13,6 +13,9 @@ public class GameScreen3D extends PerspectiveScreen {
 	private MoveableTexturedCube cube;
 	Texture front, back, left, right, top, bottom;
 	
+	private boolean prevTrans = false;
+	private boolean transition = false;
+	
 	public GameScreen3D(Perspective game) {
 		
 		super(game);
@@ -105,6 +108,11 @@ public class GameScreen3D extends PerspectiveScreen {
 
 		cube.update();
         cube.draw();
+        prevTrans = transition;
+        transition = cube.getTransition();
+        if(!transition && prevTrans){
+        	game.setScreen(new GameScreen2D(game));
+        }
 	}
 	
 	@Override
