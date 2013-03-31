@@ -1,10 +1,9 @@
 package com.cap4053.perspective;
 
-import java.util.Stack;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.cap4053.perspective.screens.PerspectiveScreen;
 import com.cap4053.perspective.screens.SplashScreen;
 import com.cap4053.perspective.view.SplashScreenInputProcessor;
@@ -14,9 +13,16 @@ public class Perspective extends Game {
 	public static final String TAG = Perspective.class.getSimpleName();
 	
 	private PerspectiveScreen currentScreen;
+	private Music musicPlayer;
 	
 	@Override
 	public void create() {		
+		
+		musicPlayer = Gdx.audio.newMusic(Gdx.files.internal("data/music/nowhere_but_up.mp3"));
+		
+		musicPlayer.setLooping(true);
+		musicPlayer.setVolume(0.15f);
+		musicPlayer.play();
 		
 		setScreen(new SplashScreen(this));
 		Gdx.input.setInputProcessor(new SplashScreenInputProcessor(this));

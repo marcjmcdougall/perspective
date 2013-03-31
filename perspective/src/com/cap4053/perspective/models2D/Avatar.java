@@ -61,6 +61,11 @@ public class Avatar extends PerspectiveObject {
 		
 		return currentPlane;
 	}
+	
+	public void setCurrentPlane(Plane plane){
+		
+		this.currentPlane = plane;
+	}
 
 	public void moveTo(int newRow, int newColumn, ArrayList<SimpleCoordinate> path, ArrayList<PerspectiveItem>items){
 		

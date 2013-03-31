@@ -4,6 +4,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.cap4053.perspective.Perspective;
+import com.cap4053.perspective.backends.LevelManager;
 import com.cap4053.perspective.backends.Plane;
 import com.cap4053.perspective.screens.GameScreen2D;
 import com.cap4053.perspective.screens.GameScreen3D;
@@ -12,12 +13,14 @@ import com.cap4053.perspective.screens.LevelSelectorScreen;
 public class GameInputProcessor2D extends PerspectiveInputProcessor{
 
 	private GameScreen2D gameScreen;
+	private LevelManager manager;
 	
-	public GameInputProcessor2D(Perspective game, GameScreen2D gameScreen){
+	public GameInputProcessor2D(Perspective game, LevelManager manager, GameScreen2D gameScreen){
 		
 		super(game);
 		
 		this.gameScreen = gameScreen;
+		this.manager = manager;
 	}
 	
 	@Override
@@ -81,8 +84,11 @@ public class GameInputProcessor2D extends PerspectiveInputProcessor{
 		}
 		else if(keycode == Input.Keys.NUM_3){
 			
-			Texture front = gameScreen.getScreen();
-			perspectiveGame.setScreen(new GameScreen3D(perspectiveGame, front, front, front, front, front, front));
+//			Texture front = gameScreen.getScreen();
+//			perspectiveGame.setScreen(new GameScreen3D(perspectiveGame, front, front, front, front, front, front));
+			
+			manager.togglePerspective();
+			manager.showScreen();
 		}
 		
 		return true;

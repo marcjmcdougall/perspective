@@ -1,7 +1,10 @@
 PERSPECTIVE ISSUE TRACKER
 ============
 
-Issue #1 [NOT Resolved] - 
+Issue #1 [RESOLVED] - 
 
 Currently, when the game is resized, there is quite a lot of screen tearing and white flashing.  This should not be the case!
 
+Issue #2 [NOT Resolved] - 
+
+Parse each level to a string when done with it, and reconstruct later.
