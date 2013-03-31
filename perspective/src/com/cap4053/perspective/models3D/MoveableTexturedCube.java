@@ -42,32 +42,32 @@ public class MoveableTexturedCube extends TexturedCube {
 		int returnVal = -1;
 		
 		//Front
-		if((adjAngX > 315 || adjAngX < 45) && (adjAngY > 315 || adjAngY < 45)){
+		if((adjAngX >= 315 || adjAngX <= 45) && (adjAngY >= 315 || adjAngY <= 45)){
 			
 			returnVal = 0;
 		}
 		//Left
-		if(adjAngX > 45 && adjAngX < 135){
+		if(adjAngX >= 45 && adjAngX <= 135){
 			
 			returnVal = 2;
 		}
 		//Back
-		if((adjAngX > 135 && adjAngX < 225) && (adjAngY > 315 || adjAngY < 45)){
+		if((adjAngX >= 135 && adjAngX <= 225) && (adjAngY >= 315 || adjAngY <= 45)){
 			
 			returnVal = 1;
 		}
 		//Right
-		if(adjAngX < 315 && adjAngX > 225){
+		if(adjAngX <= 315 && adjAngX >= 225){
 			
 			returnVal = 3;
 		}
 		//Top
-		if(adjAngY > 45 && adjAngY < 135){
+		if(adjAngY >= 45 && adjAngY <= 135){
 			
 			returnVal = 4;
 		}
 		//Bottom
-		if(adjAngY > 225 && adjAngY < 315){
+		if(adjAngY >= 225 && adjAngY <= 315){
 			
 			returnVal = 5;
 		}
