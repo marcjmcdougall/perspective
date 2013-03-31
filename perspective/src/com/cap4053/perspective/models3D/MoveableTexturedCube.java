@@ -34,8 +34,8 @@ public class MoveableTexturedCube extends TexturedCube {
 	// -1 = error?
 	public int findFrontFace(){
 		
-		System.out.println("X: " + angleX);
-		System.out.println("Y: " + angleY);
+		//System.out.println("X: " + angleX);
+		//System.out.println("Y: " + angleY);
 		float adjAngX = angleX%360;
 		float adjAngY = angleY%360;
 		
@@ -144,8 +144,8 @@ public class MoveableTexturedCube extends TexturedCube {
 		angleX = adjAngX;
 		angleY = adjAngY;
 		
-		System.out.println("X: " + angleX);
-		System.out.println("Y: " + angleY);
+		//System.out.println("X: " + angleX);
+		//System.out.println("Y: " + angleY);
 		
 		//Determine where angles should go based on front face
 		int frontFace = findFrontFace();
@@ -192,7 +192,12 @@ public class MoveableTexturedCube extends TexturedCube {
 			//Make angleX = 0
 			//Make angleY = 180
 			targetX = 180;
-			targetY = 0;
+			if(angleY >180){
+				targetY = 360;
+			}
+			else{
+				targetY = 0;
+			}
 			break;
 		
 		case 4:
@@ -232,7 +237,7 @@ public class MoveableTexturedCube extends TexturedCube {
 	
 		// TODO: Implementation
 		// Current, do nothing.
-		System.out.println("front face: " + findFrontFace());
+		//System.out.println("front face: " + findFrontFace());
 		
 		if(!transition && scale > ENDING_POINT){
 			
