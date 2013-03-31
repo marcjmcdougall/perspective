@@ -39,10 +39,12 @@ public class GameScreen3D extends PerspectiveScreen {
 //		Gdx.app.log(Perspective.TAG, "**New Default Game Screen Created**");
 	}
 	
-	public GameScreen3D(Perspective game, Texture front, Texture back, Texture left, Texture right, Texture top, Texture bottom) {
+	public GameScreen3D(Perspective game, LevelManager manager,Texture front, Texture back, Texture left, Texture right, Texture top, Texture bottom) {
 		
 		//overloaded non-default constructor
 		super(game);
+		
+		this.manager = manager;
 		
 		this.front = front;
 		this.back = back;
@@ -112,14 +114,17 @@ public class GameScreen3D extends PerspectiveScreen {
 	}
 	
 	@Override
+	public void hide() {
+		
+		// Do nothing
+	}
+	
+	@Override
 	public void dispose() {
 		
-		if(true/* TODO: Replace with: "If this method is being called because the back button was pressed" */){
-				
 			cube.dispose();
 			
 			super.dispose();
-		}
 	}
 	
 	public void resize(int width, int height) {

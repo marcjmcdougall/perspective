@@ -14,8 +14,8 @@ import com.cap4053.perspective.view.GameInputProcessor2D;
 
 public class GameScreen2D extends PerspectiveScreen{
 
-	public static final float HORIZONTAL_MARGIN = 100.0f;
-	public static final float VERTICAL_MARGIN = 20.0f;
+	public static final float HORIZONTAL_MARGIN = 20.0f;
+	public static final float VERTICAL_MARGIN = 100.0f;
 	
 	private Plane level2D;
 	private LevelManager manager;
@@ -38,6 +38,12 @@ public class GameScreen2D extends PerspectiveScreen{
 		
 		// TODO: Set input processor to just the stage?
 		Gdx.input.setInputProcessor(new GameInputProcessor2D(game, manager, this));
+	}
+	
+	@Override
+	public void hide() {
+		
+		// Do nothing
 	}
 	
 	public void resize(int width, int height){

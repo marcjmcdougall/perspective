@@ -76,43 +76,46 @@ public class GameInputProcessor3D extends PerspectiveInputProcessor {
 
 //		perspectiveGame.setScreen(new GameScreen2D(perspectiveGame));
 		
+		manager.setScreen(screen.getCube().findFrontFace());
+		switchPerspective();
+		
 		return false;
 	}
 	
 	public boolean keyUp(int keycode) {
 		
-		if(keycode == Input.Keys.NUM_1){
-			
-			manager.setScreen(2);
-			switchPerspective();
-		}
-		else if(keycode == Input.Keys.NUM_2){
-			
-			manager.setScreen(2);
-			switchPerspective();
-		}
-		else if(keycode == Input.Keys.NUM_3){
-			
-			manager.setScreen(2);
-			switchPerspective();
-		}
-		else if(keycode == Input.Keys.NUM_4){
-			
-			manager.setScreen(2);
-			switchPerspective();
-		}
-		else if(keycode == Input.Keys.NUM_5){
-			
-			manager.setScreen(2);
-			switchPerspective();
-		}
-		else if(keycode == Input.Keys.NUM_6){
-			
-			manager.setScreen(2);
-			switchPerspective();
-		}
-		
-		return true;
+//		if(keycode == Input.Keys.NUM_1){
+//			
+//			manager.setScreen(0);
+//			switchPerspective();
+//		}
+//		else if(keycode == Input.Keys.NUM_2){
+//			
+//			manager.setScreen(1);
+//			switchPerspective();
+//		}
+//		else if(keycode == Input.Keys.NUM_3){
+//			
+//			manager.setScreen(2);
+//			switchPerspective();
+//		}
+//		else if(keycode == Input.Keys.NUM_4){
+//			
+//			manager.setScreen(3);
+//			switchPerspective();
+//		}
+//		else if(keycode == Input.Keys.NUM_5){
+//			
+//			manager.setScreen(4);
+//			switchPerspective();
+//		}
+//		else if(keycode == Input.Keys.NUM_6){
+//			
+//			manager.setScreen(5);
+//			switchPerspective();
+//		}
+//		
+		return false;
 	}
 	
 	private void switchPerspective(){

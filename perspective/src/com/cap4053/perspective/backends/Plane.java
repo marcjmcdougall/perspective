@@ -71,14 +71,14 @@ public class Plane {
 		Tile characterTile = p.findTileAt(characterStartingRow, characterStartingColumn, this);
 		
 //		DEBUG
-		Gdx.app.log(Perspective.TAG, "Evaluating tile: " + characterTile);		
+//		Gdx.app.log(Perspective.TAG, "Evaluating tile: " + characterTile);		
 		
 		if(characterTile != null){
 			
 			if(characterTile.canMoveTo()){
 				
 //				DEBUG
-				Gdx.app.log(Perspective.TAG, "Creating character now");
+//				Gdx.app.log(Perspective.TAG, "Creating character now");
 				
 				this.character = Avatar.create(characterStartingRow, characterStartingColumn, this);
 			}
@@ -135,6 +135,12 @@ public class Plane {
 //			DEBUG
 //			Gdx.app.log(Perspective.TAG, "Tile Touch Detected!  Actor: " + actor.getSimpleName() + " Row: " + actor.getRow() + " Column: " + actor.getColumn());
 		}
+	}
+	
+	public void abruptlyMoveCharacter(int newRow, int newColumn){
+		
+		character.setRow(newRow);
+		character.setColumn(newColumn);
 	}
 	
 	public void moveCharacter(int newRow, int newColumn){
