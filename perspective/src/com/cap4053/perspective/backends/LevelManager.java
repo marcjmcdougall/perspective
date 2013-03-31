@@ -9,8 +9,15 @@ import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.screens.GameScreen2D;
 import com.cap4053.perspective.screens.GameScreen3D;
 
+/**
+ * Class that manages each Level in the game.  It associates the 6 planes with each level, and 
+ * computes the 3D texture for all the faces which are then displayed onto a 3D Cube.
+ * 
+ * @author Marc J. McDougall
+ */
 public class LevelManager {
 
+	// Class variables that are used to define the indices of each face
 	private static final int FACE_FRONT = 0;
 	private static final int FACE_BACK = 1;
 	private static final int FACE_LEFT = 2;
@@ -18,11 +25,19 @@ public class LevelManager {
 	private static final int FACE_TOP = 4;
 	private static final int FACE_BOTTOM = 5;
 	
+	// Maintains a reference to the Game object, in order to switch screens
 	private Perspective game;
+	
+	// Simple array data structure that contains the 6 2D faces that will be displayed to the user
 	private GameScreen2D[] faces;
+	
+	// Holds a reference to the 3D cube so that it's vertices may be reused
 	private GameScreen3D view3D;
+	
+	// Reference to the Parser class that aides in parsing the Tiles on the Screen
 	private Parser p;
 	
+	// Integer that refers to the current index in the array of the active face
 	private int currentFace;
 	private boolean display2D;
 	 
