@@ -25,17 +25,17 @@ public class MoveableTexturedCube extends TexturedCube {
 	}
 	
 	// Returns an integer for which face is facing front.
-	// 1 = front
+	// 0 = front
 	// 2 = right
 	// 3 = back
-	// 4 = left
-	// 5 = top 
-	// 6 = bottom
-	// 0 = error?
+	// 1 = left 
+	// 4 = top
+	// 5 = bottom
+	// -1 = error?
 	public int findFrontFace(){
 		
-		//System.out.println("X: " + angleX);
-		//System.out.println("Y: " + angleY);
+		System.out.println("X: " + angleX);
+		System.out.println("Y: " + angleY);
 		float adjAngX = angleX%360;
 		float adjAngY = angleY%360;
 		
@@ -47,19 +47,19 @@ public class MoveableTexturedCube extends TexturedCube {
 			
 			adjAngY = 360 + adjAngY;
 		}
-		System.out.println("X: " + adjAngX);
-		System.out.println("Y: " + adjAngY);
+		//System.out.println("X: " + adjAngX);
+		//System.out.println("Y: " + adjAngY);
 		
-		int returnVal = 0;
+		int returnVal = -1;
 		
 		if(adjAngX >= 0 && adjAngX < 45){
 			if(adjAngY >= 0 && adjAngY < 45){
 				//front
-				returnVal = 1;
+				returnVal = 0;
 			}
 			else if(adjAngY >= 45 && adjAngY < 135){
 				//top
-				returnVal = 5;
+				returnVal = 4;
 			}
 			else if(adjAngY >= 135 && adjAngY < 225){
 				//back
@@ -67,16 +67,16 @@ public class MoveableTexturedCube extends TexturedCube {
 			}
 			else if(adjAngY >= 225 && adjAngY < 315){
 				//bottom
-				returnVal = 6;
+				returnVal = 5;
 			}
 			else if(adjAngY >= 315 && adjAngY <= 360){
 				//front
-				returnVal = 1;
+				returnVal = 0;
 			}
 		}
 		if(adjAngX >= 45 && adjAngX < 135){
 			//left
-			returnVal = 4;
+			returnVal = 1;
 		}
 		if(adjAngX >= 135 && adjAngX < 225){
 			if(adjAngY >= 0 && adjAngY < 45){
@@ -85,15 +85,15 @@ public class MoveableTexturedCube extends TexturedCube {
 			}
 			else if(adjAngY >= 45 && adjAngY < 135){
 				//bottom
-				returnVal = 6;
+				returnVal = 5;
 			}
 			else if(adjAngY >= 135 && adjAngY < 225){
 				//front
-				returnVal = 1;
+				returnVal = 0;
 			}
 			else if(adjAngY >= 225 && adjAngY < 315){
 				//top
-				returnVal = 5;
+				returnVal = 4;
 			}
 			else if(adjAngY >= 315 && adjAngY <= 360){
 				//back
@@ -107,11 +107,11 @@ public class MoveableTexturedCube extends TexturedCube {
 		if(adjAngX >= 315 && adjAngX <= 360){
 			if(adjAngY >= 0 && adjAngY < 45){
 				//front
-				returnVal = 1;
+				returnVal = 0;
 			}
 			else if(adjAngY >= 45 && adjAngY < 135){
 				//top
-				returnVal = 5;
+				returnVal = 4;
 			}
 			else if(adjAngY >= 135 && adjAngY < 225){
 				//back
@@ -119,11 +119,11 @@ public class MoveableTexturedCube extends TexturedCube {
 			}
 			else if(adjAngY >= 225 && adjAngY < 315){
 				//bottom
-				returnVal = 6;
+				returnVal = 5;
 			}
 			else if(adjAngY >= 315 && adjAngY <= 360){
 				//front
-				returnVal = 1;
+				returnVal = 0;
 			}
 		}
 		return returnVal;
@@ -144,48 +144,29 @@ public class MoveableTexturedCube extends TexturedCube {
 		angleX = adjAngX;
 		angleY = adjAngY;
 		
+		System.out.println("X: " + angleX);
+		System.out.println("Y: " + angleY);
+		
 		//Determine where angles should go based on front face
 		int frontFace = findFrontFace();
 		switch(frontFace){
+		case 0:
+			//Make angleX = 0
+			//Make angleY = 0
+			if(angleX > 180){
+				targetX = 360;
+			}
+			else{
+				targetX = 0;
+			}
+			if(angleY > 180){
+				targetY = 360;
+			}
+			else{
+				targetY = 0;
+			}
+			break;
 		case 1:
-			//Make angleX = 0
-			//Make angleY = 0
-			if(angleX > 180){
-				targetX = 360;
-			}
-			else{
-				targetX = 0;
-			}
-			if(angleY > 180){
-				targetY = 360;
-			}
-			else{
-				targetX = 0;
-			}
-			break;
-		case 2:
-			//Make angleX = 270
-			//Make angleY = 0
-			targetX = 270;
-			if(angleY > 180){
-				targetY = 360;
-			}
-			else{
-				targetX = 0;
-			}
-			break;
-		case 3:
-			//Make angleX = 0
-			//Make angleY = 180
-			if(angleX > 180){
-				targetX = 360;
-			}
-			else{
-				targetX = 0;
-			}
-			targetY = 180;
-			break;
-		case 4:
 			//Make angleX = 90
 			//Make angleY = 0
 			targetX = 90;
@@ -196,7 +177,25 @@ public class MoveableTexturedCube extends TexturedCube {
 				targetY = 0;
 			}
 			break;
-		case 5:
+		case 2:
+			//Make angleX = 270
+			//Make angleY = 0
+			targetX = 270;
+			if(angleY > 180){
+				targetY = 360;
+			}
+			else{
+				targetY = 0;
+			}
+			break;
+		case 3:
+			//Make angleX = 0
+			//Make angleY = 180
+			targetX = 180;
+			targetY = 0;
+			break;
+		
+		case 4:
 			//Make angleX = 0
 			//Make angleY = 90
 			if(angleX > 180){
@@ -212,7 +211,7 @@ public class MoveableTexturedCube extends TexturedCube {
 				targetY = 90;
 			}
 			break;
-		case 6:
+		case 5:
 			//Make angleX = 0
 			//Make angleY = 270
 			if(angleX > 180){
@@ -221,7 +220,7 @@ public class MoveableTexturedCube extends TexturedCube {
 			else{
 				targetX = 0;
 			}
-			targetX = 270;
+			targetY = 270;
 			break;
 		}
 	}

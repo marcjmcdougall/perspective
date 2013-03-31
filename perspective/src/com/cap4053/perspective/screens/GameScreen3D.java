@@ -119,7 +119,9 @@ public class GameScreen3D extends PerspectiveScreen {
         prevTrans = transition;
         transition = cube.getTransition();
         if(!transition && prevTrans){
-        	game.setScreen(new GameScreen2D(game));
+        	manager.setScreen(this.getCube().findFrontFace());
+        	manager.togglePerspective();
+    		manager.showScreen();
         }
 	}
 	

@@ -80,8 +80,10 @@ public class GameInputProcessor3D extends PerspectiveInputProcessor {
 		
 		if(targetScreen >= 0){
 			
-			manager.setScreen(screen.getCube().findFrontFace());
-			switchPerspective();
+			//manager.setScreen(screen.getCube().findFrontFace());
+			//switchPerspective();
+			
+			screen.getCube().transitionTo2D();
 		}
 		
 		return false;
