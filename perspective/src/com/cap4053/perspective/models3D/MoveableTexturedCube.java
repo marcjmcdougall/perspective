@@ -26,9 +26,9 @@ public class MoveableTexturedCube extends TexturedCube {
 	
 	// Returns an integer for which face is facing front.
 	// 0 = front
-	// 2 = right
-	// 3 = back
-	// 1 = left 
+	// 2 = left
+	// 3 = right
+	// 1 = back 
 	// 4 = top
 	// 5 = bottom
 	// -1 = error?
@@ -63,7 +63,7 @@ public class MoveableTexturedCube extends TexturedCube {
 			}
 			else if(adjAngY >= 135 && adjAngY < 225){
 				//back
-				returnVal = 3;
+				returnVal = 1;
 			}
 			else if(adjAngY >= 225 && adjAngY < 315){
 				//bottom
@@ -76,12 +76,12 @@ public class MoveableTexturedCube extends TexturedCube {
 		}
 		if(adjAngX >= 45 && adjAngX < 135){
 			//left
-			returnVal = 1;
+			returnVal = 2;
 		}
 		if(adjAngX >= 135 && adjAngX < 225){
 			if(adjAngY >= 0 && adjAngY < 45){
 				//back
-				returnVal = 3;
+				returnVal = 1;
 			}
 			else if(adjAngY >= 45 && adjAngY < 135){
 				//bottom
@@ -97,12 +97,12 @@ public class MoveableTexturedCube extends TexturedCube {
 			}
 			else if(adjAngY >= 315 && adjAngY <= 360){
 				//back
-				returnVal = 3;
+				returnVal = 1;
 			}
 		}
 		if(adjAngX >= 225 && adjAngX < 315){
 			//right
-			returnVal = 2;
+			returnVal = 3;
 		}
 		if(adjAngX >= 315 && adjAngX <= 360){
 			if(adjAngY >= 0 && adjAngY < 45){
@@ -115,7 +115,7 @@ public class MoveableTexturedCube extends TexturedCube {
 			}
 			else if(adjAngY >= 135 && adjAngY < 225){
 				//back
-				returnVal = 3;
+				returnVal = 1;
 			}
 			else if(adjAngY >= 225 && adjAngY < 315){
 				//bottom
@@ -166,7 +166,7 @@ public class MoveableTexturedCube extends TexturedCube {
 				targetY = 0;
 			}
 			break;
-		case 1:
+		case 2:
 			//Make angleX = 90
 			//Make angleY = 0
 			targetX = 90;
@@ -177,7 +177,7 @@ public class MoveableTexturedCube extends TexturedCube {
 				targetY = 0;
 			}
 			break;
-		case 2:
+		case 3:
 			//Make angleX = 270
 			//Make angleY = 0
 			targetX = 270;
@@ -188,7 +188,7 @@ public class MoveableTexturedCube extends TexturedCube {
 				targetY = 0;
 			}
 			break;
-		case 3:
+		case 1:
 			//Make angleX = 0
 			//Make angleY = 180
 			targetX = 180;
