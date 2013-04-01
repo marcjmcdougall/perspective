@@ -209,12 +209,7 @@ public class MoveableTexturedCube extends TexturedCube {
 			else{
 				targetX = 0;
 			}
-			if(angleY > 180){
-				targetY = 270;
-			}
-			else{
-				targetY = 90;
-			}
+			targetY = 90;
 			break;
 		case 5:
 			//Make angleX = 0
