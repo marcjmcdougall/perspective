@@ -10,8 +10,8 @@ public class Main {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "perspective";
 		cfg.useGL20 = false;
-		cfg.width = 480;
-		cfg.height = 320;
+		cfg.width = 320;
+		cfg.height = 480;
 		cfg.vSyncEnabled = true;
 		
 		new LwjglApplication(new com.cap4053.perspective.Perspective(), cfg);

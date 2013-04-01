@@ -1,6 +1,7 @@
 package com.cap4053.perspective.backends;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import com.badlogic.gdx.Gdx;
@@ -20,23 +21,67 @@ public class Plane {
 
 	public static final int DIMENSION = 7;
 	
-	private Tile[][] tiles;
-	private PerspectiveItem[][] items;
+	private ArrayList<Tile> tiles;
+	private ArrayList<PerspectiveItem> items;
 	private Avatar character;
+	private Stage stage;
 	
-	public Plane(){
+	private Parser p;
+	
+	private boolean characterState;
+	
+	public Plane(Stage stage, boolean characterState){
 		
-		this.tiles = new Tile[DIMENSION][DIMENSION];
-		this.items = new PerspectiveItem[DIMENSION][DIMENSION];
+		this.tiles = new ArrayList<Tile>();
+		this.items = new ArrayList<PerspectiveItem>();
+		this.stage = stage;
+		
+		this.p = new Parser();
+		
+		this.characterState = characterState;
 	}
 	
-	public void initialize(int characterStartingRow, int characterStartingColumn, String tileMap, String itemMap, Stage stage){
+	public void setCharacterState(boolean newState){
+		
+		this.characterState = newState;
+		onCharacterStateChange();
+	}
+	
+	private void onCharacterStateChange(){
+		
+		if(characterState){
+		
+			stage.addActor(character);
+		}
+		else{
+			
+			// TODO: Might not be able to use Actor#remove()?
+			character.remove();
+		}
+	}
+	
+	public void initialize(int characterStartingRow, int characterStartingColumn, String tileMap, String itemMap){
 		
 		parseTilesAsString(tileMap);
 		
-		if(tiles[characterStartingRow][characterStartingColumn].canMoveTo()){
+//		DEBUG
+//		Gdx.app.log(Perspective.TAG, "Tilemap: " + tileMap);
+		
+		
+		Tile characterTile = p.findTileAt(characterStartingRow, characterStartingColumn, this);
+		
+//		DEBUG
+//		Gdx.app.log(Perspective.TAG, "Evaluating tile: " + characterTile);		
+		
+		if(characterTile != null){
 			
-			this.character = Avatar.create(characterStartingRow, characterStartingColumn, this);
+			if(characterTile.canMoveTo()){
+				
+//				DEBUG
+//				Gdx.app.log(Perspective.TAG, "Creating character now");
+				
+				this.character = Avatar.create(characterStartingRow, characterStartingColumn, this);
+			}
 		}
 		
 		parseItemsAsString(itemMap);
@@ -44,35 +89,33 @@ public class Plane {
 //		DEBUG
 		Gdx.app.log(Perspective.TAG, "About to add tiles and items");
 		
-		for(int i = 0; i < tiles.length; i++){
+		Iterator<Tile> tileIter = tiles.iterator();
+		
+		while(tileIter.hasNext()){
 			
-			for(int j = 0; j < tiles[i].length; j++){
-				
-				if(tiles[i][j] != null){
-					
-					stage.addActor(tiles[i][j]);
-				}
-				
-				if(items[i][j] != null){
-					
+			stage.addActor(tileIter.next());
+		}
+		
+		Iterator<PerspectiveItem> itemIter = items.iterator();
+		
+		while(itemIter.hasNext()){
+			
 //					DEBUG
-					Gdx.app.log(Perspective.TAG, "Adding " + items[i][j].getClass().getSimpleName());
-					
-					//TODO: REMOVED IN HERE!
-					stage.addActor(items[i][j]);
-					
+//			Gdx.app.log(Perspective.TAG, "Adding " + items[i][j].getClass().getSimpleName());
+			
+			stage.addActor(itemIter.next());
+			
 //					DEBUG
-					Gdx.app.log(Perspective.TAG, "Added " + items[i][j].getClass().getSimpleName());
-				}
-			}
+//			Gdx.app.log(Perspective.TAG, "Added " + items[i][j].getClass().getSimpleName());
 		}
 		
 //		DEBUG
-		Gdx.app.log(Perspective.TAG, "Added tiles and items");
+//		Gdx.app.log(Perspective.TAG, "Added tiles and items");
 		
-		stage.addActor(character);
-		
-
+		if(characterState){
+			
+			stage.addActor(character);
+		}
 	}
 
 	public void onTouch(float x, float y, Stage stage){
@@ -94,12 +137,18 @@ public class Plane {
 		}
 	}
 	
+	public void abruptlyMoveCharacter(int newRow, int newColumn){
+		
+		character.setRow(newRow);
+		character.setColumn(newColumn);
+	}
+	
 	public void moveCharacter(int newRow, int newColumn){
 		
 		Validator v = new Validator();
 		ArrayList<SimpleCoordinate> path;
 		
-		if(v.validateAvatarMove(newRow, newColumn, character, tiles)){
+		if(v.validateAvatarMove(newRow, newColumn, character, this)){
 			
 //			DEBUG
 //			Gdx.app.log(Perspective.TAG, "**Attempting to move character now**");
@@ -116,6 +165,9 @@ public class Plane {
 		
 		int row = 6;
 		int column = 0;
+		
+//		DEBUG
+//		System.out.println(input);
 		
 		Scanner scan = new Scanner(input);
 		Scanner lineScanner = null;
@@ -138,11 +190,11 @@ public class Plane {
 				
 				if(cursor.equals("B")){
 					
-					tiles[row][column] = BlockTile.create(row, column, this);
+					tiles.add(BlockTile.create(row, column, this));
 				}
 				else if(cursor.equals("F")){
 					
-					tiles[row][column] = FloorTile.create(row, column, this);
+					tiles.add(FloorTile.create(row, column, this));
 				}
 				
 				column ++;
@@ -160,6 +212,9 @@ public class Plane {
 		
 		int row = 6;
 		int column = 0;
+		
+//		DEBUG
+//		System.out.println(input);
 		
 		Scanner scan = new Scanner(input);
 		Scanner lineScanner = null;
@@ -182,19 +237,15 @@ public class Plane {
 				
 				if(cursor.equals("H")){
 					
-					items[row][column] = Heart.create(row, column, this);
+					items.add(Heart.create(row, column, this));
 				}
 				else if(cursor.equals("S")){
 					
-					items[row][column] = Star.create(row, column, this);
+					items.add(Star.create(row, column, this));
 				}
 				else if(cursor.equals("D")){
 					
-					items[row][column] = Diamond.create(row, column, this);
-				}
-				else{
-					
-					items[row][column] = null;
+					items.add(Diamond.create(row, column, this));
 				}
 				
 				column ++;
@@ -211,7 +262,7 @@ public class Plane {
 	/**
 	 * @return the tiles
 	 */
-	public Tile[][] getTiles() {
+	public ArrayList<Tile> getTiles() {
 		
 		return tiles;
 	}
@@ -219,7 +270,7 @@ public class Plane {
 	/**
 	 * @param tiles the tiles to set
 	 */
-	public void setTiles(Tile[][] tiles) {
+	public void setTiles(ArrayList<Tile> tiles) {
 		
 		this.tiles = tiles;
 	}
@@ -227,7 +278,7 @@ public class Plane {
 	/**
 	 * @return the items
 	 */
-	public PerspectiveItem[][] getItems() {
+	public ArrayList<PerspectiveItem> getItems() {
 		
 		return items;
 	}
@@ -235,7 +286,7 @@ public class Plane {
 	/**
 	 * @param items the items to set
 	 */
-	public void setItems(PerspectiveItem[][] items) {
+	public void setItems(ArrayList<PerspectiveItem> items) {
 		
 		this.items = items;
 	}

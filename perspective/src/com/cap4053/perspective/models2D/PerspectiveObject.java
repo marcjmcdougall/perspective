@@ -10,18 +10,18 @@ public abstract class PerspectiveObject extends Image {
 
 	public final static float SQUARE_DIMENSION = 40.0f;
 	
-	protected Plane level2D;
+	protected Plane plane;
 	
 	private int row;
 	private int column;
 	
-	public PerspectiveObject(Texture texture, int row, int column, Plane level2D){
+	public PerspectiveObject(Texture texture, int row, int column, Plane plane){
 		
 		super(texture);
 		
 		this.row = row;
 		this.column = column;
-		this.level2D = level2D;
+		this.plane = plane;
 		
 		setWidth(SQUARE_DIMENSION);
 		setHeight(SQUARE_DIMENSION);
@@ -37,7 +37,7 @@ public abstract class PerspectiveObject extends Image {
 	private void updateXYLocation(){
 		
 //		DEBUG
-		Gdx.app.log(Perspective.TAG, "**Updating XY Location For " + getClass().getSimpleName() + " Now**");
+//		Gdx.app.log(Perspective.TAG, "**Updating XY Location For " + getClass().getSimpleName() + " Now**");
 		
 		setX(GameScreen2D.HORIZONTAL_MARGIN + SQUARE_DIMENSION * column);
 		setY(GameScreen2D.VERTICAL_MARGIN + SQUARE_DIMENSION * row);

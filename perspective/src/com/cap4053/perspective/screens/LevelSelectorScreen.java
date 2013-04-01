@@ -13,12 +13,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.cap4053.perspective.Perspective;
+import com.cap4053.perspective.backends.LevelManager;
 
 public class LevelSelectorScreen extends PerspectiveScreen {
 	
 //	Perspective game;
 //	Stage stage;
-	BitmapFont black;
+	BitmapFont white;
 	TextureAtlas atlas;
 	Skin skin;
 	SpriteBatch batch;
@@ -31,11 +32,16 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 	TextButton stage7;
 	TextButton stage8;
 	TextButton stage9;
+	
+	private LevelManager manager;
+	
 	Image sprite;
 
 	public LevelSelectorScreen(Perspective game) {
 		
 		super(game);
+		
+		this.manager = new LevelManager(game);
 	}
 
 	@Override
@@ -50,22 +56,22 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 		sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
 		batch = new SpriteBatch();
-		atlas = new TextureAtlas("data/button.pack");
+		atlas = new TextureAtlas("data/graybutton.pack");
 		skin = new Skin();
 		skin.addRegions(atlas);
-		black = new BitmapFont(Gdx.files.internal("data/blackfont.fnt"),false);
+		white = new BitmapFont(Gdx.files.internal("data/whitefont.fnt"),false);
 		
 		stage.clear();
 		
 		int width = Gdx.graphics.getWidth();
 		int height = Gdx.graphics.getHeight();
-		int length = width/9;
+		int length = width/6;
 		
 		TextButtonStyle style = new TextButtonStyle();
 		
-		style.up = skin.getDrawable("buttonnormal");
-		style.down = skin.getDrawable("buttonpressed");
-		style.font = black;
+		style.up = skin.getDrawable("Button_Small");
+		style.down = skin.getDrawable("LED-Zen");
+		style.font = white;
 		
 		stage1 = new TextButton("1",style);
 		stage1.setWidth(length);
@@ -130,7 +136,9 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 			
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
 				
-				game.setScreen(new GameScreen2D(game));
+				manager.loadLevel("data/levels/level2.txt");
+				
+//				game.setScreen(new GameScreen2D(game));
 			}
 		});
 
@@ -142,7 +150,9 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
 				
-				game.setScreen(new GameScreen2D(game));
+				manager.loadLevel("data/levels/level2.txt");
+				
+//				game.setScreen(new GameScreen2D(game));
 			}
 		});
 		
@@ -155,7 +165,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 			
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
 				
-				game.setScreen(new GameScreen2D(game));
+//				game.setScreen(new GameScreen2D(game));
 			}
 		});
 		
@@ -167,7 +177,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
 				
-				game.setScreen(new GameScreen2D(game));
+//				game.setScreen(new GameScreen2D(game));
 			}
 		});
 		
@@ -179,7 +189,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
 				
-				game.setScreen(new GameScreen2D(game));
+//				game.setScreen(new GameScreen2D(game));
 			}
 		});
 		
@@ -191,7 +201,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
 				
-				game.setScreen(new GameScreen2D(game));
+//				game.setScreen(new GameScreen2D(game));
 			}
 		});
 		
@@ -203,7 +213,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
 				
-				game.setScreen(new GameScreen2D(game));
+//				game.setScreen(new GameScreen2D(game));
 			}
 		});
 		
@@ -215,7 +225,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
 				
-				game.setScreen(new GameScreen2D(game));
+//				game.setScreen(new GameScreen2D(game));
 			}
 		});
 		stage9.addListener(new InputListener()
@@ -226,7 +236,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
 				
-				game.setScreen(new GameScreen2D(game));
+//				game.setScreen(new GameScreen2D(game));
 			}
 		});
 		
@@ -249,6 +259,6 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 		
 		skin.dispose();
 		atlas.dispose();
-		black.dispose();
+		white.dispose();
 	}
 }

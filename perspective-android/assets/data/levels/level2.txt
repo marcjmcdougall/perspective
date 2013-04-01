@@ -1,0 +1,97 @@
+0 0
+
+F F F F F F F
+F F B B B B F
+F F B B B B B
+F F B F F B B
+B B B B B B B
+B B B B B B B
+F F F F F F F
+
+F F B B B F F
+F F B F B F F
+F F B F B F F
+F F B B B F F
+F F F F F F F
+F F F F F F F
+F F F F F F F 
+
+F B B B B B B
+F B F F B B B
+B B B F B B B
+F F B F B B B
+F F B B B B B
+F F F F F F F
+F F F F F F F
+
+B B B B B B B
+B B B B B B B
+B B B B B B B
+B B B B B B B
+B B B B B B B
+B B B B B B B
+F F B B B B B
+
+B B B B B B B
+B B B B B B B
+B B B B B B B
+B B B B B B B
+B B B B B B B
+B B B B B B B
+F F F F F F F
+
+B F F F F F F
+B F B B B B F
+F F F F B B F
+B B B B B B F
+F F F F F F F
+F B B B B B B
+F B B B B B B
+
+E E E E E E E
+E E E E E E D
+E E E E E E E
+E E E S E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+
+E E E E E E D
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+
+E E E E E E E
+E E E H E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E D D
+
+E E E E E E E
+E E E E E E E
+H E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E

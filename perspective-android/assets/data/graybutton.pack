@@ -1,0 +1,19 @@
+
+graybutton.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Button_Small
+  rotate: false
+  xy: 1, 1
+  size: 140, 100
+  orig: 140, 100
+  offset: 0, 0
+  index: -1
+LED-Zen
+  rotate: false
+  xy: 143, 61
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1

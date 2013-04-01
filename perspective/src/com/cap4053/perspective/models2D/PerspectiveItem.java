@@ -1,16 +1,19 @@
 package com.cap4053.perspective.models2D;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.cap4053.perspective.Perspective;
+import com.cap4053.perspective.backends.Parser;
 import com.cap4053.perspective.backends.Plane;
 
 public abstract class PerspectiveItem extends PerspectiveObject {
 
-	public PerspectiveItem(Texture texture, int row, int column, Plane level2D) {
+	Parser p;
+	
+	public PerspectiveItem(Texture texture, int row, int column, Plane plane) {
 		
-		super(texture, row, column, level2D);
+		super(texture, row, column, plane);
+		
+		this.p = new Parser();
 	}
 
 	public abstract Drawable getZenDrawable();
@@ -25,7 +28,7 @@ public abstract class PerspectiveItem extends PerspectiveObject {
 	public boolean remove() {
 		
 //		DEBUG
-		Gdx.app.log(Perspective.TAG, "**REMOVING NOW**");
+//		Gdx.app.log(Perspective.TAG, "**REMOVING NOW**");
 		
 		if(getParent() == null){
 			
@@ -33,7 +36,8 @@ public abstract class PerspectiveItem extends PerspectiveObject {
 		}
 		else{
 			
-			level2D.getItems()[getRow()][getColumn()] = null;
+			// TODO: Re-implement later 
+			p.removeItemAt(getRow(), getColumn(), plane);
 			
 			return super.remove();
 		}

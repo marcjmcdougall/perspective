@@ -9,39 +9,27 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.cap4053.perspective.Perspective;
+import com.cap4053.perspective.backends.LevelManager;
 import com.cap4053.perspective.backends.Plane;
-import com.cap4053.perspective.models2D.PerspectiveObject;
 import com.cap4053.perspective.view.GameInputProcessor2D;
 
 public class GameScreen2D extends PerspectiveScreen{
 
-	public static final float HORIZONTAL_MARGIN = 100.0f;
-	public static final float VERTICAL_MARGIN = 20.0f;
+	public static final float HORIZONTAL_MARGIN = 20.0f;
+	public static final float VERTICAL_MARGIN = 100.0f;
 	
 	private Plane level2D;
+	private LevelManager manager;
 	
-	public GameScreen2D(Perspective game) {
+	public GameScreen2D(Perspective game, boolean characterActive, String tileDescription, String itemDescription, LevelManager manager) {
 		
 		super(game);
 		
-		String tileDescription = 	"F F F F F F F\n" +
-									"F B B B B B F\n" +
-									"F B F F F B F\n" +
-									"F B F B B B F\n" +
-									"F B F F F B F\n" +
-									"F B B B F B F\n" +
-									"F F F F F B F\n";
+		this.manager = manager;
 		
-		String itemDescription = 	"D D D E E E H\n" +
-									"E E E E E E E\n" +
-									"E E E E E E E\n" +
-									"E E E E E E E\n" +
-									"E E S E E E E\n" +
-									"E E E E E E E\n" +
-									"E E E E E E E\n";
-
-		level2D = new Plane();
-		level2D.initialize(0, 0, tileDescription, itemDescription, stage);
+		level2D = new Plane(stage, characterActive);
+		
+		level2D.initialize(0, 0, tileDescription, itemDescription);
 	}
 	
 	@Override
@@ -50,7 +38,13 @@ public class GameScreen2D extends PerspectiveScreen{
 		super.show();
 		
 		// TODO: Set input processor to just the stage?
-		Gdx.input.setInputProcessor(new GameInputProcessor2D(game, this));
+		Gdx.input.setInputProcessor(new GameInputProcessor2D(game, manager, this));
+	}
+	
+	@Override
+	public void hide() {
+		
+		// Do nothing
 	}
 	
 	public void resize(int width, int height){
@@ -61,15 +55,22 @@ public class GameScreen2D extends PerspectiveScreen{
 	/**
 	 * @return the level2D
 	 */
-	public Plane getLevel2D() {
+	public Plane getLevel2D(){
 		
 		return level2D;
 	}
 
-	public Texture getScreen(/*int x, int y, int w, int h, boolean flipY*/) {
-		TextureRegion front = ScreenUtils.getFrameBufferTexture((int)HORIZONTAL_MARGIN, (int)VERTICAL_MARGIN,
-										256, 256);
-		return front.getTexture();
+//	public Texture getScreen(/*int x, int y, int w, int h, boolean flipY*/) {
+////		TextureRegion front = ScreenUtils.getFrameBufferTexture((int)HORIZONTAL_MARGIN, (int)VERTICAL_MARGIN,
+////										256, 256);
+////		return front.getTexture();
+//		Gdx.gl.glPixelStorei(GL10.GL_PACK_ALIGNMENT, 1);
+//		int w = 256;
+//		int h = w;
+//		int x = (int)HORIZONTAL_MARGIN;
+//		int y = (int)VERTICAL_MARGIN;
+//		boolean flipY = false;
+//        
 //		Gdx.gl.glPixelStorei(GL10.GL_PACK_ALIGNMENT, 1);
 //        
 //        final Pixmap pixmap = new Pixmap(w, h, Pixmap.Format.RGBA8888);
@@ -92,5 +93,5 @@ public class GameScreen2D extends PerspectiveScreen{
 //        }
 //        
 //        return new Texture(pixmap);
-	}
+//	}
 }

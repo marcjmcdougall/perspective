@@ -15,10 +15,12 @@ import com.cap4053.perspective.view.CompletedAction;
 
 public class Avatar extends PerspectiveObject {
 
-	private static final float DURATION_PER_SQUARE = 0.50f;
-	private static final Interpolation INTERPOLATOR = Interpolation.swing;
+	private static final float DURATION_PER_SQUARE = 0.25f;
+	private static final Interpolation INTERPOLATOR = Interpolation.linear;
 	
 	private static final int MAX_HEALTH = 10;
+	
+	private Plane currentPlane;
 	
 	private int health;
 	
@@ -27,6 +29,7 @@ public class Avatar extends PerspectiveObject {
 		super(texture, row, column, level2D);
 		
 		this.health = MAX_HEALTH;
+		this.currentPlane = level2D;
 	}
 	
 	public static Avatar create(int row, int column, Plane level2D){
@@ -53,8 +56,18 @@ public class Avatar extends PerspectiveObject {
 		
 		this.health = health;
 	}
+	
+	public Plane getCurrentPlane(){
+		
+		return currentPlane;
+	}
+	
+	public void setCurrentPlane(Plane plane){
+		
+		this.currentPlane = plane;
+	}
 
-	public void moveTo(int newRow, int newColumn, ArrayList<SimpleCoordinate> path, PerspectiveItem[][] items){
+	public void moveTo(int newRow, int newColumn, ArrayList<SimpleCoordinate> path, ArrayList<PerspectiveItem>items){
 		
 		SimpleCoordinate cursor = null;
 		
