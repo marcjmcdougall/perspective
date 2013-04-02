@@ -1,5 +1,6 @@
 package com.cap4053.perspective.view;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.backends.LevelManager;
@@ -122,12 +123,25 @@ public class GameInputProcessor3D extends PerspectiveInputProcessor {
 //			switchPerspective();
 //		}
 //		
-		if(keycode == Input.Keys.NUM_2){
+//		if(keycode == Input.Keys.NUM_2){
 			
 			//perspectiveGame.setScreen(new GameScreen2D(perspectiveGame));
 			
-			screen.getCube().transitionTo2D();
+//			screen.getCube().transitionTo2D();
+//		}
+		
+		if(keycode == Input.Keys.M){
+			
+			if(Perspective.DEVELOPER_MODE){
+				
+//				DEBUG
+				Gdx.app.log(Perspective.TAG, "**M Pressed**");
+			}
+			
+			manager.togglePerspective();
+			manager.toggleMenu();
 		}
+		
 		return false;
 	}
 	

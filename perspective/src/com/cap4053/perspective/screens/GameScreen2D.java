@@ -1,13 +1,7 @@
 package com.cap4053.perspective.screens;
 
 import com.badlogic.gdx.Gdx;
-<<<<<<< HEAD
-=======
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.ScreenUtils;
->>>>>>> 3ad139898a4c29c2b850636956eaffa5d2490c3d
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.backends.LevelManager;
 import com.cap4053.perspective.backends.Plane;
@@ -64,16 +58,5 @@ public class GameScreen2D extends GameScreen{
 		return level2D;
 	}
 
-<<<<<<< HEAD
 	/* getScreen() method moved to LevelManager.java */
-=======
-	public Texture getScreen(){
-		
-		TextureRegion front = ScreenUtils.getFrameBufferTexture((int) HORIZONTAL_MARGIN, 
-																(int) VERTICAL_MARGIN,
-																(int) PerspectiveObject.SQUARE_DIMENSION * 7, 
-																(int) PerspectiveObject.SQUARE_DIMENSION * 7);
-		return front.getTexture();
-	}
->>>>>>> 3ad139898a4c29c2b850636956eaffa5d2490c3d
 }

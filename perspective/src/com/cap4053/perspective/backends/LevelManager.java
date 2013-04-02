@@ -42,15 +42,12 @@ public class LevelManager {
 	
 	// Reference to the Parser class that aides in parsing the Tiles on the Screen
 	private Parser p;
-	
-<<<<<<< HEAD
+
 	private Texture front, back, left, right, top, bottom;
 
-=======
 	// The context menu for the game
 	private Stage menu;
-	
->>>>>>> 3ad139898a4c29c2b850636956eaffa5d2490c3d
+
 	// Integer that refers to the current index in the array of the active face
 	private int currentFace;
 	
@@ -340,7 +337,7 @@ public class LevelManager {
 			}
 			
 			//redraw the 3d cube
-			this.view3D = new GameScreen3D(game, this, front, back, left, right, top, bottom);
+			this.view3D = new GameScreen3D(game, menu, this, front, back, left, right, top, bottom);
 			
 			// Make it 3D
 			display2D = false;
@@ -402,7 +399,10 @@ public class LevelManager {
         
         Pixmap screen = new Pixmap(512, 512, Pixmap.Format.RGBA8888);
         screen.drawPixmap(pixmap, 0, 0, w, h, 0, 0, 512, 512);
+        pixmap.dispose();
+        Texture map = new Texture(screen);
+        screen.dispose();
         
-        return new Texture(screen);
+        return map;
 	}
 }
