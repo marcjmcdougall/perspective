@@ -35,7 +35,7 @@ public class Heart extends PerspectiveItem {
 //		DEBUG
 		Gdx.app.log(Perspective.TAG, "**Moved Over Heart**");
 		
-		collidedObject.setHealth(collidedObject.getHealth() + 1);
+		collidedObject.addHeart(this);
 		
 		super.onMoveOver(collidedObject);
 	}
