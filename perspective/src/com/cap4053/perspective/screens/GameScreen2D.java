@@ -67,7 +67,6 @@ public class GameScreen2D extends PerspectiveScreen{
 																(int) VERTICAL_MARGIN,
 																(int) PerspectiveObject.SQUARE_DIMENSION * 7, 
 																(int) PerspectiveObject.SQUARE_DIMENSION * 7);
-		
 		return front.getTexture();
 	}
 }

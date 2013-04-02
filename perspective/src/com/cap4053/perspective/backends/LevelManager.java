@@ -145,16 +145,20 @@ public class LevelManager {
 		// Pull in the item maps for the 6 faces of the cube		
 		for(int i = 0; i < 6; i++){
 			
+			// Reassign the input string to the null string each time we advance through the array
 			input = "";
 			
 			
 			for(int j = 0; j < Plane.DIMENSION; j++){
 				
+				// Append the information in the file string with a newline to the input String
 				input += scan.nextLine() + "\n";
 			}
 			
+			// Add this String to the array
 			itemMaps[i] = input;
 			
+			// If there is a next line (necessary in case we reach the EOF)
 			if(scan.hasNextLine()){
 				
 				// Advance the scanner
