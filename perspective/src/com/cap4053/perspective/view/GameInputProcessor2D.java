@@ -87,13 +87,17 @@ public class GameInputProcessor2D extends PerspectiveInputProcessor{
 //			perspectiveGame.setScreen(new GameScreen3D(perspectiveGame, front, front, front, front, front, front));
 			
 			manager.togglePerspective();
-			manager.showScreen();
 		}
 		else if(keycode == Input.Keys.T){
 			
-			Texture screen = gameScreen.getScreen();
+			// TODO: Removed for now
+//			Texture screen = gameScreen.getScreen();
 			
-			perspectiveGame.setScreen(new GameScreen3D(perspectiveGame, manager, screen, screen, screen, screen, screen, screen));
+//			perspectiveGame.setScreen(new GameScreen3D(perspectiveGame, manager, screen, screen, screen, screen, screen, screen));
+		}
+		else if(keycode == Input.Keys.M){
+			
+			manager.toggleMenu();
 		}
 		
 		return true;

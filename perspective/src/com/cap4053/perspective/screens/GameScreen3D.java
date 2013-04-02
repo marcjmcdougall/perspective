@@ -2,14 +2,14 @@ package com.cap4053.perspective.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.backends.LevelManager;
 import com.cap4053.perspective.models3D.MoveableTexturedCube;
 import com.cap4053.perspective.view.GameInputProcessor3D;
 
-public class GameScreen3D extends PerspectiveScreen {
+public class GameScreen3D extends GameScreen {
 
 	private MoveableTexturedCube cube;
 	private LevelManager manager;
@@ -20,9 +20,9 @@ public class GameScreen3D extends PerspectiveScreen {
 	private boolean transition = false;
 	
 	
-	public GameScreen3D(Perspective game, LevelManager manager) {
+	public GameScreen3D(Perspective game, Stage contextMenu, LevelManager manager) {
 	
-		super(game);
+		super(game, contextMenu);
 		
 		this.manager = manager;
 		
@@ -44,10 +44,10 @@ public class GameScreen3D extends PerspectiveScreen {
 //		Gdx.app.log(Perspective.TAG, "**New Default Game Screen Created**");
 	}
 	
-	public GameScreen3D(Perspective game, LevelManager manager,Texture front, Texture back, Texture left, Texture right, Texture top, Texture bottom) {
+	public GameScreen3D(Perspective game, Stage contextMenu, LevelManager manager,Texture front, Texture back, Texture left, Texture right, Texture top, Texture bottom) {
 		
 		//overloaded non-default constructor
-		super(game);
+		super(game, contextMenu);
 		
 		this.manager = manager;
 		
@@ -118,10 +118,11 @@ public class GameScreen3D extends PerspectiveScreen {
         cube.draw();
         prevTrans = transition;
         transition = cube.getTransition();
+       
         if(!transition && prevTrans){
+        	
         	manager.setScreen(this.getCube().findFrontFace());
         	manager.togglePerspective();
-    		manager.showScreen();
         }
 	}
 	

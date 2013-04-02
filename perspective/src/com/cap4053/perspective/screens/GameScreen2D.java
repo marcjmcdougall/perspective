@@ -3,6 +3,7 @@ package com.cap4053.perspective.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.backends.LevelManager;
@@ -10,7 +11,7 @@ import com.cap4053.perspective.backends.Plane;
 import com.cap4053.perspective.models2D.PerspectiveObject;
 import com.cap4053.perspective.view.GameInputProcessor2D;
 
-public class GameScreen2D extends PerspectiveScreen{
+public class GameScreen2D extends GameScreen{
 
 	public static final float HORIZONTAL_MARGIN = 20.0f;
 	public static final float VERTICAL_MARGIN = 100.0f;
@@ -18,15 +19,15 @@ public class GameScreen2D extends PerspectiveScreen{
 	private Plane level2D;
 	private LevelManager manager;
 	
-	public GameScreen2D(Perspective game, boolean characterActive, String tileDescription, String itemDescription, LevelManager manager) {
+	public GameScreen2D(Perspective game, Stage contextMenu, boolean characterActive, String tileDescription, String itemDescription, LevelManager manager) {
 		
-		super(game);
+		super(game, contextMenu);
 		
 		this.manager = manager;
 		
 //		DEBUGS
-		Gdx.app.log(Perspective.TAG, "horizontal margin: " + HORIZONTAL_MARGIN + ", vertical margin: " + VERTICAL_MARGIN);
-		Gdx.app.log(Perspective.TAG, "width: " + Gdx.graphics.getWidth() + ", height: " + Gdx.graphics.getHeight());
+//		Gdx.app.log(Perspective.TAG, "horizontal margin: " + HORIZONTAL_MARGIN + ", vertical margin: " + VERTICAL_MARGIN);
+//		Gdx.app.log(Perspective.TAG, "width: " + Gdx.graphics.getWidth() + ", height: " + Gdx.graphics.getHeight());
 		
 		level2D = new Plane(stage, characterActive);
 		
