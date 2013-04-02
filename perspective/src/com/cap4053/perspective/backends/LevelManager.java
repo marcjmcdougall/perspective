@@ -8,6 +8,9 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.screens.GameScreen2D;
 import com.cap4053.perspective.screens.GameScreen3D;
@@ -40,14 +43,23 @@ public class LevelManager {
 	// Reference to the Parser class that aides in parsing the Tiles on the Screen
 	private Parser p;
 	
+<<<<<<< HEAD
 	private Texture front, back, left, right, top, bottom;
 
+=======
+	// The context menu for the game
+	private Stage menu;
+	
+>>>>>>> 3ad139898a4c29c2b850636956eaffa5d2490c3d
 	// Integer that refers to the current index in the array of the active face
 	private int currentFace;
 	
 	// Variable that determines whether or not to display the 2D version of the game
 	private boolean display2D;
-	 
+	
+	// Variable that determines whether or not to display the game menu
+	private boolean displayMenu;
+	
 	/**
 	 * Simple constructor that associates the main Game with the local variable.
 	 * 
@@ -66,6 +78,15 @@ public class LevelManager {
 		// Default the starting perspective to the 2D orientation
 		this.display2D = true;
 		
+		// Default the menu state of off
+		this.displayMenu = false;
+		
+		// Sets up the menu Stage
+		this.menu = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
+		
+		// Initializes the Menu
+		initializeMenu();
+		
 		// Defines the textures of the 3D cube.  This is temporary and will eventually be replaced with the screen shot function.
 		front = new Texture(Gdx.files.internal("data/levels/images/level2_front.png"));
 		back = new Texture(Gdx.files.internal("data/levels/images/level2_back.png"));
@@ -75,7 +96,7 @@ public class LevelManager {
 		bottom = new Texture(Gdx.files.internal("data/levels/images/level2_bottom.png"));
 		
 		// Creates the new 3D cube
-		this.view3D = new GameScreen3D(game, this, front, back, left, right, top, bottom);
+		this.view3D = new GameScreen3D(game, menu, this, front, back, left, right, top, bottom);
 	}
 	
 	/**
@@ -149,16 +170,20 @@ public class LevelManager {
 		// Pull in the item maps for the 6 faces of the cube		
 		for(int i = 0; i < 6; i++){
 			
+			// Reassign the input string to the null string each time we advance through the array
 			input = "";
 			
 			
 			for(int j = 0; j < Plane.DIMENSION; j++){
 				
+				// Append the information in the file string with a newline to the input String
 				input += scan.nextLine() + "\n";
 			}
 			
+			// Add this String to the array
 			itemMaps[i] = input;
 			
+			// If there is a next line (necessary in case we reach the EOF)
 			if(scan.hasNextLine()){
 				
 				// Advance the scanner
@@ -183,13 +208,13 @@ public class LevelManager {
 				}
 				
 				// Create the new face, but pass in true to the constructor (used for character identification)
-				faces[i] = new GameScreen2D(game, true, tileMaps[i], itemMaps[i], this);
+				faces[i] = new GameScreen2D(game, menu, true, tileMaps[i], itemMaps[i], this);
 			}
 			// Otherwise...
 			else{
 				
 				// Create the new face, but pass in false to the constructor (used for character identification)
-				faces[i] = new GameScreen2D(game, false, tileMaps[i], itemMaps[i], this);
+				faces[i] = new GameScreen2D(game, menu, false, tileMaps[i], itemMaps[i], this);
 			}
 		}
 		
@@ -260,6 +285,34 @@ public class LevelManager {
 	}
 	
 	/**
+	 * Toggles the state of the menu.  It will be shown if it is not currently being shown, or
+	 * hidden if it is currently being shown.
+	 */
+	public void toggleMenu(){
+		
+		// If we are currently displaying the menu
+		if(displayMenu){
+			
+			// Stop displaying it
+			displayMenu = false;
+		}
+		// Otherwise
+		else{
+			
+			displayMenu = true;
+		}
+		
+		if(display2D){
+			
+			faces[currentFace].setDisplayMenu(displayMenu);
+		}
+		else{
+			
+			view3D.setDisplayMenu(displayMenu);
+		}
+	}
+	
+	/**
 	 * Toggles the perspective to the opposite of the current perspective.
 	 */
 	public void togglePerspective(){
@@ -298,6 +351,21 @@ public class LevelManager {
 			// Make it 2D
 			display2D = true;
 		}
+		
+		// Show the appropriate Screen
+		showScreen();
+	}
+	
+	private void initializeMenu(){
+		
+		Image background = new Image(new Texture(Gdx.files.internal("data/perspective_cube_other.png")));
+		
+		background.setX(Gdx.graphics.getWidth() * 0.125f);
+		background.setY(Gdx.graphics.getHeight() * 0.125f);
+		background.setWidth(Gdx.graphics.getWidth() * 0.75f);
+		background.setHeight(Gdx.graphics.getHeight() * 0.75f);
+		
+		menu.addActor(background);
 	}
 	
 	public Texture getScreen() {

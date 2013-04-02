@@ -27,9 +27,11 @@ public abstract class PerspectiveScreen implements Screen {
 	public void render(float delta) {
 		
 		stage.act(delta);
-	
-	    // clear the screen with the given RGB color (black)
-	    Gdx.gl.glClearColor( 1f, 1f, 1f, 1f );
+		
+		// clear the screen with the given RGB color (black)
+		Gdx.gl.glClearColor( 1f, 1f, 1f, 1f );
+			
+		
 	    Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 	
 	    // draw the actors
