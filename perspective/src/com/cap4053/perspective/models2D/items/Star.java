@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.backends.Plane;
 import com.cap4053.perspective.models2D.Avatar;
 import com.cap4053.perspective.models2D.PerspectiveItem;
@@ -30,7 +31,11 @@ public class Star extends PerspectiveItem {
 	public void onMoveOver(Avatar collidedObject) {
 		
 		// TODO Star-specific implementation
+		Gdx.app.log(Perspective.TAG, "**Moved Over Star**");
+		System.out.println("Star: " + collidedObject);
 		
+		collidedObject.addStar(this);
+
 		super.onMoveOver(collidedObject);
 	}
 
