@@ -34,7 +34,7 @@ public abstract class PerspectiveObject extends Image {
 		return getClass().getSimpleName();
 	}
 	
-	private void updateXYLocation(){
+	public void updateXYLocation(){
 		
 //		DEBUG
 //		Gdx.app.log(Perspective.TAG, "**Updating XY Location For " + getClass().getSimpleName() + " Now**");
