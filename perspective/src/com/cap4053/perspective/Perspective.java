@@ -17,6 +17,7 @@ public class Perspective extends Game {
 	
 	// Public class variable that is used for debugging
 	public static final String TAG = Perspective.class.getSimpleName();
+	public static final boolean DEBUG = true;
 	
 	// Public class variable used to control printout statements.  Also removes potentially frustrating features
 	// during the development process (such as music and sound effects).  Must be set to false before release.
