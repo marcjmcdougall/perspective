@@ -4,9 +4,15 @@ import java.util.Scanner;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.screens.GameScreen2D;
@@ -291,8 +297,11 @@ public class LevelManager {
 		// Otherwise
 		else{
 			
+			// Display it
 			displayMenu = true;
 		}
+		
+		animateMenu();
 		
 		if(display2D){
 			
@@ -326,15 +335,44 @@ public class LevelManager {
 		showScreen();
 	}
 	
+	/**
+	 * Helper method used to add the Actors to the Stage.
+	 */
 	private void initializeMenu(){
+		
+		float backgroundX = Gdx.graphics.getWidth() * 0.125f;
+		float backgroundY = Gdx.graphics.getHeight() * 0.125f;
+		float backgroundWidth = Gdx.graphics.getWidth() * 0.75f;
+		float backgroundHeight = Gdx.graphics.getHeight() * 0.75f;
 		
 		Image background = new Image(new Texture(Gdx.files.internal("data/perspective_cube_other.png")));
 		
-		background.setX(Gdx.graphics.getWidth() * 0.125f);
-		background.setY(Gdx.graphics.getHeight() * 0.125f);
-		background.setWidth(Gdx.graphics.getWidth() * 0.75f);
-		background.setHeight(Gdx.graphics.getHeight() * 0.75f);
+		BitmapFont font = new BitmapFont(Gdx.files.internal("data/whitefont.fnt"), false);
+		LabelStyle style = new LabelStyle(font, Color.BLACK);
+		Label title = new Label("Menu", style);
+		
+		background.setX(backgroundX);
+		background.setY(backgroundY);
+		background.setWidth(backgroundWidth);
+		background.setHeight(backgroundHeight);
+		
+		title.setX(backgroundX + (backgroundWidth / 2.0f) - (title.getWidth() / 2.0f));
+		title.setY(backgroundY + backgroundHeight - title.getHeight());
 		
 		menu.addActor(background);
+		menu.addActor(title);
+	}
+	
+	private void animateMenu(){
+		
+		AlphaAction fader = new AlphaAction();
+		fader.setDuration(0.5f);
+		
+		if(displayMenu){
+			
+			fader.setReverse(true);
+		}
+		
+		menu.addAction(fader);
 	}
 }
