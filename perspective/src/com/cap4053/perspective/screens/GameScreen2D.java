@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.backends.LevelManager;
 import com.cap4053.perspective.backends.Plane;
+import com.cap4053.perspective.models2D.Avatar;
 import com.cap4053.perspective.models2D.PerspectiveObject;
 import com.cap4053.perspective.view.GameInputProcessor2D;
 
@@ -28,9 +29,10 @@ public class GameScreen2D extends PerspectiveScreen{
 		Gdx.app.log(Perspective.TAG, "horizontal margin: " + HORIZONTAL_MARGIN + ", vertical margin: " + VERTICAL_MARGIN);
 		Gdx.app.log(Perspective.TAG, "width: " + Gdx.graphics.getWidth() + ", height: " + Gdx.graphics.getHeight());
 		
-		level2D = new Plane(stage, characterActive);
+		level2D = new Plane(stage, manager, characterActive);
 		
 		level2D.initialize(0, 0, tileDescription, itemDescription);
+		
 	}
 	
 	@Override
