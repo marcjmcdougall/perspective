@@ -40,6 +40,8 @@ public class Avatar extends PerspectiveObject {
 	private PerspectiveCollection starCollection;
 	private PerspectiveCollection heartCollection;
 	
+	private boolean isMoving;
+	
 	private Avatar(Texture texture, int row, int column, Plane level2D, LevelManager manager) {
 		
 		super(texture, row, column, level2D);
@@ -92,51 +94,59 @@ public class Avatar extends PerspectiveObject {
 
 	public void moveTo(int newRow, int newColumn, ArrayList<SimpleCoordinate> path, ArrayList<PerspectiveItem>items){
 		
-		System.out.println("Stars: " + this.manager.getStars().size());
-		
-		SimpleCoordinate cursor = null;
-		
-		SequenceAction sequence = new SequenceAction();
-		
-		for(int i = 0; i < path.size(); i++){
+		if(!this.isMoving){
+			this.isMoving = true;
 			
-			cursor = path.get(i);
+			SimpleCoordinate cursor = null;
 			
-			int targetRow = cursor.getRow();
-			int targetColumn = cursor.getColumn();
+			SequenceAction sequence = new SequenceAction();
 			
-			float targetX = GameScreen2D.HORIZONTAL_MARGIN + SQUARE_DIMENSION * cursor.getColumn();
-			float targetY = GameScreen2D.VERTICAL_MARGIN + SQUARE_DIMENSION * cursor.getRow();
+			for(int i = 0; i < path.size(); i++){
+				
+				cursor = path.get(i);
+				
+				int targetRow = cursor.getRow();
+				int targetColumn = cursor.getColumn();
+				
+				float targetX = GameScreen2D.HORIZONTAL_MARGIN + SQUARE_DIMENSION * cursor.getColumn();
+				float targetY = GameScreen2D.VERTICAL_MARGIN + SQUARE_DIMENSION * cursor.getRow();
+				
+				AvatarMoveToAction m = new AvatarMoveToAction(this, items, targetRow, targetColumn);
+				
+				m.setPosition(targetX, targetY);
+				
+				m.setDuration(DURATION_PER_SQUARE);
+				m.setInterpolation(INTERPOLATOR);
+				
+				/*
+				// Calculate duration per square
+				float dps = (TOTAL_DURATION/2);
+				m.setDuration(dps);
+				
+				if(i == 0)
+					m.setInterpolation(INTERPOLATOR_START);
+				else if(i == path.size()-1)
+					m.setInterpolation(INTERPOLATOR_END);
+				else
+					m.setInterpolation(INTERPOLATOR);*/
+				
+				sequence.addAction(m);
+			}
+				
+			CompletedAction complete = new CompletedAction(this);
+			complete.setTargetColumn(newColumn);
+			complete.setTargetRow(newRow);
 			
-			AvatarMoveToAction m = new AvatarMoveToAction(this, items, targetRow, targetColumn);
+			sequence.addAction(complete);
 			
-			m.setPosition(targetX, targetY);
+			sequence.addAction(Actions.run(
+		            new Runnable(){
+		                public void run () {
+		                	isMoving = false;
+		            }}));  
 			
-			m.setDuration(DURATION_PER_SQUARE);
-			m.setInterpolation(INTERPOLATOR);
-			
-			/*
-			// Calculate duration per square
-			float dps = (TOTAL_DURATION/2);
-			m.setDuration(dps);
-			
-			if(i == 0)
-				m.setInterpolation(INTERPOLATOR_START);
-			else if(i == path.size()-1)
-				m.setInterpolation(INTERPOLATOR_END);
-			else
-				m.setInterpolation(INTERPOLATOR);*/
-			
-			sequence.addAction(m);
+			this.addAction(sequence);
 		}
-			
-		CompletedAction complete = new CompletedAction(this);
-		complete.setTargetColumn(newColumn);
-		complete.setTargetRow(newRow);
-		
-		sequence.addAction(complete);
-		
-		this.addAction(sequence);
 	}
 	
 	public void onPickUp(PerspectiveItem item){
