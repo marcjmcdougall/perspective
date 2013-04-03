@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.models2D.Avatar;
+import com.cap4053.perspective.models2D.PerspectiveCollection;
 import com.cap4053.perspective.models2D.PerspectiveItem;
 import com.cap4053.perspective.models2D.PerspectiveObject;
 import com.cap4053.perspective.models2D.items.Diamond;
@@ -46,18 +47,21 @@ public class Plane {
 	// A variable defining the state if the character (currently binary, either on or off the Screen)
 	private boolean characterState;
 	
+	private LevelManager manager;
+	
 	/**
 	 * Simple constructor.  Creates a new Plane object.
 	 * 
 	 * @param stage The associated Stage.
 	 * @param characterState The initial state of the Avatar.
 	 */
-	public Plane(Stage stage, boolean characterState){
+	public Plane(Stage stage, LevelManager manager, boolean characterState){
 		
 		// Initialize new objects as needed
 		this.tiles = new ArrayList<Tile>();
 		this.items = new ArrayList<PerspectiveItem>();
 		this.p = new Parser();
+		this.manager = manager;
 		
 		// Assign the parameters to their class variable equivalents
 		this.stage = stage;
@@ -83,6 +87,14 @@ public class Plane {
 	 */
 	private void onCharacterStateChange(){
 		
+		if(this.character.getStarCollection() != null){
+			this.character.getStarCollection().update(this.manager.getStars().size());
+		}
+		
+		if(this.character.getHeartCollection() != null){
+			this.character.getHeartCollection().update(this.manager.getHearts().size());
+		}
+		
 		// If the character should be displayed...
 		if(characterState){
 		
@@ -98,7 +110,7 @@ public class Plane {
 	}
 	
 	/**
-	 * Initialization method that sets all the values to their starting states.
+	 * Initialization method that sets all the values to their starting states, will return the Avatar to use on other planes
 	 * 
 	 * @param characterStartingRow The initial row of the character on this Plane
 	 * @param characterStartingColumn The initial column of the character on this Plane
@@ -127,7 +139,7 @@ public class Plane {
 				}
 				
 				// Create the new character
-				this.character = Avatar.create(characterStartingRow, characterStartingColumn, this);
+				this.character = Avatar.create(characterStartingRow, characterStartingColumn, this, this.manager);
 			}
 		}
 		
@@ -167,6 +179,7 @@ public class Plane {
 			// Add it to the Stage also
 			stage.addActor(character);
 		}
+		
 	}
 
 	/**
@@ -179,7 +192,14 @@ public class Plane {
 	public void onTouch(float x, float y, Stage stage){
 		
 		// Obtain the object that was hit by this touch
-		PerspectiveObject actor = (PerspectiveObject) stage.hit(x, y, false);
+		PerspectiveObject actor = null;
+		
+		try{
+			actor = (PerspectiveObject) stage.hit(x, y, false);
+		}
+		catch(ClassCastException e){
+			// Item is collection object
+		}
 		
 		// If this value is not null...
 		if(actor != null){
@@ -396,5 +416,13 @@ public class Plane {
 	public void setCharacter(Avatar character) {
 		
 		this.character = character;
+	}
+
+	public Stage getStage() {
+		return stage;
+	}
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
 	}
 }
