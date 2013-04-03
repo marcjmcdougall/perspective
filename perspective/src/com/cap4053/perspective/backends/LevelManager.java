@@ -1,11 +1,15 @@
 package com.cap4053.perspective.backends;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.cap4053.perspective.Perspective;
+import com.cap4053.perspective.models2D.Avatar;
+import com.cap4053.perspective.models2D.items.Heart;
+import com.cap4053.perspective.models2D.items.Star;
 import com.cap4053.perspective.models3D.TexturedCube;
 import com.cap4053.perspective.screens.GameScreen2D;
 import com.cap4053.perspective.screens.GameScreen3D;
@@ -43,6 +47,9 @@ public class LevelManager {
 	
 	// Variable that determines whether or not to display the 2D version of the game
 	private boolean display2D;
+	
+	private ArrayList<Star> stars;
+	private ArrayList<Heart> hearts;
 	 
 	/**
 	 * Simple constructor that associates the main Game with the local variable.
@@ -72,6 +79,9 @@ public class LevelManager {
 		
 		// Creates the new 3D cube
 		this.view3D = new GameScreen3D(game, this, front, back, left, right, top, bottom);
+		
+		this.setStars(new ArrayList<Star>());
+		this.setHearts(new ArrayList<Heart>());
 	}
 	
 	/**
@@ -272,5 +282,21 @@ public class LevelManager {
 			// Make it 2D
 			display2D = true;
 		}
+	}
+
+	public ArrayList<Star> getStars() {
+		return stars;
+	}
+
+	public void setStars(ArrayList<Star> stars) {
+		this.stars = stars;
+	}
+
+	public ArrayList<Heart> getHearts() {
+		return hearts;
+	}
+
+	public void setHearts(ArrayList<Heart> hearts) {
+		this.hearts = hearts;
 	}
 }
