@@ -40,10 +40,6 @@ public class MenuScreen extends PerspectiveScreen{
 	public void render(float delta) {
 		
 		super.render(delta);
-		
-		// If debugging, go right to the game
-		if(Perspective.DEBUG)
-			game.setScreen(new GameScreen2D(game));
 	}
 
 	@Override

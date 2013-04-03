@@ -30,28 +30,23 @@ public class Avatar extends PerspectiveObject {
 	private static final Interpolation INTERPOLATOR_START = Interpolation.swingIn;
 	private static final Interpolation INTERPOLATOR_END = Interpolation.swingOut;*/
 	
-<<<<<<< HEAD
 	private Plane currentPlane;
 	
 	private int health;
-=======
 	private static final int MAX_HEALTH = 3;
 	
 	private ArrayList<Star> stars;
 	private ArrayList<Heart> hearts;
->>>>>>> collection-of-items
 	
 	private Avatar(Texture texture, int row, int column, Plane level2D) {
 		
 		super(texture, row, column, level2D);
 		
-<<<<<<< HEAD
 		this.health = MAX_HEALTH;
 		this.currentPlane = level2D;
-=======
+		
 		this.hearts = new ArrayList<Heart>();
 		this.stars = new ArrayList<Star>();
->>>>>>> collection-of-items
 	}
 	
 	public static Avatar create(int row, int column, Plane level2D){
