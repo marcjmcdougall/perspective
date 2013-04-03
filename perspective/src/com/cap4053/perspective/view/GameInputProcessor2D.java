@@ -58,7 +58,6 @@ public class GameInputProcessor2D extends PerspectiveInputProcessor{
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-//		TextureRegion front = ScreenUtils.getFrameBufferTexture((int)GameScreen2D.HORIZONTAL_MARGIN, (int)GameScreen2D.VERTICAL_MARGIN,
 		
 		return false;
 	}
@@ -88,7 +87,17 @@ public class GameInputProcessor2D extends PerspectiveInputProcessor{
 //			perspectiveGame.setScreen(new GameScreen3D(perspectiveGame, front, front, front, front, front, front));
 			
 			manager.togglePerspective();
-			manager.showScreen();
+		}
+		else if(keycode == Input.Keys.T){
+			
+			// TODO: Removed for now
+//			Texture screen = gameScreen.getScreen();
+			
+//			perspectiveGame.setScreen(new GameScreen3D(perspectiveGame, manager, screen, screen, screen, screen, screen, screen));
+		}
+		else if(keycode == Input.Keys.M){
+			
+			manager.toggleMenu();
 		}
 		
 		return true;

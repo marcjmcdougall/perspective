@@ -1,12 +1,17 @@
 package com.cap4053.perspective.backends;
 
+import java.nio.ByteBuffer;
 import java.util.Scanner;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.cap4053.perspective.Perspective;
-import com.cap4053.perspective.models3D.TexturedCube;
 import com.cap4053.perspective.screens.GameScreen2D;
 import com.cap4053.perspective.screens.GameScreen3D;
 
@@ -37,13 +42,21 @@ public class LevelManager {
 	
 	// Reference to the Parser class that aides in parsing the Tiles on the Screen
 	private Parser p;
-	
+
+	private Texture front, back, left, right, top, bottom;
+
+	// The context menu for the game
+	private Stage menu;
+
 	// Integer that refers to the current index in the array of the active face
 	private int currentFace;
 	
 	// Variable that determines whether or not to display the 2D version of the game
 	private boolean display2D;
-	 
+	
+	// Variable that determines whether or not to display the game menu
+	private boolean displayMenu;
+	
 	/**
 	 * Simple constructor that associates the main Game with the local variable.
 	 * 
@@ -62,16 +75,25 @@ public class LevelManager {
 		// Default the starting perspective to the 2D orientation
 		this.display2D = true;
 		
+		// Default the menu state of off
+		this.displayMenu = false;
+		
+		// Sets up the menu Stage
+		this.menu = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
+		
+		// Initializes the Menu
+		initializeMenu();
+		
 		// Defines the textures of the 3D cube.  This is temporary and will eventually be replaced with the screen shot function.
-		Texture front = new Texture(Gdx.files.internal("data/levels/images/level2_front.png"));
-		Texture back = new Texture(Gdx.files.internal("data/levels/images/level2_back.png"));
-		Texture left = new Texture(Gdx.files.internal("data/levels/images/level2_left.png"));
-		Texture right = new Texture(Gdx.files.internal("data/levels/images/level2_right.png"));
-		Texture top = new Texture(Gdx.files.internal("data/levels/images/level2_top.png"));
-		Texture bottom = new Texture(Gdx.files.internal("data/levels/images/level2_bottom.png"));
+		front = new Texture(Gdx.files.internal("data/levels/images/level2_front.png"));
+		back = new Texture(Gdx.files.internal("data/levels/images/level2_back.png"));
+		left = new Texture(Gdx.files.internal("data/levels/images/level2_left.png"));
+		right = new Texture(Gdx.files.internal("data/levels/images/level2_right.png"));
+		top = new Texture(Gdx.files.internal("data/levels/images/level2_top.png"));
+		bottom = new Texture(Gdx.files.internal("data/levels/images/level2_bottom.png"));
 		
 		// Creates the new 3D cube
-		this.view3D = new GameScreen3D(game, this, front, back, left, right, top, bottom);
+		this.view3D = new GameScreen3D(game, menu, this, front, back, left, right, top, bottom);
 	}
 	
 	/**
@@ -145,16 +167,20 @@ public class LevelManager {
 		// Pull in the item maps for the 6 faces of the cube		
 		for(int i = 0; i < 6; i++){
 			
+			// Reassign the input string to the null string each time we advance through the array
 			input = "";
 			
 			
 			for(int j = 0; j < Plane.DIMENSION; j++){
 				
+				// Append the information in the file string with a newline to the input String
 				input += scan.nextLine() + "\n";
 			}
 			
+			// Add this String to the array
 			itemMaps[i] = input;
 			
+			// If there is a next line (necessary in case we reach the EOF)
 			if(scan.hasNextLine()){
 				
 				// Advance the scanner
@@ -179,13 +205,13 @@ public class LevelManager {
 				}
 				
 				// Create the new face, but pass in true to the constructor (used for character identification)
-				faces[i] = new GameScreen2D(game, true, tileMaps[i], itemMaps[i], this);
+				faces[i] = new GameScreen2D(game, menu, true, tileMaps[i], itemMaps[i], this);
 			}
 			// Otherwise...
 			else{
 				
 				// Create the new face, but pass in false to the constructor (used for character identification)
-				faces[i] = new GameScreen2D(game, false, tileMaps[i], itemMaps[i], this);
+				faces[i] = new GameScreen2D(game, menu, false, tileMaps[i], itemMaps[i], this);
 			}
 		}
 		
@@ -256,12 +282,62 @@ public class LevelManager {
 	}
 	
 	/**
+	 * Toggles the state of the menu.  It will be shown if it is not currently being shown, or
+	 * hidden if it is currently being shown.
+	 */
+	public void toggleMenu(){
+		
+		// If we are currently displaying the menu
+		if(displayMenu){
+			
+			// Stop displaying it
+			displayMenu = false;
+		}
+		// Otherwise
+		else{
+			
+			displayMenu = true;
+		}
+		
+		if(display2D){
+			
+			faces[currentFace].setDisplayMenu(displayMenu);
+		}
+		else{
+			
+			view3D.setDisplayMenu(displayMenu);
+		}
+	}
+	
+	/**
 	 * Toggles the perspective to the opposite of the current perspective.
 	 */
 	public void togglePerspective(){
 		
 		// If the perspective is 2D...
 		if(display2D){
+			//set the current face to the new screenshot
+			if(currentFace == FACE_FRONT) {
+				front = getScreen();
+			}
+			else if(currentFace == FACE_BACK) {
+				back = getScreen();
+			}
+			else if(currentFace == FACE_LEFT) {
+				left = getScreen();
+			}
+			else if(currentFace == FACE_RIGHT) {
+				right = getScreen();
+			}
+			else if(currentFace == FACE_TOP) {
+				top = getScreen();
+			}
+			else {
+				bottom = getScreen();
+			}
+			
+			//redraw the 3d cube
+			this.view3D = new GameScreen3D(game, menu, this, front, back, left, right, top, bottom);
 			
 			// Make it 3D
 			display2D = false;
@@ -272,5 +348,61 @@ public class LevelManager {
 			// Make it 2D
 			display2D = true;
 		}
+		
+		// Show the appropriate Screen
+		showScreen();
+	}
+	
+	private void initializeMenu(){
+		
+		Image background = new Image(new Texture(Gdx.files.internal("data/perspective_cube_other.png")));
+		
+		background.setX(Gdx.graphics.getWidth() * 0.125f);
+		background.setY(Gdx.graphics.getHeight() * 0.125f);
+		background.setWidth(Gdx.graphics.getWidth() * 0.75f);
+		background.setHeight(Gdx.graphics.getHeight() * 0.75f);
+		
+		menu.addActor(background);
+	}
+	
+	public Texture getScreen() {
+//		TextureRegion front = ScreenUtils.getFrameBufferTexture((int)GameScreen2D.HORIZONTAL_MARGIN, (int)GameScreen2D.VERTICAL_MARGIN,
+//										256, 256);
+//		return front.getTexture();
+		Gdx.gl.glPixelStorei(GL10.GL_PACK_ALIGNMENT, 1);
+		int w = 280;
+		int h = w;
+		int x = (int)GameScreen2D.HORIZONTAL_MARGIN;
+		int y = (int)GameScreen2D.VERTICAL_MARGIN;
+		boolean flipY = true;
+        
+		Gdx.gl.glPixelStorei(GL10.GL_PACK_ALIGNMENT, 1);
+        
+        final Pixmap pixmap = new Pixmap(w, h, Pixmap.Format.RGBA8888);
+        ByteBuffer pixels = pixmap.getPixels();
+        Gdx.gl.glReadPixels(x, y, w, h, GL10.GL_RGBA, GL10.GL_UNSIGNED_BYTE, pixels);
+        
+        final int numBytes = w * h * 4;
+        byte[] lines = new byte[numBytes];
+        if (flipY) {
+                final int numBytesPerLine = w * 4;
+                for (int i = 0; i < h; i++) {
+                        pixels.position((h - i - 1) * numBytesPerLine);
+                        pixels.get(lines, i * numBytesPerLine, numBytesPerLine);
+                }
+                pixels.clear();
+                pixels.put(lines);
+        } else {
+                pixels.clear();
+                pixels.get(lines);
+        }
+        
+        Pixmap screen = new Pixmap(512, 512, Pixmap.Format.RGBA8888);
+        screen.drawPixmap(pixmap, 0, 0, w, h, 0, 0, 512, 512);
+        pixmap.dispose();
+        Texture map = new Texture(screen);
+        screen.dispose();
+        
+        return map;
 	}
 }
