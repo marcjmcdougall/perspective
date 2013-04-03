@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.cap4053.perspective.backends.LevelManager;
 import com.cap4053.perspective.backends.Plane;
 import com.cap4053.perspective.backends.SimpleCoordinate;
 import com.cap4053.perspective.models2D.items.Heart;
@@ -31,108 +32,119 @@ public class Avatar extends PerspectiveObject {
 	private static final Interpolation INTERPOLATOR_END = Interpolation.swingOut;*/
 	
 	private Plane currentPlane;
+	private LevelManager manager;
 	
-	private int health;
+	private static final int MAX_STARS = 4;
 	private static final int MAX_HEALTH = 3;
 	
-	private ArrayList<Star> stars;
-	private ArrayList<Heart> hearts;
+	private PerspectiveCollection starCollection;
+	private PerspectiveCollection heartCollection;
 	
-	private Avatar(Texture texture, int row, int column, Plane level2D) {
+	private boolean isMoving;
+	
+	private Avatar(Texture texture, int row, int column, Plane level2D, LevelManager manager) {
 		
 		super(texture, row, column, level2D);
 		
-		this.health = MAX_HEALTH;
 		this.currentPlane = level2D;
 		
-		this.hearts = new ArrayList<Heart>();
-		this.stars = new ArrayList<Star>();
+		this.currentPlane = level2D;
+		this.manager = manager;
+		
+		// Adding item collection (stars)
+		this.starCollection = PerspectiveCollection.create(level2D, "Stars", 
+				manager.getStars().size(), MAX_STARS, 0, 0, true, 64, 5);
+		
+		this.heartCollection = PerspectiveCollection.create(level2D, "Hearts", 
+				manager.getHearts().size(), MAX_HEALTH, 20, 50, false, 32, 5);
 	}
 	
-	public static Avatar create(int row, int column, Plane level2D){
+	public static Avatar create(int row, int column, Plane level2D, LevelManager manager){
 		
 		Texture texture = new Texture(Gdx.files.internal("data/zen.png"));
 		
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		return new Avatar(texture, row, column, level2D);
-	}
-	
-	public ArrayList<Heart> getHearts(){
-		return this.hearts;
+		return new Avatar(texture, row, column, level2D, manager);
 	}
 	
 	public void addHeart(Heart heart) {
-		if(!hearts.contains(heart))
-			hearts.add(heart);
-	}
-
-	public ArrayList<Star> getStars(){
-		return this.stars;
+		if(!manager.getHearts().contains(heart)){
+			manager.getHearts().add(heart);
+			heartCollection.update(manager.getHearts().size());
+		}
 	}
 	
 	public void addStar(Star star) {
-		if(!stars.contains(star))
-			stars.add(star);
+		if(!manager.getStars().contains(star)){
+			manager.getStars().add(star);
+			starCollection.update(manager.getStars().size());
+		}
 	}
 	
 	public Plane getCurrentPlane(){
-		
 		return currentPlane;
 	}
 	
 	public void setCurrentPlane(Plane plane){
-		
 		this.currentPlane = plane;
 	}
 
 	public void moveTo(int newRow, int newColumn, ArrayList<SimpleCoordinate> path, ArrayList<PerspectiveItem>items){
 		
-		System.out.println("Stars: " + this.stars.size());
-		
-		SimpleCoordinate cursor = null;
-		
-		SequenceAction sequence = new SequenceAction();
-		
-		for(int i = 0; i < path.size(); i++){
+		if(!this.isMoving){
+			this.isMoving = true;
 			
-			cursor = path.get(i);
+			SimpleCoordinate cursor = null;
 			
-			int targetRow = cursor.getRow();
-			int targetColumn = cursor.getColumn();
+			SequenceAction sequence = new SequenceAction();
 			
-			float targetX = GameScreen2D.HORIZONTAL_MARGIN + SQUARE_DIMENSION * cursor.getColumn();
-			float targetY = GameScreen2D.VERTICAL_MARGIN + SQUARE_DIMENSION * cursor.getRow();
+			for(int i = 0; i < path.size(); i++){
+				
+				cursor = path.get(i);
+				
+				int targetRow = cursor.getRow();
+				int targetColumn = cursor.getColumn();
+				
+				float targetX = GameScreen2D.HORIZONTAL_MARGIN + SQUARE_DIMENSION * cursor.getColumn();
+				float targetY = GameScreen2D.VERTICAL_MARGIN + SQUARE_DIMENSION * cursor.getRow();
+				
+				AvatarMoveToAction m = new AvatarMoveToAction(this, items, targetRow, targetColumn);
+				
+				m.setPosition(targetX, targetY);
+				
+				m.setDuration(DURATION_PER_SQUARE);
+				m.setInterpolation(INTERPOLATOR);
+				
+				/*
+				// Calculate duration per square
+				float dps = (TOTAL_DURATION/2);
+				m.setDuration(dps);
+				
+				if(i == 0)
+					m.setInterpolation(INTERPOLATOR_START);
+				else if(i == path.size()-1)
+					m.setInterpolation(INTERPOLATOR_END);
+				else
+					m.setInterpolation(INTERPOLATOR);*/
+				
+				sequence.addAction(m);
+			}
+				
+			CompletedAction complete = new CompletedAction(this);
+			complete.setTargetColumn(newColumn);
+			complete.setTargetRow(newRow);
 			
-			AvatarMoveToAction m = new AvatarMoveToAction(this, items, targetRow, targetColumn);
+			sequence.addAction(complete);
 			
-			m.setPosition(targetX, targetY);
+			sequence.addAction(Actions.run(
+		            new Runnable(){
+		                public void run () {
+		                	isMoving = false;
+		            }}));  
 			
-			m.setDuration(DURATION_PER_SQUARE);
-			m.setInterpolation(INTERPOLATOR);
-			
-			/*
-			// Calculate duration per square
-			float dps = (TOTAL_DURATION/2);
-			m.setDuration(dps);
-			
-			if(i == 0)
-				m.setInterpolation(INTERPOLATOR_START);
-			else if(i == path.size()-1)
-				m.setInterpolation(INTERPOLATOR_END);
-			else
-				m.setInterpolation(INTERPOLATOR);*/
-			
-			sequence.addAction(m);
+			this.addAction(sequence);
 		}
-			
-		CompletedAction complete = new CompletedAction(this);
-		complete.setTargetColumn(newColumn);
-		complete.setTargetRow(newRow);
-		
-		sequence.addAction(complete);
-		
-		this.addAction(sequence);
 	}
 	
 	public void onPickUp(PerspectiveItem item){
@@ -175,5 +187,21 @@ public class Avatar extends PerspectiveObject {
 		TextureRegionDrawable drawable = new TextureRegionDrawable(tr);
 		
 		return drawable;
+	}
+	
+	public PerspectiveCollection getStarCollection() {
+		return starCollection;
+	}
+
+	public void setStarCollection(PerspectiveCollection starCollection) {
+		this.starCollection = starCollection;
+	}
+
+	public PerspectiveCollection getHeartCollection() {
+		return heartCollection;
+	}
+
+	public void setHeartCollection(PerspectiveCollection heartCollection) {
+		this.heartCollection = heartCollection;
 	}
 }
