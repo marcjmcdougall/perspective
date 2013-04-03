@@ -44,13 +44,11 @@ public class Avatar extends PerspectiveObject {
 	
 	private Avatar(Texture texture, int row, int column, Plane level2D, LevelManager manager) {
 		
-		super(texture, row, column, level2D);
-		
-		this.currentPlane = level2D;
+		super(texture, row, column, level2D);	
 		
 		this.currentPlane = level2D;
 		this.manager = manager;
-		
+
 		// Adding item collection (stars)
 		this.starCollection = PerspectiveCollection.create(level2D, "Stars", 
 				manager.getStars().size(), MAX_STARS, 0, 0, true, 64, 5);
