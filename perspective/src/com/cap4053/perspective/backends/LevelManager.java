@@ -102,7 +102,6 @@ public class LevelManager {
 		
 		// Creates the new 3D cube
 		this.view3D = new GameScreen3D(game, menu, this, front, back, left, right, top, bottom);
-		//this.view3D = new GameScreen3D(game, this, front, back, left, right, top, bottom);
 		
 		this.setStars(new ArrayList<Star>());
 		this.setHearts(new ArrayList<Heart>());
