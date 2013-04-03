@@ -54,7 +54,7 @@ E E E E E E E
 E E E S E E E
 E E E E E E E
 E E E E E E E
-E E E E E E E
+E H H H S S S
 
 E E E E E E D
 E E E E E E E
