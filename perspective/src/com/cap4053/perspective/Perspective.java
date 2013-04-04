@@ -29,6 +29,9 @@ public class Perspective extends Game {
 	// Music variable that handles the playing of music for the application
 	private Music musicPlayer;
 	
+	private int time = 59;
+	private float elapsed = 0;
+	
 	@Override
 	public void create() {		
 		
@@ -109,5 +112,34 @@ public class Perspective extends Game {
 	public Screen getScreen(){
 		
 		return currentScreen;
+	}
+	
+	public int getTime()
+	{
+		return this.time;
+	}
+	
+	public void decTime()
+	{
+		this.time--;
+	}
+	
+	public void addTime(int add)
+	{
+		this.time+=add;
+	}
+	
+	public void continueTime(float delta)
+	{
+		this.elapsed+=delta;
+		
+		if(this.elapsed>=1)
+		{
+			this.decTime();
+			this.elapsed = 0;
+		}
+		
+		if(this.getTime()==0)
+			this.addTime(59);
 	}
 }

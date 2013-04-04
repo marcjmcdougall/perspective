@@ -3,7 +3,11 @@ package com.cap4053.perspective.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.backends.LevelManager;
 import com.cap4053.perspective.models3D.MoveableTexturedCube;
@@ -18,6 +22,9 @@ public class GameScreen3D extends GameScreen {
 	
 	private boolean prevTrans = false;
 	private boolean transition = false;
+	
+	private int time;
+	private int elapsed = 0;
 	
 	
 	public GameScreen3D(Perspective game, Stage contextMenu, LevelManager manager) {
@@ -89,6 +96,8 @@ public class GameScreen3D extends GameScreen {
 	
 	public void render(float delta){
 		
+		game.continueTime(delta);
+			
 //		DEBUG
 //		Gdx.app.log(Perspective.TAG, "**Rendering Game Screen Now**");
 		
@@ -124,6 +133,7 @@ public class GameScreen3D extends GameScreen {
         	manager.setScreen(this.getCube().findFrontFace());
         	manager.togglePerspective();
         }
+        
 	}
 	
 	@Override

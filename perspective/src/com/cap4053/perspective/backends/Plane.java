@@ -8,7 +8,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.models2D.Avatar;
-import com.cap4053.perspective.models2D.PerspectiveCollection;
 import com.cap4053.perspective.models2D.PerspectiveItem;
 import com.cap4053.perspective.models2D.PerspectiveObject;
 import com.cap4053.perspective.models2D.items.Diamond;
@@ -179,6 +178,8 @@ public class Plane {
 			// Add it to the Stage also
 			stage.addActor(character);
 		}
+		
+		
 		
 	}
 
