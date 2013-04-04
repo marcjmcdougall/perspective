@@ -358,6 +358,34 @@ public class Plane {
 		lineScanner.close();
 	}
 	
+	// called from GameScreen2D.java when the screen is resized
+	public void onResize(){
+		// update Zen's location
+		character.updateXYLocation();
+		
+		// Obtain an Iterator that will parse the ArrayList of Tile objects
+		Iterator<Tile> tileIter = tiles.iterator();
+		
+		// While there is something to parse...
+		while(tileIter.hasNext()){
+			
+			// Update the location of the tile
+			tileIter.next().updateXYLocation();
+		}
+		
+		// Obtain an Iterator that will parse the ArrayList of PerspectiveItem objects
+		Iterator<PerspectiveItem> itemIter = items.iterator();
+		
+		// While there is something to parse...
+		while(itemIter.hasNext()){
+			
+			// Update the location of the item
+			itemIter.next().updateXYLocation();
+		}
+	}
+	
+	
+	
 	/**
 	 * Provides visibility to the Tile ArrayList.
 	 * 

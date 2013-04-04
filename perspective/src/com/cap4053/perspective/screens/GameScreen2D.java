@@ -11,8 +11,8 @@ import com.cap4053.perspective.view.GameInputProcessor2D;
 
 public class GameScreen2D extends GameScreen{
 
-	public static final float HORIZONTAL_MARGIN = 20.0f;
-	public static final float VERTICAL_MARGIN = 100.0f;
+	public static float HORIZONTAL_MARGIN = 20.0f;
+	public static float VERTICAL_MARGIN = 100.0f;
 	
 	private Plane level2D;
 	private LevelManager manager;
@@ -49,6 +49,12 @@ public class GameScreen2D extends GameScreen{
 	}
 	
 	public void resize(int width, int height){
+		// update the margin based on new dimensions
+		HORIZONTAL_MARGIN = (width - PerspectiveObject.SQUARE_DIMENSION * 7) / 2.0f;
+		VERTICAL_MARGIN = (height - PerspectiveObject.SQUARE_DIMENSION * 7) / 2.0f;
+		
+		// update the location of all the actors
+		level2D.onResize();
 		
 		super.resize(width, height);
 	}
