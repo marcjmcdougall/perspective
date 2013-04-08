@@ -20,22 +20,30 @@ import com.cap4053.perspective.screens.GameScreen2D;
 import com.cap4053.perspective.view.AvatarMoveToAction;
 import com.cap4053.perspective.view.CompletedAction;
 
+/**
+ * Class representing the character that is being played during the game.
+ * 
+ * @author Marc J. McDougall
+ */
 public class Avatar extends PerspectiveObject {
 
+	// Static variable defining how quickly the avatar should progress through one square on the board
 	private static final float DURATION_PER_SQUARE = 0.25f;
+	
+	// The interpolation to use when moving.
 	private static final Interpolation INTERPOLATOR = Interpolation.linear;
 	
-	/*
-	private static final float TOTAL_DURATION = 0.25f;
-	private static final Interpolation INTERPOLATOR = Interpolation.linear;
-	private static final Interpolation INTERPOLATOR_START = Interpolation.swingIn;
-	private static final Interpolation INTERPOLATOR_END = Interpolation.swingOut;*/
-	
-	private Plane currentPlane;
-	private LevelManager manager;
-	
+	// Static variable detailing the total number of stars that can be obtained
 	private static final int MAX_STARS = 4;
+	
+	// Static variable detailing the total health that can be obtained
 	private static final int MAX_HEALTH = 3;
+	
+	// The current plane the Avatar is being rendered onto
+	private Plane currentPlane;
+	
+	// A reference to the LevelManager class
+	private LevelManager manager;
 	
 	private PerspectiveCollection starCollection;
 	private PerspectiveCollection heartCollection;
