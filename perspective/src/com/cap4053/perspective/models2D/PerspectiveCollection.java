@@ -3,15 +3,7 @@ package com.cap4053.perspective.models2D;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.graphics.Texture.TextureWrap;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.cap4053.perspective.backends.Plane;
-import com.cap4053.perspective.screens.GameScreen2D;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class PerspectiveCollection{
 	
@@ -53,28 +45,35 @@ public class PerspectiveCollection{
 		
 		// Remove old items
 		for(int i = 0; i < items.size(); i++){
+			
 			PerspectiveCollectionItem item = items.get(i);
 			item.remove();
 		}
+		
 		items.clear();
 		
 		displayItems(enabled);
-		
 	}
 	
 	public void displayItems(int enabled){
+		
 		int startX = this.startX;
 		int startY = this.startY;
 		
 		if(this.centered){
+			
 			startX = (Gdx.graphics.getWidth() - (this.objectSize * this.max) - (this.objectSpacing * this.max-1))/2;
 			startY = Gdx.graphics.getHeight() - 75;
 		}
 			
 		int obtainedCounter = 0;
+		
 		for(int i = 0; i < max; i++){
+			
 			PerspectiveCollectionItem item;
+			
 			if(obtainedCounter != enabled){
+				
 				item = PerspectiveCollectionItem.create(this.type, true);
 				obtainedCounter++;
 			}

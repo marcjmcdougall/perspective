@@ -327,23 +327,30 @@ public class LevelManager {
 		
 		// If the perspective is 2D...
 		if(display2D){
+			
 			//set the current face to the new screenshot
 			if(currentFace == FACE_FRONT) {
+				
 				front = getScreen();
 			}
 			else if(currentFace == FACE_BACK) {
+				
 				back = getScreen();
 			}
 			else if(currentFace == FACE_LEFT) {
+				
 				left = getScreen();
 			}
 			else if(currentFace == FACE_RIGHT) {
+				
 				right = getScreen();
 			}
 			else if(currentFace == FACE_TOP) {
+				
 				top = getScreen();
 			}
 			else {
+				
 				bottom = getScreen();
 			}
 			
@@ -377,9 +384,7 @@ public class LevelManager {
 	}
 	
 	public Texture getScreen() {
-//		TextureRegion front = ScreenUtils.getFrameBufferTexture((int)GameScreen2D.HORIZONTAL_MARGIN, (int)GameScreen2D.VERTICAL_MARGIN,
-//										256, 256);
-//		return front.getTexture();
+		
 		Gdx.gl.glPixelStorei(GL10.GL_PACK_ALIGNMENT, 1);
 		int w = 280;
 		int h = w;

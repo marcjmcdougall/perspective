@@ -66,6 +66,4 @@ public class GameScreen2D extends GameScreen{
 		
 		return level2D;
 	}
-
-	/* getScreen() method moved to LevelManager.java */
 }

@@ -37,24 +37,24 @@ public class GameScreen extends PerspectiveScreen {
 			contextMenu.draw();
 		}
 		
-		Texture clockTexture = new Texture(Gdx.files.internal("data/items/item_clock256.png"));
-		clockTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		Image clockImg = new Image(clockTexture);
-		clockImg.setPosition(Gdx.graphics.getWidth()/2, 10);
-		clockImg.setSize(50, 50);
+//		Texture clockTexture = new Texture(Gdx.files.internal("data/items/item_clock256.png"));
+//		clockTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+//		Image clockImg = new Image(clockTexture);
+//		clockImg.setPosition(Gdx.graphics.getWidth()/2, 10);
+//		clockImg.setSize(50, 50);
 		
-		SpriteBatch batch = new SpriteBatch();
-		BitmapFont black = new BitmapFont(Gdx.files.internal("data/blackfont.fnt"),false);
+//		SpriteBatch batch = new SpriteBatch();
+//		BitmapFont black = new BitmapFont(Gdx.files.internal("data/blackfont.fnt"),false);
+//		
+//		game.continueTime(delta);
+//		
+//		time = game.getTime();
+//		
+//		batch.begin();
+//		black.draw(batch, time/60 + ":" + (time%60)/10 +"" + time%10, Gdx.graphics.getWidth()/2 + 55, 50);
+//		batch.end();
 		
-		game.continueTime(delta);
-		
-		time = game.getTime();
-		
-		batch.begin();
-		black.draw(batch, time/60 + ":" + (time%60)/10 +"" + time%10, Gdx.graphics.getWidth()/2 + 55, 50);
-		batch.end();
-		
-		stage.addActor(clockImg);
+//		stage.addActor(clockImg);
 		
 	}
 	
