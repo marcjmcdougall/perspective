@@ -267,6 +267,23 @@ public class LevelManager {
 		}
 	}
 	
+	//Returns true if the screen given can be moved to
+	public boolean canMoveToScreen(int newScreen){
+		
+		// Get a reference to the old Screen
+		Plane oldFace = faces[currentFace].getLevel2D();
+		
+		// Determine the old character row and column (for transposing onto the new face)
+		int oldRow = oldFace.getCharacter().getRow();
+		int oldColumn = oldFace.getCharacter().getColumn();
+		
+		// Find the new face that is associated with the newScreen int
+		Plane newFace = faces[newScreen].getLevel2D();
+		
+		// If it is possible to move to that new location...
+		return (p.findTileAt(oldRow, oldColumn, newFace).canMoveTo());
+	}
+	
 	/**
 	 * Sets the screen according to the state of the perspective.
 	 */

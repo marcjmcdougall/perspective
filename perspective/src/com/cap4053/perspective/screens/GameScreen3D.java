@@ -128,10 +128,16 @@ public class GameScreen3D extends GameScreen {
         prevTrans = transition;
         transition = cube.getTransition();
        
-        if(!transition && prevTrans){
+        //Switch to 2D when transition is done, and only if new screen is valid to move to
+        if(!transition && prevTrans && manager.canMoveToScreen(this.getCube().findFrontFace())){
         	
         	manager.setScreen(this.getCube().findFrontFace());
         	manager.togglePerspective();
+        }
+        //If transition ends and new screen is not valid to move to, play annoying buzzer sound or something
+        else if(!transition && prevTrans && !manager.canMoveToScreen(this.getCube().findFrontFace())){
+        	
+        	//Annoying buzzer goes here.
         }
         
 	}
