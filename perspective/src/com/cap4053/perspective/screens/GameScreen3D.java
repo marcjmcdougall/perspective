@@ -1,6 +1,8 @@
 package com.cap4053.perspective.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -26,6 +28,8 @@ public class GameScreen3D extends GameScreen {
 	private int time;
 	private int elapsed = 0;
 	
+	// Music variable that handles the playing of annoying beeps
+	private Sound audioPlayer;
 	
 	public GameScreen3D(Perspective game, Stage contextMenu, LevelManager manager) {
 	
@@ -47,6 +51,9 @@ public class GameScreen3D extends GameScreen {
 		this.top = top;
 		this.bottom = bottom;
 		
+    	// Obtain a reference to the Music object wrapped with the application
+		audioPlayer = Gdx.audio.newSound(Gdx.files.internal("data/audio/error-beep.wav"));
+		
 //		DEBUG
 //		Gdx.app.log(Perspective.TAG, "**New Default Game Screen Created**");
 	}
@@ -64,6 +71,9 @@ public class GameScreen3D extends GameScreen {
 		this.right = right;
 		this.top = top;
 		this.bottom = bottom;
+		
+    	// Obtain a reference to the Music object wrapped with the application
+		audioPlayer = Gdx.audio.newSound(Gdx.files.internal("data/audio/error-beep.wav"));
 		
 //		DEBUG
 		Gdx.app.log(Perspective.TAG, "**New Game Screen Created**");
@@ -136,8 +146,15 @@ public class GameScreen3D extends GameScreen {
         }
         //If transition ends and new screen is not valid to move to, play annoying buzzer sound or something
         else if(!transition && prevTrans && !manager.canMoveToScreen(this.getCube().findFrontFace())){
-        	
         	//Annoying buzzer goes here.
+    		
+    		//this plays the sound at maximum volume (the float input from 0.0f to
+    		// 1.0f determines volume)
+    		long id = audioPlayer.play(1.0f);
+    		
+    		//We may now modify attributes of this sound by referring to its id
+    		audioPlayer.setLooping(id, false);
+    		audioPlayer.setPitch(id, 2);
         }
         
 	}
