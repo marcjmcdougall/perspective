@@ -298,8 +298,41 @@ public class LevelManager {
 			game.setScreen(faces[currentFace]);
 		}
 		else{
-			
 			game.setScreen(view3D);
+			
+			//Move cube to correct orientation
+			switch(currentFace){
+			//front
+			case 0:
+				view3D.getCube().setAngleX(0);
+				view3D.getCube().setAngleY(0);
+				break;
+			//back
+			case 1:
+				view3D.getCube().setAngleX(180);
+				view3D.getCube().setAngleY(0);
+				break;
+			//left
+			case 2:
+				view3D.getCube().setAngleX(90);
+				view3D.getCube().setAngleY(0);
+				break;
+			//right
+			case 3:
+				view3D.getCube().setAngleX(270);
+				view3D.getCube().setAngleY(0);
+				break;
+			//top
+			case 4:
+				view3D.getCube().setAngleX(0);
+				view3D.getCube().setAngleY(90);
+				break;
+			//bottom
+			case 5:
+				view3D.getCube().setAngleX(0);
+				view3D.getCube().setAngleY(270);
+				break;
+			}
 		}
 	}
 	
