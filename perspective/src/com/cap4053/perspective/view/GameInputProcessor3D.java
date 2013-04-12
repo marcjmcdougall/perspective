@@ -142,6 +142,17 @@ public class GameInputProcessor3D extends PerspectiveInputProcessor {
 			manager.toggleMenu();
 		}
 		
+		if(keycode == Input.Keys.Z || keycode == Input.Keys.NUM_2)
+		{
+			if(Perspective.DEVELOPER_MODE)
+			{
+				Gdx.app.log(Perspective.TAG, "**Zooming and Switching to 2D");
+			}
+			
+			screen.getCube().zoomTransition();
+		
+		}
+		
 		return false;
 	}
 	
