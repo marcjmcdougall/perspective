@@ -309,6 +309,11 @@ public class MoveableTexturedCube extends TexturedCube {
 		return readyToTransition;
 	}
 	
+	public void finishTransition()
+	{
+		readyToTransition = false;
+	}
+	
 	public float getScale(){
 		
 		return scale;
