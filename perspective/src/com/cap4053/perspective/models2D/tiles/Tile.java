@@ -2,6 +2,7 @@ package com.cap4053.perspective.models2D.tiles;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.cap4053.perspective.backends.Plane;
+import com.cap4053.perspective.models2D.Avatar;
 import com.cap4053.perspective.models2D.PerspectiveObject;
 
 public abstract class Tile extends PerspectiveObject {
