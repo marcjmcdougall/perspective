@@ -49,6 +49,9 @@ public class LevelManager {
 	private Parser p;
 
 	private Texture front, back, left, right, top, bottom;
+	
+	private Texture tempFace;
+	private int tempFacePos;
 
 	// The context menu for the game
 	private Stage menu;
@@ -382,26 +385,32 @@ public class LevelManager {
 			if(currentFace == FACE_FRONT) {
 				
 				front = getScreen();
+				createTempFace(FACE_FRONT);
 			}
 			else if(currentFace == FACE_BACK) {
 				
 				back = getScreen();
+				createTempFace(FACE_BACK);
 			}
 			else if(currentFace == FACE_LEFT) {
 				
 				left = getScreen();
+				createTempFace(FACE_LEFT);
 			}
 			else if(currentFace == FACE_RIGHT) {
 				
 				right = getScreen();
+				createTempFace(FACE_RIGHT);
 			}
 			else if(currentFace == FACE_TOP) {
 				
 				top = getScreen();
+				createTempFace(FACE_TOP);
 			}
 			else {
 				
 				bottom = getScreen();
+				createTempFace(FACE_BOTTOM);
 			}
 			
 			//redraw the 3d cube
@@ -412,15 +421,52 @@ public class LevelManager {
 		}
 		// Otherwise...
 		else{
-			
+			setTempFace();
+			this.view3D = new GameScreen3D(game, menu, this, front, back, left, right, top, bottom);
 			// Make it 2D
 			display2D = true;
+			
 		}
 		
 		// Show the appropriate Screen
 		showScreen();
 	}
 	
+	private void setTempFace() {
+		if(tempFacePos == FACE_FRONT) {
+			
+			front = tempFace;
+		}
+		else if(tempFacePos == FACE_BACK) {
+			
+			back = tempFace;
+		}
+		else if(tempFacePos == FACE_LEFT) {
+			
+			left = tempFace;
+		}
+		else if(tempFacePos == FACE_RIGHT) {
+			
+			right = tempFace;
+		}
+		else if(tempFacePos == FACE_TOP) {
+			
+			top = tempFace;
+		}
+		else {
+			
+			bottom = tempFace;
+		}
+	}
+
+	private void createTempFace(int face) {
+		
+		faces[face].getLevel2D().setCharacterState(false);
+		tempFace = getScreen();
+		tempFacePos = face;
+		faces[face].getLevel2D().setCharacterState(true);
+	}
+
 	private void initializeMenu(){
 		
 		Image background = new Image(new Texture(Gdx.files.internal("data/perspective_cube_other.png")));
@@ -486,5 +532,16 @@ public class LevelManager {
 
 	public void setHearts(ArrayList<Heart> hearts) {
 		this.hearts = hearts;
+	}
+	
+	public int getCurrentFace()
+	{
+		return this.currentFace;
+	}
+
+	public void removeCharacter() 
+	{
+		Gdx.app.log(Perspective.TAG, "removing character from this face");
+		faces[currentFace].getLevel2D().setCharacterState(false);
 	}
 }

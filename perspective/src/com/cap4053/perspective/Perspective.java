@@ -4,6 +4,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.OrderedMap;
 import com.cap4053.perspective.screens.PerspectiveScreen;
 import com.cap4053.perspective.screens.SplashScreen;
 import com.cap4053.perspective.view.SplashScreenInputProcessor;
@@ -13,7 +15,7 @@ import com.cap4053.perspective.view.SplashScreenInputProcessor;
  * 
  * @author Marc J McDougall
  */
-public class Perspective extends Game {
+public class Perspective extends Game implements Json.Serializable {
 	
 	// Public class variable that is used for debugging
 	public static final String TAG = Perspective.class.getSimpleName();
@@ -31,6 +33,9 @@ public class Perspective extends Game {
 	
 	private int time = 59;
 	private float elapsed = 0;
+	
+	private static final String TIME = "time";
+	
 	
 	@Override
 	public void create() {		
@@ -141,5 +146,19 @@ public class Perspective extends Game {
 		
 		if(this.getTime()==0)
 			this.addTime(59);
+	}
+	
+	public void setTime(int time)
+	{
+		this.time = time;
+	}
+
+	@Override
+	public void write(Json json) {
+		json.writeValue(TIME, this.getTime());
+	}
+
+	@Override
+	public void read(Json json, OrderedMap<String, Object> jsonData) {
 	}
 }

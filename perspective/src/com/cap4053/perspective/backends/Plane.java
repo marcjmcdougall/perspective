@@ -76,6 +76,10 @@ public class Plane {
 	public void setCharacterState(boolean newState){
 		
 		this.characterState = newState;
+		if(newState)
+			Gdx.app.log(Perspective.TAG,"character state true");
+		else
+			Gdx.app.log(Perspective.TAG,"character state false");
 		
 		// Callback that adds and removes the Character Actor as necessary
 		onCharacterStateChange();
@@ -105,6 +109,7 @@ public class Plane {
 			
 			// Remove it as an Actor
 			character.remove();
+			stage.draw();
 		}
 	}
 	

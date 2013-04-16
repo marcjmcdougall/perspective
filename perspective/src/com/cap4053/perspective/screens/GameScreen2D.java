@@ -21,6 +21,11 @@ public class GameScreen2D extends GameScreen{
 		
 		super(game, contextMenu);
 		
+		/*if(characterActive)
+			Gdx.app.log(Perspective.TAG,"character state true");
+		else
+			Gdx.app.log(Perspective.TAG,"character state false");*/
+		
 		this.manager = manager;
 		
 //		DEBUGS
