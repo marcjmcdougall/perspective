@@ -45,7 +45,7 @@ public class Avatar extends PerspectiveObject {
 	
 	// A reference to the LevelManager class
 	private LevelManager manager;
-	
+
 	// A reference to the collection object that contains the various stars
 	private PerspectiveCollection starCollection;
 	
@@ -308,5 +308,9 @@ public class Avatar extends PerspectiveObject {
 	public void setHeartCollection(PerspectiveCollection heartCollection) {
 		
 		this.heartCollection = heartCollection;
+	}
+	
+	public LevelManager getManager() {
+		return manager;
 	}
 }
