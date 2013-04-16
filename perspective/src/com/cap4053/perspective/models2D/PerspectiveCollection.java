@@ -3,6 +3,7 @@ package com.cap4053.perspective.models2D;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.cap4053.perspective.backends.Plane;
 
 public class PerspectiveCollection{
@@ -73,7 +74,6 @@ public class PerspectiveCollection{
 			PerspectiveCollectionItem item;
 			
 			if(obtainedCounter != enabled){
-				
 				item = PerspectiveCollectionItem.create(this.type, true);
 				obtainedCounter++;
 			}
