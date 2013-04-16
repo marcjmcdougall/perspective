@@ -51,6 +51,9 @@ public class LevelManager {
 
 	private Texture[] textures;
 
+	private Texture tempFace;
+	private int tempFacePos;
+
 	// The context menu for the game
 	private Stage menu;
 
@@ -384,6 +387,7 @@ public class LevelManager {
 			
 			//set the current face to the new screenshot
 			textures[currentFace] = getScreenshot();
+			createTempFace();
 			
 			//redraw the 3d cube
 			update3DScreen();
@@ -392,19 +396,30 @@ public class LevelManager {
 		}
 		// Otherwise...
 		else{
-			
+			setTempFace();
+			update3DScreen();
 			// Make it 2D
 			display2D = true;
+			
 		}
 		
 		// Show the appropriate Screen
 		showScreen();
 	}
 	
-//	public void setFace(int face, Texture tex){
-//		
-//	}
-	
+	private void setTempFace() {
+		
+		textures[tempFacePos] = tempFace;
+	}
+
+	private void createTempFace() {
+		
+		faces[currentFace].getLevel2D().setCharacterState(false);
+		tempFace = getScreenshot();
+		tempFacePos = currentFace;
+		faces[currentFace].getLevel2D().setCharacterState(true);
+	}
+
 	private void initializeMenu(){
 		
 		Image background = new Image(new Texture(Gdx.files.internal("data/perspective_cube_other.png")));
@@ -499,5 +514,16 @@ public class LevelManager {
 	public GameScreen2D get2DScreen(int number) {
 		// TODO Auto-generated method stub
 		return faces[number];
+	}
+	
+	public int getCurrentFace()
+	{
+		return this.currentFace;
+	}
+
+	public void removeCharacter() 
+	{
+		Gdx.app.log(Perspective.TAG, "removing character from this face");
+		faces[currentFace].getLevel2D().setCharacterState(false);
 	}
 }

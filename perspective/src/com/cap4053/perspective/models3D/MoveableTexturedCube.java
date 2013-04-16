@@ -16,6 +16,8 @@ public class MoveableTexturedCube extends TexturedCube {
 	private int targetY;
 	
 	private boolean transition;
+	private boolean nowZoom;
+	private boolean readyToTransition;
 	
 	public MoveableTexturedCube(Texture frontTexture, Texture backTexture, Texture leftTexture, Texture rightTexture, Texture topTexture, Texture bottomTexture) {
 		
@@ -23,6 +25,8 @@ public class MoveableTexturedCube extends TexturedCube {
 		
 		scale = STARTING_POINT;
 		transition = false;
+		nowZoom = false;
+		readyToTransition = false;
 	}
 	
 	// Returns an integer for which face is facing front.
@@ -226,7 +230,10 @@ public class MoveableTexturedCube extends TexturedCube {
 		}
 	}
 	
-	
+	public void zoomTransition()
+	{
+		nowZoom = true;
+	}
 
 	@Override
 	public void update() {
@@ -235,23 +242,28 @@ public class MoveableTexturedCube extends TexturedCube {
 		// Current, do nothing.
 		//System.out.println("front face: " + findFrontFace());
 		
-		if(!transition && scale > ENDING_POINT){
+		if(!transition && !nowZoom && scale > ENDING_POINT){
 			
 			scale -= SCALE_FACTOR;
 		}
-		else if(transition && (scale < STARTING_POINT)){
+		else if((transition||nowZoom) && (scale < STARTING_POINT)){
 			
-			makeAngleX(targetX);
-			makeAngleY(targetY);
-			
+			if(transition)
+			{	
+				makeAngleX(targetX);
+				makeAngleY(targetY);
+			}
 			//Move cube towards viewport, only if angle adjustment is done
 			if(targetX == angleX && targetY == angleY){
-				scale += SCALE_FACTOR;
+				transition = false;
+				if(nowZoom)
+					scale += SCALE_FACTOR;
 			}
 				
 			//Transition is now over
 			if(scale >= STARTING_POINT){
-				transition = false;
+				nowZoom = false;
+				readyToTransition = true;
 			}
 		}
 	}
@@ -290,6 +302,16 @@ public class MoveableTexturedCube extends TexturedCube {
 	
 	public boolean getTransition(){
 		return transition;
+	}
+	
+	public boolean getReadyToTransition()
+	{
+		return readyToTransition;
+	}
+	
+	public void finishTransition()
+	{
+		readyToTransition = false;
 	}
 	
 	public float getScale(){

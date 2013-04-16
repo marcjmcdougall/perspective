@@ -1,13 +1,13 @@
 package com.cap4053.perspective.view;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Json;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.backends.LevelManager;
 import com.cap4053.perspective.backends.Plane;
 import com.cap4053.perspective.screens.GameScreen2D;
-import com.cap4053.perspective.screens.GameScreen3D;
 import com.cap4053.perspective.screens.LevelSelectorScreen;
 
 public class GameInputProcessor2D extends PerspectiveInputProcessor{
@@ -85,7 +85,6 @@ public class GameInputProcessor2D extends PerspectiveInputProcessor{
 			
 //			Texture front = gameScreen.getScreen();
 //			perspectiveGame.setScreen(new GameScreen3D(perspectiveGame, front, front, front, front, front, front));
-			
 			manager.togglePerspective();
 		}
 		else if(keycode == Input.Keys.T){
@@ -98,6 +97,24 @@ public class GameInputProcessor2D extends PerspectiveInputProcessor{
 		else if(keycode == Input.Keys.M){
 			
 			manager.toggleMenu();
+		}
+		else if(keycode == Input.Keys.S){
+			Perspective game = new Perspective();
+			Json json = new Json();
+			
+			game.setScreen(perspectiveGame.getScreen());
+			game.setTime(perspectiveGame.getTime());
+			Gdx.app.log(Perspective.TAG, json.toJson(game));
+			
+			Perspective game1 = new Perspective();
+			if(game1.getScreen()==null)
+				Gdx.app.log(Perspective.TAG, "Initial Screen is null, time: " + game1.getTime());
+			
+			
+			game1 = json.fromJson(Perspective.class, json.toJson(game));
+			
+			if(game1.getScreen()==null)
+				Gdx.app.log(Perspective.TAG, "New Screen is null, time: " + game1.getTime());
 		}
 		
 		return true;

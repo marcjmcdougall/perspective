@@ -136,17 +136,21 @@ public class GameScreen3D extends GameScreen {
 		cube.update();
         cube.draw();
         prevTrans = transition;
-        transition = cube.getTransition();
+        transition = cube.getReadyToTransition();
        
         //Switch to 2D when transition is done, and only if new screen is valid to move to
-        if(!transition && prevTrans && manager.canMoveToScreen(this.getCube().findFrontFace())){
+        if(transition && manager.canMoveToScreen(this.getCube().findFrontFace())){
         	
         	manager.setScreen(this.getCube().findFrontFace());
         	manager.togglePerspective();
+        	this.getCube().finishTransition();
         }
         //If transition ends and new screen is not valid to move to, play annoying buzzer sound or something
-        else if(!transition && prevTrans && !manager.canMoveToScreen(this.getCube().findFrontFace())){
+        else if(transition && !manager.canMoveToScreen(this.getCube().findFrontFace())){
         	//Annoying buzzer goes here.
+        	
+        	transition = false;
+        	Gdx.app.log(Perspective.TAG, "Looping sound");
     		
     		//this plays the sound at maximum volume (the float input from 0.0f to
     		// 1.0f determines volume)
@@ -155,6 +159,7 @@ public class GameScreen3D extends GameScreen {
     		//We may now modify attributes of this sound by referring to its id
     		audioPlayer.setLooping(id, false);
     		audioPlayer.setPitch(id, 2);
+    		this.getCube().finishTransition();
         }
         
 	}
