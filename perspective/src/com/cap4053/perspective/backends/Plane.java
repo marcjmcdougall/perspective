@@ -5,7 +5,10 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.models2D.Avatar;
 import com.cap4053.perspective.models2D.PerspectiveItem;
@@ -15,6 +18,7 @@ import com.cap4053.perspective.models2D.items.Heart;
 import com.cap4053.perspective.models2D.items.Star;
 import com.cap4053.perspective.models2D.tiles.BlockTile;
 import com.cap4053.perspective.models2D.tiles.FloorTile;
+import com.cap4053.perspective.models2D.tiles.LevelTile;
 import com.cap4053.perspective.models2D.tiles.Tile;
 
 /**
@@ -65,6 +69,13 @@ public class Plane {
 		// Assign the parameters to their class variable equivalents
 		this.stage = stage;
 		this.characterState = characterState;
+		
+		Texture texture = new Texture(Gdx.files.internal("data/Plane-BG.png"));
+		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		Image bgImage = new Image(texture);
+		
+		this.stage.addActor(bgImage);
+		
 	}
 	
 	/**
@@ -303,6 +314,11 @@ public class Plane {
 				else if(cursor.equals("F")){
 					
 					tiles.add(FloorTile.create(row, column, this));
+				}
+				
+				else if(cursor.equals("P")){
+					
+					tiles.add(LevelTile.create(row, column, this, "tile_purple.png"));
 				}
 				
 				column ++;

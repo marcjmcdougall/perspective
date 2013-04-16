@@ -43,6 +43,10 @@ public abstract class PerspectiveObject extends Image {
 		setY(GameScreen2D.VERTICAL_MARGIN + SQUARE_DIMENSION * row);
 	}
 	
+	public void onMoveOver(Avatar avatar){
+		
+	}
+	
 	/**
 	 * @return the row
 	 */

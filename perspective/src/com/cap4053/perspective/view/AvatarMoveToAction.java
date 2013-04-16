@@ -9,6 +9,7 @@ import com.cap4053.perspective.backends.Parser;
 import com.cap4053.perspective.backends.Plane;
 import com.cap4053.perspective.models2D.Avatar;
 import com.cap4053.perspective.models2D.PerspectiveItem;
+import com.cap4053.perspective.models2D.tiles.Tile;
 
 public class AvatarMoveToAction extends MoveToAction {
 
@@ -48,11 +49,22 @@ public class AvatarMoveToAction extends MoveToAction {
 			item.onMoveOver(avatar);
 		}
 		
+		Tile tile = detectTile();
+		
+		if(tile != null){
+			tile.onMoveOver(avatar);
+		}
+		
 		return super.act(delta);
 	}
 	
 	private PerspectiveItem detectCollision(){
 		
 		return p.findItemAt(immediateRow, immediateColumn, plane);
+	}
+	
+	private Tile detectTile(){
+		
+		return p.findTileAt(immediateRow, immediateColumn, plane);
 	}
 }
