@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.cap4053.perspective.backends.Plane;
+import com.cap4053.perspective.backends.TimerManager;
 import com.cap4053.perspective.models2D.Avatar;
 import com.cap4053.perspective.screens.SummaryScreen;
 
@@ -47,7 +48,8 @@ public class LevelTile extends Tile {
 			this.plane.getStage().addActor(summary);
 			summary.addAction(Actions.alpha(1, 0.7f));
 			
-			
+			TimerManager timerManager = TimerManager.getInstance();
+			timerManager.shouldRunTimer = false;
 			
 			System.out.println("LEVEL UP!");
 			
