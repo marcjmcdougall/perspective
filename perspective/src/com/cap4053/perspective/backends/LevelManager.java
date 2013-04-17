@@ -9,6 +9,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
@@ -543,5 +544,9 @@ public class LevelManager {
 	{
 		Gdx.app.log(Perspective.TAG, "removing character from this face");
 		faces[currentFace].getLevel2D().setCharacterState(false);
+	}
+	
+	public Stage getMenu() {
+		return menu;
 	}
 }
