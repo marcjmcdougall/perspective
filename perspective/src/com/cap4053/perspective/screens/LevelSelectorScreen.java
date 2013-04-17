@@ -136,7 +136,12 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 			
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
 				
-				manager.loadLevel("data/levels/level2.txt");
+				try {
+					manager.loadLevel("data/levels/level2.txt");
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 //				game.setScreen(new GameScreen2D(game));
 			}
@@ -150,7 +155,12 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 			}
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
 				
-				manager.loadLevel("data/levels/level2.txt");
+				try {
+					manager.loadLevel("data/levels/level2.txt");
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 //				game.setScreen(new GameScreen2D(game));
 			}

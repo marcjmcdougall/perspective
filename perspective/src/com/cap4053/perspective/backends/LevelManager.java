@@ -19,6 +19,7 @@ import com.cap4053.perspective.models2D.items.Star;
 import com.cap4053.perspective.models3D.TexturedCube;
 import com.cap4053.perspective.screens.GameScreen2D;
 import com.cap4053.perspective.screens.GameScreen3D;
+import com.cap4053.perspective.screens.LoadingScreen;
 
 /**
  * Class that manages each Level in the game.  It associates the 6 planes with each level, and 
@@ -48,8 +49,8 @@ public class LevelManager {
 	// Reference to the Parser class that aides in parsing the Tiles on the Screen
 	private Parser p;
 
-	private Texture front, back, left, right, top, bottom;
-	
+	private Texture[] textures;
+
 	private Texture tempFace;
 	private int tempFacePos;
 
@@ -96,15 +97,20 @@ public class LevelManager {
 		initializeMenu();
 		
 		// Defines the textures of the 3D cube.  This is temporary and will eventually be replaced with the screen shot function.
-		front = new Texture(Gdx.files.internal("data/levels/images/level2_front.png"));
-		back = new Texture(Gdx.files.internal("data/levels/images/level2_back.png"));
-		left = new Texture(Gdx.files.internal("data/levels/images/level2_left.png"));
-		right = new Texture(Gdx.files.internal("data/levels/images/level2_right.png"));
-		top = new Texture(Gdx.files.internal("data/levels/images/level2_top.png"));
-		bottom = new Texture(Gdx.files.internal("data/levels/images/level2_bottom.png"));
+		textures = new Texture[] {	new Texture(Gdx.files.internal("data/levels/images/level2_front.png")),
+									new Texture(Gdx.files.internal("data/levels/images/level2_back.png")),
+									new Texture(Gdx.files.internal("data/levels/images/level2_left.png")),
+									new Texture(Gdx.files.internal("data/levels/images/level2_right.png")),
+									new Texture(Gdx.files.internal("data/levels/images/level2_top.png")),
+									new Texture(Gdx.files.internal("data/levels/images/level2_bottom.png")) };
 		
 		// Creates the new 3D cube
-		this.view3D = new GameScreen3D(game, menu, this, front, back, left, right, top, bottom);
+		this.view3D = new GameScreen3D(game, menu, this, 	textures[FACE_FRONT],
+															textures[FACE_BACK], 
+															textures[FACE_LEFT],
+															textures[FACE_RIGHT],
+															textures[FACE_TOP],
+															textures[FACE_BOTTOM]);
 		
 		this.setStars(new ArrayList<Star>());
 		this.setHearts(new ArrayList<Heart>());
@@ -115,8 +121,9 @@ public class LevelManager {
 	 * specify any relevant sub-directory information in the name.
 	 * 
 	 * @param levelFileName The file name of the level.
+	 * @throws InterruptedException 
 	 */
-	public void loadLevel(String levelFileName){
+	public void loadLevel(String levelFileName) throws InterruptedException{
 		
 		// Temporary variables holding empty memory space for the Strings that represent each face
 		String[] tileMaps = new String[6]; 
@@ -229,13 +236,10 @@ public class LevelManager {
 			}
 		}
 		
-		// Finally, set the screen to the FRONT face of the cube
-		setScreen(FACE_FRONT);
-		
-		// Show the screen to the user
-		showScreen();
+		// Show the loading screen, which will display each face before starting
+		game.setScreen( new LoadingScreen(game, this) );
 	}
-	
+
 	/**
 	 * Sets the screen to be facing a new Screen head on.
 	 * 
@@ -382,47 +386,18 @@ public class LevelManager {
 		if(display2D){
 			
 			//set the current face to the new screenshot
-			if(currentFace == FACE_FRONT) {
-				
-				front = getScreen();
-				createTempFace(FACE_FRONT);
-			}
-			else if(currentFace == FACE_BACK) {
-				
-				back = getScreen();
-				createTempFace(FACE_BACK);
-			}
-			else if(currentFace == FACE_LEFT) {
-				
-				left = getScreen();
-				createTempFace(FACE_LEFT);
-			}
-			else if(currentFace == FACE_RIGHT) {
-				
-				right = getScreen();
-				createTempFace(FACE_RIGHT);
-			}
-			else if(currentFace == FACE_TOP) {
-				
-				top = getScreen();
-				createTempFace(FACE_TOP);
-			}
-			else {
-				
-				bottom = getScreen();
-				createTempFace(FACE_BOTTOM);
-			}
+			textures[currentFace] = getScreenshot();
+			createTempFace();
 			
 			//redraw the 3d cube
-			this.view3D = new GameScreen3D(game, menu, this, front, back, left, right, top, bottom);
-			
+			update3DScreen();
 			// Make it 3D
 			display2D = false;
 		}
 		// Otherwise...
 		else{
 			setTempFace();
-			this.view3D = new GameScreen3D(game, menu, this, front, back, left, right, top, bottom);
+			update3DScreen();
 			// Make it 2D
 			display2D = true;
 			
@@ -433,38 +408,16 @@ public class LevelManager {
 	}
 	
 	private void setTempFace() {
-		if(tempFacePos == FACE_FRONT) {
-			
-			front = tempFace;
-		}
-		else if(tempFacePos == FACE_BACK) {
-			
-			back = tempFace;
-		}
-		else if(tempFacePos == FACE_LEFT) {
-			
-			left = tempFace;
-		}
-		else if(tempFacePos == FACE_RIGHT) {
-			
-			right = tempFace;
-		}
-		else if(tempFacePos == FACE_TOP) {
-			
-			top = tempFace;
-		}
-		else {
-			
-			bottom = tempFace;
-		}
+		
+		textures[tempFacePos] = tempFace;
 	}
 
-	private void createTempFace(int face) {
+	private void createTempFace() {
 		
-		faces[face].getLevel2D().setCharacterState(false);
-		tempFace = getScreen();
-		tempFacePos = face;
-		faces[face].getLevel2D().setCharacterState(true);
+		faces[currentFace].getLevel2D().setCharacterState(false);
+		tempFace = getScreenshot();
+		tempFacePos = currentFace;
+		faces[currentFace].getLevel2D().setCharacterState(true);
 	}
 
 	private void initializeMenu(){
@@ -479,7 +432,7 @@ public class LevelManager {
 		menu.addActor(background);
 	}
 	
-	public Texture getScreen() {
+	public Texture getScreenshot() {
 		
 		Gdx.gl.glPixelStorei(GL10.GL_PACK_ALIGNMENT, 1);
 		int w = 280;
@@ -532,6 +485,35 @@ public class LevelManager {
 
 	public void setHearts(ArrayList<Heart> hearts) {
 		this.hearts = hearts;
+	}
+
+	/**
+	 * Takes in an array of Textures to replace the default ones.
+	 * Used when initializing the level
+	 * 
+	 * @param texture array to replace the old one
+	 */
+	public void loadScreens(Texture[] textures) {
+		this.textures = textures;
+		
+		update3DScreen();
+	}
+	
+	/**
+	 * Updates the 3D game screen with new textures
+	 */
+	public void update3DScreen(){
+		this.view3D = new GameScreen3D(game, menu, this, 	textures[FACE_FRONT],
+															textures[FACE_BACK],
+															textures[FACE_LEFT],
+															textures[FACE_RIGHT],
+															textures[FACE_TOP],
+															textures[FACE_BOTTOM]);
+	}
+
+	public GameScreen2D get2DScreen(int number) {
+		// TODO Auto-generated method stub
+		return faces[number];
 	}
 	
 	public int getCurrentFace()
