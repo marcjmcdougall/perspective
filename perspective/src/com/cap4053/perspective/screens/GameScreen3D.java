@@ -132,7 +132,7 @@ public class GameScreen3D extends GameScreen {
 		Gdx.gl10.glRotatef(cube.getAngleY(),  1, 0, 0);
 		
 //		Gdx.app.log(Perspective.TAG, "Cube Angle Y: " + cube.getAngleY());
-
+		
 		cube.update();
         cube.draw();
         prevTrans = transition;
