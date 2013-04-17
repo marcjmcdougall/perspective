@@ -81,7 +81,7 @@ public class Avatar extends PerspectiveObject {
 		
 		// Adding item collection (hearts)
 		this.heartCollection = PerspectiveCollection.create(level2D, "Hearts", 
-				manager.getHearts().size(), MAX_HEALTH, 20, 50, false, 32, 5);
+				manager.getHearts().size(), MAX_HEALTH, 1, 26, false, 32, 3);
 	}
 	
 	/**
