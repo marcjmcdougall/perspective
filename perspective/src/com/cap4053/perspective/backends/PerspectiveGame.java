@@ -3,6 +3,9 @@ package com.cap4053.perspective.backends;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 /**
  * An abstract class dedicated to providing some generic functionality for 
