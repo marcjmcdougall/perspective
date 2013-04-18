@@ -9,15 +9,13 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.models2D.Avatar;
+import com.cap4053.perspective.models2D.PerspectiveItem;
 import com.cap4053.perspective.models2D.items.Heart;
 import com.cap4053.perspective.models2D.items.Star;
-import com.cap4053.perspective.models3D.TexturedCube;
 import com.cap4053.perspective.screens.GameScreen2D;
 import com.cap4053.perspective.screens.GameScreen3D;
 import com.cap4053.perspective.screens.LoadingScreen;
@@ -298,13 +296,16 @@ public class LevelManager {
 	public void showScreen(){
 		
 		if(display2D){
+			
+			game.setScreen(faces[currentFace]);
 						
 			Plane plane = faces[currentFace].getLevel2D();
 			int row = plane.getCharacter().getRow();
 			int col = plane.getCharacter().getColumn();
-			plane.moveCharacter(row, col);
-			
-			game.setScreen(faces[currentFace]);
+			Parser p = new Parser();
+			PerspectiveItem item = p.findItemAt(row, col, plane);
+			if(item != null)
+				item.onMoveOver(plane.getCharacter());
 		}
 		else{
 			game.setScreen(view3D);
