@@ -11,7 +11,6 @@ public class LoadingScreen extends PerspectiveScreen {
 
 	private LevelManager manager;
 	
-//	private GameScreen2D[] screens;
 	private Texture[] textures;
 
 	private SpriteBatch batch;
@@ -30,34 +29,36 @@ public class LoadingScreen extends PerspectiveScreen {
 		batch = new SpriteBatch();
 		black = new BitmapFont(Gdx.files.internal("data/blackfont.fnt"),false);
 		
-		counter = 1;
+		counter = 0;
 	}
 	
 	@Override
 	public void render(float delta) {
-		// TODO Auto-generated method stub
+
 		super.render(delta);
 		
-		if (counter < 6) {
-			manager.get2DScreen(counter).show();
-			manager.get2DScreen(counter).resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-			manager.get2DScreen(counter).render(delta);
+		if (counter++ < 6) {
+			manager.get2DScreen(counter % 6).show();
+			manager.get2DScreen(counter % 6).resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+			manager.get2DScreen(counter % 6).render(delta);
 			
 			batch.begin();
 			black.draw(batch, "Loading...", Gdx.graphics.getWidth()/2 - 55, Gdx.graphics.getHeight() - 50);
 			batch.end();
 			
-//			try {
-//				Thread.sleep(500);
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-			textures[counter] = manager.getScreenshot();
-			counter++;
+			if(!Perspective.DEVELOPER_MODE) {
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			textures[counter % 6] = manager.getScreenshot();
 		}
-		// done generating screens 
-		else if (counter == 6){
+		else { // done generating screens 
 			manager.loadScreens(textures);
+			manager.setScreen(0);
 			manager.showScreen();
 		}
 	}

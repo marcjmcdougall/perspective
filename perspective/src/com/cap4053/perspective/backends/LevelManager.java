@@ -297,6 +297,11 @@ public class LevelManager {
 	public void showScreen(){
 		
 		if(display2D){
+						
+			Plane plane = faces[currentFace].getLevel2D();
+			int row = plane.getCharacter().getRow();
+			int col = plane.getCharacter().getColumn();
+			plane.moveCharacter(row, col);
 			
 			game.setScreen(faces[currentFace]);
 		}
@@ -512,7 +517,7 @@ public class LevelManager {
 	}
 
 	public GameScreen2D get2DScreen(int number) {
-		// TODO Auto-generated method stub
+
 		return faces[number];
 	}
 	
