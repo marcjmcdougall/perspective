@@ -20,8 +20,8 @@ public class Validator {
 	// Reference to the parser that assists in moving through the board
 	private Parser p;
 	
-	// Local variable that details if a slot has been visited on the board
-	private boolean[][] visited;
+	// Local variable that details the distance left to reach the goal point
+	private int[][] distLeft;
 	
 	/**
 	 * Simple default constructor
@@ -47,142 +47,101 @@ public class Validator {
 		// Reset the local path variable
 		path = new ArrayList<SimpleCoordinate>();
 		
-		// Initialize a stack to facilitate parsing the path
-		Stack<Tile> cursor = new Stack<Tile>();
+		boolean done = false;
+		boolean emptyPass = true;
+		int currVal = 0;
+		int avatarVal;
+		int currRow, currCol;
 		
-		// Reset the visited variable
-		visited = new boolean[Plane.DIMENSION][Plane.DIMENSION];
-		
-		// Push the starting Tile onto the Stack
-		cursor.push(p.findTileAt(avatar.getRow(), avatar.getColumn(), plane));
-		
-		// Specify that the starting position has been visisted
-		visited[avatar.getRow()][avatar.getColumn()] = true;
-		
-		// Initialize the local temporary variables to 0
-		int cursorRow = 0;
-		int cursorColumn = 0;
-		
-		// While the stack is not empty...
-		while(!cursor.empty()){
-			
-			// Update the local placeholder variables to the row and column of the Tile at the head of the Stack
-			cursorRow = cursor.peek().getRow();
-			cursorColumn = cursor.peek().getColumn();
-			
-			// Test the value to the right
-			if(testRight(cursorRow, cursorColumn, plane)){
-				
-//				DEBUG
-//				Gdx.app.log(Perspective.TAG, "Adding (" + (cursorRow) + ", " + (cursorColumn + 1) + ")");
-				
-				// If we haven't returned by now, then push the next value onto the Stack
-				cursor.push(p.findTileAt(cursorRow, cursorColumn + 1, plane));
-				
-				// If this location equals the target row column pair
-				if(cursorColumn + 1 == targetColumn && cursorRow == targetRow){
-					
-					// Store the path before returning (for use later)
-					storePath(cursor);
-					
-					// Return true to specify that the move is indeed valid
-					return true;
-				}
-			}
-			// Test the value to the bottom
-			else if(testBottom(cursorRow, cursorColumn, plane)){
-				
-//				DEBUG
-//				Gdx.app.log(Perspective.TAG, "Adding (" + (cursorRow - 1) + ", " + (cursorColumn) + ")");
-				
-				//If we haven't returned by now, then push the next value onto the Stack
-				cursor.push(p.findTileAt(cursorRow - 1, cursorColumn, plane));
-				
-				// If this location equals the target row column pair
-				if(cursorColumn == targetColumn && cursorRow - 1 == targetRow){
-					
-					// Store the path before returning (for use later)
-					storePath(cursor);
-					
-					// Return true to specify that the move is indeed valid
-					return true;
-				}
-			}
-			// Test the value to the left
-			else if(testLeft(cursorRow, cursorColumn, plane)){
-				
-//				DEBUG
-//				Gdx.app.log(Perspective.TAG, "Adding (" + (cursorRow) + ", " + (cursorColumn - 1) + ")");
-				
-				//If we haven't returned by now, then push the next value onto the Stack
-				cursor.push(p.findTileAt(cursorRow, cursorColumn - 1, plane));
-				
-				// If this location equals the target row column pair
-				if(cursorColumn - 1 == targetColumn && cursorRow == targetRow){
-					
-					// Store the path before returning (for use later)
-					storePath(cursor);
-					
-					// Return true to specify that the move is indeed valid
-					return true;
-				}
-			}
-			// Test the value to the top
-			else if(testTop(cursorRow, cursorColumn, plane)){
-				
-//				DEBUG
-//				Gdx.app.log(Perspective.TAG, "Adding (" + (cursorRow + 1) + ", " + (cursorColumn) + ")");
-				
-				//If we haven't returned by now, then push the next value onto the Stack
-				cursor.push(p.findTileAt(cursorRow + 1, cursorColumn, plane));
-				
-				// If this location equals the target row column pair
-				if(cursorColumn == targetColumn && cursorRow + 1 == targetRow){
-					
-					// Store the path before returning (for use later)
-					storePath(cursor);
-					
-					// Return true to specify that the move is indeed valid
-					return true;
-				}
-			}
-			// Otherwise...
-			else{
-				
-				// Pop the stack
-				cursor.pop();
+		// Reset distance left with -1(infinity)
+		distLeft = new int[Plane.DIMENSION][Plane.DIMENSION];
+		for(int i=Plane.DIMENSION-1; i>=0; i--){
+			for(int j=0; j<Plane.DIMENSION; j++){
+				distLeft[i][j] = -1;
 			}
 		}
+		if(p.findTileAt(targetRow, targetColumn, plane).canMoveTo()){
+			distLeft[targetRow][targetColumn] = 0;
+		}
+		// Build distLeft array
+		while(!done){
+			for(int i=Plane.DIMENSION-1; i>=0; i--){
+				for(int j=0; j<Plane.DIMENSION; j++){
+					if(distLeft[i][j] == currVal){
+						if(testLeft(i, j, plane) && distLeft[i][j-1] == -1){
+							distLeft[i][j-1] = currVal + 1;
+							emptyPass = false;
+						}
+						if(testRight(i, j, plane) && distLeft[i][j+1] == -1){
+							distLeft[i][j+1] = currVal + 1;
+							emptyPass = false;
+						}
+						if(testBottom(i, j, plane) && distLeft[i-1][j] == -1){
+							distLeft[i-1][j] = currVal + 1;
+							emptyPass = false;
+						}
+						if(testTop(i, j, plane) && distLeft[i+1][j] == -1){
+							distLeft[i+1][j] = currVal + 1;
+							emptyPass = false;
+						}
+					}
+				}
+			}
+			if(emptyPass){
+				done = true;
+			}
+			emptyPass = true;
+			currVal = currVal + 1;
+		}
+		// Code for testing distLeft calculation.
+		/*
+		for(int i=Plane.DIMENSION-1; i>=0; i--){
+			for(int j=0; j<Plane.DIMENSION; j++){
+				System.out.print(distLeft[i][j]);
+			}
+			System.out.println();
+		}
+		*/
+		// The avatar's current distance to goal square.
+		avatarVal = distLeft[avatar.getRow()][avatar.getColumn()];
+		currRow = avatar.getRow();
+		currCol = avatar.getColumn();
 		
-		// If a solution has not been found by now, then return false
-		return false;
-	}
-
-	/**
-	 * Helper method used to update the most recent path to the given row and column.
-	 * 
-	 * @param cursor The Stack that contains all the path information.
-	 */
-	private void storePath(Stack<Tile> cursor) {
-		
-		// Initialize an iterator to iterate over the elements in the Stack
-		Iterator<Tile> i = cursor.iterator();
-		
-		// A local cursor object, and initialize it to null
-		Tile tileCursor = null;
-		
-		// While there are elements in the iterator...
-		while(i.hasNext()){
-			
-			// Advance the cursor
-			tileCursor = i.next();
-			
-			// Create a new coordinate, and make it's row and column equal to the 
-			// row and column of the cursor
-			SimpleCoordinate coord = new SimpleCoordinate(tileCursor.getRow(), tileCursor.getColumn());
-			
-			// Add that coordinate to the path.
-			path.add(coord);
+		// Path is impossible, avatar cannot reach that square.
+		if(avatarVal == -1){
+			path = null;
+			return false;
+		}
+		else{
+			while(avatarVal>=0){
+				// Create a new coordinate, and make it's row and column equal to the 
+				// row and column of the cursor
+				SimpleCoordinate coord = new SimpleCoordinate(currRow, currCol);
+				
+				// Add that coordinate to the path.
+				path.add(coord);
+				
+				if(testLeft(currRow, currCol, plane) && distLeft[currRow][currCol-1] == avatarVal - 1){
+					currCol = currCol - 1;
+					emptyPass = false;
+				}
+				if(testRight(currRow, currCol, plane) && distLeft[currRow][currCol+1] == avatarVal - 1){
+					currCol = currCol + 1;
+					emptyPass = false;
+				}
+				if(testBottom(currRow, currCol, plane) && distLeft[currRow-1][currCol] == avatarVal - 1){
+					currRow = currRow - 1;
+					emptyPass = false;
+				}
+				if(testTop(currRow, currCol, plane) && distLeft[currRow+1][currCol] == avatarVal - 1){
+					currRow = currRow + 1;
+					emptyPass = false;
+				}
+				
+				// Decrement current avatar distance value.
+				avatarVal = avatarVal - 1;
+			}
+			return true;
 		}
 	}
 	
@@ -208,9 +167,9 @@ public class Validator {
 		
 		if(currentColumn + 1 < Plane.DIMENSION){	
 		
-			if(!visited[currentRow][currentColumn + 1]){
+		//	if(!visited[currentRow][currentColumn + 1]){
 				
-				visited[currentRow][currentColumn + 1] = true;
+		//		visited[currentRow][currentColumn + 1] = true;
 			
 				if(p.findTileAt(currentRow, currentColumn + 1, plane).canMoveTo()){
 					
@@ -219,7 +178,7 @@ public class Validator {
 					
 					return true;
 				}
-			}
+		//	}
 		}
 		
 		return false;
@@ -237,9 +196,9 @@ public class Validator {
 		
 		if(currentRow - 1 >= 0){	
 		
-			if(!visited[currentRow - 1][currentColumn]){
+			//if(!visited[currentRow - 1][currentColumn]){
 				
-				visited[currentRow - 1][currentColumn] = true;
+			//	visited[currentRow - 1][currentColumn] = true;
 				
 				if(p.findTileAt(currentRow - 1, currentColumn, plane).canMoveTo()){
 					
@@ -248,7 +207,7 @@ public class Validator {
 					
 					return true;
 				}
-			}
+			//}
 		}
 		
 		return false;
@@ -266,9 +225,9 @@ public class Validator {
 		
 		if(currentColumn - 1 >= 0){
 		
-			if(!visited[currentRow][currentColumn - 1]){
+			//if(!visited[currentRow][currentColumn - 1]){
 				
-				visited[currentRow][currentColumn - 1] = true;
+			//	visited[currentRow][currentColumn - 1] = true;
 				
 				if(p.findTileAt(currentRow, currentColumn - 1, plane).canMoveTo()){
 					
@@ -277,7 +236,7 @@ public class Validator {
 					
 					return true;
 				}
-			}
+			//}
 		}
 		
 		return false;
@@ -295,9 +254,9 @@ public class Validator {
 		
 		if(currentRow + 1 < Plane.DIMENSION){
 			
-			if(!visited[currentRow + 1][currentColumn]){
+			//if(!visited[currentRow + 1][currentColumn]){
 			
-				visited[currentRow + 1][currentColumn] = true;
+		//		visited[currentRow + 1][currentColumn] = true;
 		
 				if(p.findTileAt(currentRow + 1, currentColumn, plane).canMoveTo()){
 					
@@ -306,7 +265,7 @@ public class Validator {
 					
 					return true;
 				}
-			}
+			//}
 		}
 		
 		return false;
