@@ -3,10 +3,10 @@
 F F F F F F F
 F F B B B B F
 F F B B B B B
-F F B F F B B
+F F B F P B B
 B B B B B B B
 B B B B B B B
-F F F F F F P
+F F F F F F F
 
 F F B B B F F
 F F B F B F F
@@ -54,12 +54,12 @@ E E E E E E E
 E E E S E E E
 E E E E E E E
 E E E E E E E
-E H E S E E E
+E E E S E E E
 
 E E E E E E D
 E E E E E E S
 E E E E E E S
-E E E E E E S
+E E E E E E E
 E E E E E E E
 E E E E E E E
 E E E E E E E
