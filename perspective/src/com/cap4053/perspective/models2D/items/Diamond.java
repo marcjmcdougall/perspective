@@ -19,7 +19,7 @@ public class Diamond extends PerspectiveItem {
 
 	public static Diamond create(int row, int column, Plane level2D){
 	
-		Texture texture = new Texture(Gdx.files.internal("data/items/item_diamond.png"));
+		Texture texture = new Texture(Gdx.files.internal("data/Items/item_diamond.png"));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		return new Diamond(texture, row, column, level2D);
@@ -36,7 +36,7 @@ public class Diamond extends PerspectiveItem {
 	@Override
 	public Drawable getZenDrawable() {
 		
-		TextureRegion tr = new TextureRegion(new Texture(Gdx.files.internal("data/items/alternate_diamond.png")));
+		TextureRegion tr = new TextureRegion(new Texture(Gdx.files.internal("data/Items/alternate_diamond.png")));
 		
 		TextureRegionDrawable drawable = new TextureRegionDrawable(tr);
 		
