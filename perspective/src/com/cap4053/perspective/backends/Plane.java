@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -70,11 +71,18 @@ public class Plane {
 		this.stage = stage;
 		this.characterState = characterState;
 		
-		Texture texture = new Texture(Gdx.files.internal("data/Plane-BG.png"));
+		Texture texture = null;
+		if(Gdx.app.getType() == ApplicationType.Desktop){
+			texture = new Texture(Gdx.files.internal("data/Plane-BG.png"));
+		}
+		else{
+			texture = new Texture(Gdx.files.internal("data/Plane-BG-Android.png"));
+		}
+		
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		Image bgImage = new Image(texture);
-		
 		this.stage.addActor(bgImage);
+		//bgImage.setOrigin(originX, originY);
 		
 	}
 	

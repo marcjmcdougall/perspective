@@ -14,41 +14,41 @@ public class PerspectiveCollectionItem extends Image{
 		Texture texture = null;
 		if(type.equalsIgnoreCase("Stars")){
 			if(!enabled){
-				texture = new Texture(Gdx.files.internal("data/items/uncollected_star.png"));
+				texture = new Texture(Gdx.files.internal("data/Items/uncollected_star.png"));
 				texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 			}
 			else{
-				texture = new Texture(Gdx.files.internal("data/items/collected_star.png"));
+				texture = new Texture(Gdx.files.internal("data/Items/collected_star.png"));
 				texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 			}
 		}
 		else if(type.equalsIgnoreCase("Hearts")){
 			if(!enabled){
-				texture = new Texture(Gdx.files.internal("data/items/uncollected_heart.png"));
+				texture = new Texture(Gdx.files.internal("data/Items/uncollected_heart.png"));
 				texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 			}
 			else{
-				texture = new Texture(Gdx.files.internal("data/items/collected_heart.png"));
+				texture = new Texture(Gdx.files.internal("data/Items/collected_heart.png"));
 				texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 			}
 		}
 		else if(type.equalsIgnoreCase("Summary-Stars")){
 			if(!enabled){
-				texture = new Texture(Gdx.files.internal("data/items/summary-star-unfilled.png"));
+				texture = new Texture(Gdx.files.internal("data/Items/summary-star-unfilled.png"));
 				texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 			}
 			else{
-				texture = new Texture(Gdx.files.internal("data/items/summary-star-filled.png"));
+				texture = new Texture(Gdx.files.internal("data/Items/summary-star-filled.png"));
 				texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 			}
 		}
 		else if(type.equalsIgnoreCase("Summary-Hearts")){
 			if(!enabled){
-				texture = new Texture(Gdx.files.internal("data/items/summary-heart-unfilled.png"));
+				texture = new Texture(Gdx.files.internal("data/Items/summary-heart-unfilled.png"));
 				texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 			}
 			else{
-				texture = new Texture(Gdx.files.internal("data/items/summary-heart-filled.png"));
+				texture = new Texture(Gdx.files.internal("data/Items/summary-heart-filled.png"));
 				texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 			}
 		}
