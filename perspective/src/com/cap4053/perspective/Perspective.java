@@ -4,9 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.OrderedMap;
 import com.cap4053.perspective.screens.PerspectiveScreen;
@@ -66,7 +64,7 @@ public class Perspective extends Game implements Json.Serializable {
 		setScreen(new SplashScreen(this));
 		
 		// Assign the input processor to the one designed for the Splash Screen
-		Gdx.input.setInputProcessor(new SplashScreenInputProcessor(this));
+		Gdx.input.setInputProcessor(new GestureDetector(new SplashScreenInputProcessor(this)));
 	}
 	
 	@Override
