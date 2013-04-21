@@ -110,6 +110,8 @@ public class OptionsScreen extends PerspectiveScreen{
 		
 		slider1 = new Slider(0, 20, 1, false, style);
 		slider2 = new Slider(0, 20, 1, false, style);
+		slider1.setValue(game.musicVolume * 20);
+		slider2.setValue(game.SFXVolume * 20);
 		slider1.addListener(new InputListener()
 		{
 			public boolean touchDown(InputEvent even, float x, float y,int pointer, int button){
@@ -122,8 +124,9 @@ public class OptionsScreen extends PerspectiveScreen{
 				slider1Val = slider1.getValue();
 				//Debug Statement
 				//System.out.println("Slider1Val is " + slider1Val);
-				musicPlayer = game.getmusicPlayer();
-				musicPlayer.setVolume(slider1Val/20f);
+				game.musicVolume = (slider1Val/20f);
+				Music musicPlayer = game.getMusicPlayer();
+				musicPlayer.setVolume(game.musicVolume);
 			}
 		});
 		slider2.addListener(new InputListener()
