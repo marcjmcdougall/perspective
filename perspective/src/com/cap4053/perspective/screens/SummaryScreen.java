@@ -81,8 +81,9 @@ public class SummaryScreen extends Image {
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
 				System.out.println("touch up");
 				if(manager.getCurrentLevel() < 3){
+					manager.setCurrentLevel(manager.getCurrentLevel() + 1);
 					try {
-						manager.loadLevel("data/levels/level" + (manager.getCurrentLevel() + 1) + ".txt");
+						manager.loadLevel("data/levels/level" + manager.getCurrentLevel() + ".txt");
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
