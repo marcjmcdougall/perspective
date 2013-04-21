@@ -27,7 +27,7 @@ public class Perspective extends Game implements Json.Serializable {
 	
 	// Public class variable used to control printout statements.  Also removes potentially frustrating features
 	// during the development process (such as music and sound effects).  Must be set to false before release.
-	public static final boolean DEVELOPER_MODE = false;
+	public static final boolean DEVELOPER_MODE = true;
 	
 	// Reference to the current screen that is being displayed 
 	private PerspectiveScreen currentScreen;

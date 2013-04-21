@@ -74,12 +74,12 @@ public class SummaryScreen extends Image {
 		{
 
 			public boolean touchDown(InputEvent even, float x, float y,int pointer, int button){
-				System.out.println("touch down");
+
 				return true;
 			}
 			
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				System.out.println("touch up");
+
 				if(manager.getCurrentLevel() < 3){
 					manager.setCurrentLevel(manager.getCurrentLevel() + 1);
 					try {
@@ -97,7 +97,7 @@ public class SummaryScreen extends Image {
 
 		SequenceAction buttonSequence = new SequenceAction();
 		
-		buttonSequence.addAction(Actions.delay(0.01f));
+		buttonSequence.addAction(Actions.delay(0.8f));
 
 		buttonSequence.addAction(Actions.run(
 				new Runnable(){
