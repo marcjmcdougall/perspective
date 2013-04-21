@@ -54,21 +54,21 @@ public class SummaryScreen extends Image {
 		
 		int width = Gdx.graphics.getWidth();
 		int height = Gdx.graphics.getHeight();
-		TextureAtlas atlas = new TextureAtlas("data/MainMenu.pack");
+		TextureAtlas atlas = new TextureAtlas("data/Next_Level_Button.pack");
 		Skin skin = new Skin();
 		skin.addRegions(atlas);
 		TextButtonStyle style = new TextButtonStyle();
 		BitmapFont black = new BitmapFont(Gdx.files.internal("data/blackfont.fnt"),false);
 		
-		style.up = skin.getDrawable("Play_Button");
-		style.down = skin.getDrawable("Play_Button_Pushed");
+		style.up = skin.getDrawable("next-level-button");
+		style.down = skin.getDrawable("next-level-button");
 		style.font = black;
 		
 		nextLevel = new TextButton("", style);
-		nextLevel.setWidth(120);
-		nextLevel.setHeight(50);
-		nextLevel.setX(50);
-		nextLevel.setY(50);
+		nextLevel.setWidth(128);
+		nextLevel.setHeight(128);
+		nextLevel.setX(Gdx.graphics.getWidth()/2 - 58);
+		nextLevel.setY(35);
 		
 		nextLevel.addListener(new InputListener()
 		{
@@ -97,7 +97,7 @@ public class SummaryScreen extends Image {
 
 		SequenceAction buttonSequence = new SequenceAction();
 		
-		buttonSequence.addAction(Actions.delay(0.8f));
+		buttonSequence.addAction(Actions.delay(0.01f));
 
 		buttonSequence.addAction(Actions.run(
 				new Runnable(){
