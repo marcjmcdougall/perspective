@@ -39,6 +39,8 @@ public class Perspective extends Game implements Json.Serializable {
 	
 	private static final String TIME = "time";
 	
+	public float SFXVolume = 1.0f;
+	
 	
 	@Override
 	public void create() {		
@@ -163,5 +165,9 @@ public class Perspective extends Game implements Json.Serializable {
 
 	@Override
 	public void read(Json json, OrderedMap<String, Object> jsonData) {
+	}
+	
+	public Music getmusicPlayer(){
+		return musicPlayer;
 	}
 }

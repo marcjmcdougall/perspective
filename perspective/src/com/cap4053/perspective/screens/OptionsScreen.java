@@ -1,6 +1,8 @@
 package com.cap4053.perspective.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -34,6 +36,7 @@ public class OptionsScreen extends PerspectiveScreen{
 	Sprite sprite;
 	Slider slider1;
 	Slider slider2;
+	Music musicPlayer;
 	
 	public OptionsScreen(Perspective game) {
 		super(game);
@@ -107,6 +110,37 @@ public class OptionsScreen extends PerspectiveScreen{
 		
 		slider1 = new Slider(0, 20, 1, false, style);
 		slider2 = new Slider(0, 20, 1, false, style);
+		slider1.addListener(new InputListener()
+		{
+			public boolean touchDown(InputEvent even, float x, float y,int pointer, int button){
+				
+				return true;
+			}
+			
+			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
+				float slider1Val;
+				slider1Val = slider1.getValue();
+				//Debug Statement
+				//System.out.println("Slider1Val is " + slider1Val);
+				musicPlayer = game.getmusicPlayer();
+				musicPlayer.setVolume(slider1Val/20f);
+			}
+		});
+		slider2.addListener(new InputListener()
+		{
+			public boolean touchDown(InputEvent even, float x, float y,int pointer, int button){
+				
+				return true;
+			}
+			
+			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
+				float slider2Val;
+				slider2Val = slider2.getValue();
+				//Debug Statement
+				//System.out.println("Slider1Val is " + slider1Val);
+				game.SFXVolume = (slider2Val/20f);
+			}
+		});
 				
 		
 		slider1.setX(width/2);

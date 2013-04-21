@@ -154,7 +154,7 @@ public class GameScreen3D extends GameScreen {
     		
     		//this plays the sound at maximum volume (the float input from 0.0f to
     		// 1.0f determines volume)
-    		long id = audioPlayer.play(1.0f);
+    		long id = audioPlayer.play(game.SFXVolume);
     		
     		//We may now modify attributes of this sound by referring to its id
     		audioPlayer.setLooping(id, false);
