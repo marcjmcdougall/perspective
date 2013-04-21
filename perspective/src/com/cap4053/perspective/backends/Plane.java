@@ -32,6 +32,9 @@ public class Plane {
 	// A class variable defining the total number of Tiles on each Plane
 	public static final int DIMENSION = 7;
 	
+	// Which level we are on currently
+	public int currentLevel;
+	
 	// ArrayList representing the Tile objects on the Plane
 	private ArrayList<Tile> tiles;
 	
@@ -51,7 +54,7 @@ public class Plane {
 	private boolean characterState;
 	
 	private LevelManager manager;
-	
+
 	/**
 	 * Simple constructor.  Creates a new Plane object.
 	 * 
@@ -69,6 +72,7 @@ public class Plane {
 		// Assign the parameters to their class variable equivalents
 		this.stage = stage;
 		this.characterState = characterState;
+		this.currentLevel = manager.getCurrentLevel();
 		
 		Texture texture = new Texture(Gdx.files.internal("data/Plane-BG.png"));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
@@ -313,12 +317,32 @@ public class Plane {
 				}
 				else if(cursor.equals("F")){
 					
-					tiles.add(FloorTile.create(row, column, this));
+					if(manager.getCurrentLevel() == 3) {
+						tiles.add(LevelTile.create(row, column, this, "tile_blue.png"));
+					}
+					else {
+						tiles.add(FloorTile.create(row, column, this, "tile_blue.png"));
+					}
 				}
 				
 				else if(cursor.equals("P")){
 					
-					tiles.add(LevelTile.create(row, column, this, "tile_purple.png"));
+					if(manager.getCurrentLevel() == 1) {
+						tiles.add(LevelTile.create(row, column, this, "tile_purple.png"));
+					}
+					else {
+						tiles.add(FloorTile.create(row, column, this, "tile_purple.png"));
+					}
+				}
+				
+				else if(cursor.equals("G")){
+					
+					if(manager.getCurrentLevel() == 2) {
+						tiles.add(LevelTile.create(row, column, this, "tile_green.png"));
+					}
+					else {
+						tiles.add(FloorTile.create(row, column, this, "tile_green.png"));
+					}
 				}
 				
 				column ++;
@@ -474,5 +498,9 @@ public class Plane {
 
 	public void setStage(Stage stage) {
 		this.stage = stage;
+	}
+	
+	public LevelManager getManager() {
+		return manager;
 	}
 }

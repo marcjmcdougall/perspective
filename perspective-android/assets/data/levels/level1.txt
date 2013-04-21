@@ -1,97 +1,97 @@
 0 0
 
 F F F F F F F
-F B B B B B F
-B B F F F B F
-F B F B B B F
-F B F F F B F
-F B B B F B F
-F B F F F B F
-
+F F B B B B F
+F F B B B B B
+F F B F P B B
+B B B B B B B
+B B B B B B B
 F F F F F F F
-F B B B B B F
-F B F F F B F
-F B F B B B F
-F B F F F B F
-F B B B F B F
-F F F F F B F
 
+F F B B B F F
+F F B F B F F
+F F B F B F F
+F F B B B F F
 F F F F F F F
-F B B B B B F
-F B F F F B F
-F B F B B B F
-F B F F F B F
-F B B B F B F
-F F F F F B F
-
 F F F F F F F
-F B B B B B F
-F B F F F B F
-F B F B B B F
-F B F F F B F
-F B B B F B F
-F F F F F B F
+F F F F F F F 
 
+F B B B B B B
+F B F F B B B
+B B B F B B B
+F F B F B B B
+F F B B B B B
 F F F F F F F
-F B B B B B F
-F B F F F B F
-F B F B B B F
-F B F F F B F
-F B B B F B F
-F F F F F B F
-
 F F F F F F F
-F B B B B B F
-F B F F F B F
-F B F B B B F
-F B F F F B F
-F B B B F B F
-F F F F F B F
 
-D D D E E E H
-E E E E E E E
-E E E E E E E
-E E E E E E E
-E E S E E E E
-E E E E E E E
-E E E E E E E
+B B B B B B B
+B B B B B B B
+B B B B B B B
+B B B B B B B
+B B B B B B B
+B B B B B B B
+F F B B B B B
 
-D D D E E E H
-E E E E E E E
-E E E E E E E
-E E E E E E E
-E E S E E E E
-E E E E E E E
-E E E E E E E
+B B B B B B B
+B B B B B B B
+B B B B B B B
+B B B B B B B
+B B B B B B B
+B B B B B B B
+F F F F F F F
 
-D D D E E E H
-E E E E E E E
-E E E E E E E
-E E E E E E E
-E E S E E E E
-E E E E E E E
-E E E E E E E
+B F F F F F F
+B F B B B B F
+F F F F B B F
+B B B B B B F
+F F F F F F F
+F B B B B B B
+F B B B B B B
 
-D D D E E E H
+E E E E E E E
+E E E E E E D
+E E E E E E E
+E E E S E E E
 E E E E E E E
 E E E E E E E
-E E E E E E E
-E E S E E E E
-E E E E E E E
-E E E E E E E
+E H E S E E E
 
-D D D E E E H
+E E E E E E D
+E E E E E E S
+E E E E E E S
+E E E E E E S
 E E E E E E E
-E E E E E E E
-E E E E E E E
-E E S E E E E
 E E E E E E E
 E E E E E E E
 
-D D D E E E H
+E E E E E E E
+E E E H E E E
 E E E E E E E
 E E E E E E E
 E E E E E E E
-E E S E E E E
+E E E E E E E
+E E E E E E E
+
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E E D D
+
+E E E E E E E
+E E E E E E E
+H E E E E E E
+E E E E E E E
+E E E E E E E
 E E E E E E E
 E E E E E E E

@@ -3,9 +3,9 @@ package com.cap4053.perspective.models2D.tiles;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.cap4053.perspective.Perspective;
+import com.cap4053.perspective.backends.LevelManager;
 import com.cap4053.perspective.backends.Plane;
 import com.cap4053.perspective.backends.TimerManager;
 import com.cap4053.perspective.models2D.Avatar;
@@ -35,14 +35,14 @@ public class LevelTile extends Tile {
 		return output;
 	}
 	
-	public void onMoveOver(Avatar collidedObject){
+	public void onMoveOver(Perspective game, LevelManager manager, Avatar collidedObject){
 		// Prevents being called multiple times
 		if(!this.isLevelingUp){
 			this.isLevelingUp = true;
 			
 			int stars = collidedObject.getManager().getStars().size();
 			int hearts = collidedObject.getManager().getHearts().size();
-			SummaryScreen summary = SummaryScreen.create(this.plane, stars, hearts);
+			SummaryScreen summary = SummaryScreen.create(game, manager, this.plane, stars, hearts);
 			
 			summary.addAction(Actions.alpha(0.0f));
 			this.plane.getStage().addActor(summary);

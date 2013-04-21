@@ -1,75 +1,67 @@
 0 0
 
-F F F F F F F
-F F B B B B F
-F F B B B B B
-F F B F F B B
 B B B B B B B
-B B B B B B B
-F F F F F F P
+P B P P B P P
+P B P P B P B
+B B P P B P B
+P B B B B B B
+P B P P P P P
+P B P P P P P
 
-F F B B B F F
-F F B F B F F
-F F B F B F F
-F F B B B F F
-F F F F F F F
-F F F F F F F
-F F F F F F F 
+B B P P B B B
+B B P P B P B
+B B B B B B B
+B B B P P P B
+P P B B B P B
+B P B P P P P
+P P P P P P P
 
-F B B B B B B
-F B F F B B B
-B B B F B B B
-F F B F B B B
-F F B B B B B
-F F F F F F F
-F F F F F F F
-
+B B B P B B B
+B B B P B P B
+B B B P B P B
+B B B P B P B 
+B B B P P P P
 B B B B B B B
-B B B B B B B
-B B B B B B B
-B B B B B B B
-B B B B B B B
-B B B B B B B
-F F B B B B B
+P B B B B B B
 
 B B B B B B B
-B B B B B B B
-B B B B B B B
-B B B B B B B
-B B B B B B B
-B B B B B B B
-F F F F F F F
+B B P B B B B
+P P P B B B P
+P B B B B B B
+P P P P B P P
+B B B P B P B
+P B B P P P P
 
-B F F F F F F
-B F B B B B F
-F F F F B B F
-B B B B B B F
-F F F F F F F
-F B B B B B B
-F B B B B B B
+P P P B B B B
+P P P B B B B
+P P B B B P B
+P P B P B P B
+B B B B B P B
+B P P P P P P
+P P P P P P P
+
+B P B P B P B
+P P P P P P P
+B B B B B B B
+B G B P B P P
+B P B P B P B
+B P B P B P B
+P B B B B P B
 
 E E E E E E E
-E E E E E E D
-E E E E E E E
-E E E S E E E
 E E E E E E E
 E E E E E E E
-E H E S E E E
+E E H E E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
 
-E E E E E E D
-E E E E E E S
-E E E E E E S
 E E E E E E S
 E E E E E E E
-E E E E E E E
-E E E E E E E
-
 E E E E E E E
 E E E H E E E
 E E E E E E E
-E E E E E E E
-E E E E E E E
-E E E E E E E
+E E E S E E E
 E E E E E E E
 
 E E E E E E E
@@ -86,11 +78,19 @@ E E E E E E E
 E E E E E E E
 E E E E E E E
 E E E E E E E
-E E E E E D D
+E E E E E E E
 
 E E E E E E E
 E E E E E E E
-H E E E E E E
+E H E E E E E
+E S E S E E E
+E E E E E E E
+E E E E E E E
+E E E E E E E
+
+E E E E E E E
+E E E E E E E
+E E E E E E E
 E E E E E E E
 E E E E E E E
 E E E E E E E

@@ -3,9 +3,18 @@ package com.cap4053.perspective.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.backends.LevelManager;
 import com.cap4053.perspective.backends.Plane;
 import com.cap4053.perspective.models2D.PerspectiveCollection;
@@ -16,7 +25,9 @@ public class SummaryScreen extends Image {
 	private int stars;
 	private int hearts;
 	
-	private SummaryScreen(Texture texture, final Plane level2D, final int stars, final int hearts) {
+	private Button nextLevel;
+	
+	private SummaryScreen(final Perspective game, final LevelManager manager, Texture texture, final Plane level2D, final int stars, final int hearts) {
 		
 		// Call the super constructor
 		super(texture);	
@@ -35,7 +46,49 @@ public class SummaryScreen extends Image {
 		
 		
 		this.addAction(sequence);
-
+		
+		int width = Gdx.graphics.getWidth();
+		int height = Gdx.graphics.getHeight();
+		TextureAtlas atlas = new TextureAtlas("data/MainMenu.pack");
+		Skin skin = new Skin();
+		skin.addRegions(atlas);
+		TextButtonStyle style = new TextButtonStyle();
+		BitmapFont black = new BitmapFont(Gdx.files.internal("data/blackfont.fnt"),false);
+		
+		style.up = skin.getDrawable("Play_Button");
+		style.down = skin.getDrawable("Play_Button_Pushed");
+		style.font = black;
+		
+		nextLevel = new TextButton("", style);
+		nextLevel.setWidth(120);
+		nextLevel.setHeight(50);
+		nextLevel.setX((width/2)-(nextLevel.getWidth()*5)/4);
+		nextLevel.setY(height);
+		
+		nextLevel.addListener(new InputListener()
+		{
+			public boolean touchDown(InputEvent even, float x, float y,int pointer, int button){
+				
+				return true;
+			}
+			
+			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
+				
+				if(manager.getCurrentLevel() < 2){
+					try {
+						manager.loadLevel("data/levels/level" + (manager.getCurrentLevel() + 1) + ".txt");
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				else{
+					game.setScreen(new LevelSelectorScreen(game));
+				}
+			}
+		});
+		
+		manager.getStage().addActor(nextLevel);
 	}
 	
 	public SequenceAction addItemsToSequence(final SequenceAction sequence, final Plane level2D, final String items, final int numItems, final int maxItems, final int startX, final int startY, final int objSize, final int objSpacing){
@@ -90,7 +143,7 @@ public class SummaryScreen extends Image {
 		return sequence;
 	}
 	
-	public static SummaryScreen create(Plane level2D, int stars, int hearts){
+	public static SummaryScreen create(Perspective game, LevelManager manager, Plane level2D, int stars, int hearts){
 		
 		// Create the new Texture 
 		Texture texture = new Texture(Gdx.files.internal("data/Summary-BG.png"));
@@ -99,7 +152,7 @@ public class SummaryScreen extends Image {
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		// Return the Texture
-		return new SummaryScreen(texture, level2D, stars, hearts);
+		return new SummaryScreen(game, manager, texture, level2D, stars, hearts);
 	}
 
 }

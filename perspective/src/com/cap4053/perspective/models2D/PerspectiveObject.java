@@ -3,6 +3,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.cap4053.perspective.Perspective;
+import com.cap4053.perspective.backends.LevelManager;
 import com.cap4053.perspective.backends.Plane;
 import com.cap4053.perspective.screens.GameScreen2D;
 
@@ -43,7 +44,7 @@ public abstract class PerspectiveObject extends Image {
 		setY(GameScreen2D.VERTICAL_MARGIN + SQUARE_DIMENSION * row);
 	}
 	
-	public void onMoveOver(Avatar avatar){
+	public void onMoveOver(Perspective perspective, LevelManager levelManager, Avatar avatar){
 		
 	}
 	
