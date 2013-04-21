@@ -2,59 +2,51 @@
 
 G G G G G G G
 G G G G G G G
-G G G G G G G
-G G G G F G G
-G G G G G G G
+G G G B B B G
+G G G B F B G
+G G G B B B G
 G G G G G G G
 G G G G G G G
 
 G G G G G G G
 G G G G G G G
-G G G G G G G
-G G G G G G G
-G G G G G G G
+G G G B B B G
+G G G B G B G
+G G G B B B G
 G G G G G G G
 G G G G G G G 
 
 G G G G G G G
 G G G G G G G
+G G G B B B G
+G G G B G B G
+G G G B B B G
 G G G G G G G
-G G G G G G G
-G G G G G G G
-G G G G G G G
-G G G G G G G
+G G G G G G G 
 
 G G G G G G G
 G G G G G G G
+G G G B B B G
+G G G B G B G
+G G G B B B G
 G G G G G G G
-G G G G G G G
-G G G G G G G
-G G G G G G G
-G G G G G G G
+G G G G G G G 
 
 G G G G G G G
 G G G G G G G
+G G G B B B G
+G G G B G B G
+G G G B B B G
 G G G G G G G
-G G G G G G G
-G G G G G G G
-G G G G G G G
-G G G G G G G
+G G G G G G G 
 
 G G G G G G G
 G G G G G G G
+G G G B B B G
+G G G B G B G
+G G G B B B G
 G G G G G G G
-G G G G G G G
-G G G G G G G
-G G G G G G G
-G G G G G G G
-
-E E E E E E E
-E E E E E E E
-E E E E E E E
-E E E E E E E
-E E E E E E E
-E E E E E E E
-E E E E E E E
+G G G G G G G 
 
 E E E E E E E
 E E E E E E E
@@ -67,7 +59,7 @@ E E E E E E E
 E E E E E E E
 E E E E E E E
 E E E E E E E
-E E E E E E E
+E E E E S E E
 E E E E E E E
 E E E E E E E
 E E E E E E E
@@ -75,7 +67,7 @@ E E E E E E E
 E E E E E E E
 E E E E E E E
 E E E E E E E
-E E E E E E E
+E E E E D E E
 E E E E E E E
 E E E E E E E
 E E E E E E E
@@ -91,7 +83,15 @@ E E E E E E E
 E E E E E E E
 E E E E E E E
 E E E E E E E
+E E E E H E E
 E E E E E E E
+E E E E E E E
+E E E E E E E
+
+E E E E E E E
+E E E E E E E
+E E E E E E E
+E E E E S E E
 E E E E E E E
 E E E E E E E
 E E E E E E E

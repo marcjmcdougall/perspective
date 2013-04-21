@@ -23,6 +23,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 	TextureAtlas atlas;
 	Skin skin;
 	SpriteBatch batch;
+	TextButton back;
 	TextButton stage1;
 	TextButton stage2;
 	TextButton stage3;
@@ -72,6 +73,11 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 		style.up = skin.getDrawable("Button_Small");
 		style.down = skin.getDrawable("LED-Zen");
 		style.font = white;
+		
+		back = new TextButton("Back",style);
+		back.setWidth(100);
+		back.setHeight(60);
+		back.setPosition(20, Gdx.graphics.getHeight()-80);
 		
 		stage1 = new TextButton("1",style);
 		stage1.setWidth(length);
@@ -126,6 +132,19 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 		stage9.setHeight(length);
 		stage9.setX(width/2-stage3.getWidth()/2 + stage3.getWidth()*2);
 		stage9.setY(height/2-stage3.getHeight()/2 - stage3.getHeight()*2);
+		
+		back.addListener(new InputListener()
+		{
+			public boolean touchDown(InputEvent even, float x, float y,int pointer, int button){
+				
+				return true;
+			}
+			
+			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
+				
+				game.setScreen(new MenuScreen(game));
+			}
+		});
 		
 		stage1.addListener(new InputListener()
 		{
@@ -265,6 +284,7 @@ public class LevelSelectorScreen extends PerspectiveScreen {
 		});
 		
 		stage.addActor(sprite);
+		stage.addActor(back);
 		stage.addActor(stage1);
 		stage.addActor(stage2);
 		stage.addActor(stage3);

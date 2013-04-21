@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.OrderedMap;
+import com.cap4053.perspective.backends.TimerManager;
 import com.cap4053.perspective.screens.PerspectiveScreen;
 import com.cap4053.perspective.screens.SplashScreen;
 import com.cap4053.perspective.view.SplashScreenInputProcessor;
@@ -26,7 +27,7 @@ public class Perspective extends Game implements Json.Serializable {
 	
 	// Public class variable used to control printout statements.  Also removes potentially frustrating features
 	// during the development process (such as music and sound effects).  Must be set to false before release.
-	public static final boolean DEVELOPER_MODE = true;
+	public static final boolean DEVELOPER_MODE = false;
 	
 	// Reference to the current screen that is being displayed 
 	private PerspectiveScreen currentScreen;
@@ -131,26 +132,31 @@ public class Perspective extends Game implements Json.Serializable {
 	
 	public void decTime()
 	{
-		this.time--;
+		if(TimerManager.shouldRunTimer)
+			this.time--;
 	}
 	
 	public void addTime(int add)
 	{
-		this.time+=add;
+		if(TimerManager.shouldRunTimer)
+			this.time+=add;
 	}
 	
 	public void continueTime(float delta)
 	{
-		this.elapsed+=delta;
-		
-		if(this.elapsed>=1)
+		if(TimerManager.shouldRunTimer)
 		{
-			this.decTime();
-			this.elapsed = 0;
+			this.elapsed+=delta;
+			
+			if(this.elapsed>=1)
+			{
+				this.decTime();
+				this.elapsed = 0;
+			}
+			
+			if(this.getTime()==0)
+				this.addTime(59);
 		}
-		
-		if(this.getTime()==0)
-			this.addTime(59);
 	}
 	
 	public void setTime(int time)
