@@ -3,9 +3,18 @@ package com.cap4053.perspective.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.backends.LevelManager;
 import com.cap4053.perspective.backends.Plane;
 import com.cap4053.perspective.models2D.PerspectiveCollection;
@@ -16,6 +25,8 @@ public class SummaryScreen extends Image {
 	private int stars;
 	private int hearts;
 	
+	private Button nextLevel;
+	
 	private SummaryScreen(Texture texture, final Plane level2D, final int stars, final int hearts) {
 		
 		// Call the super constructor
@@ -24,6 +35,9 @@ public class SummaryScreen extends Image {
 		this.level2D = level2D;
 		this.stars = stars;
 		this.hearts = hearts;
+		
+		final LevelManager manager = level2D.getManager();
+		final Perspective game = manager.getGame();
 		
 		SequenceAction sequence = new SequenceAction();
 		
@@ -35,7 +49,67 @@ public class SummaryScreen extends Image {
 		
 		
 		this.addAction(sequence);
+		
+		
+		
+		int width = Gdx.graphics.getWidth();
+		int height = Gdx.graphics.getHeight();
+		TextureAtlas atlas = new TextureAtlas("data/Next_Level_Button.pack");
+		Skin skin = new Skin();
+		skin.addRegions(atlas);
+		TextButtonStyle style = new TextButtonStyle();
+		BitmapFont black = new BitmapFont(Gdx.files.internal("data/blackfont.fnt"),false);
+		
+		style.up = skin.getDrawable("next-level-button");
+		style.down = skin.getDrawable("next-level-button");
+		style.font = black;
+		
+		nextLevel = new TextButton("", style);
+		nextLevel.setWidth(128);
+		nextLevel.setHeight(128);
+		nextLevel.setX(Gdx.graphics.getWidth()/2 - 58);
+		nextLevel.setY(35);
+		
+		nextLevel.addListener(new InputListener()
+		{
 
+			public boolean touchDown(InputEvent even, float x, float y,int pointer, int button){
+				System.out.println("touch down");
+				return true;
+			}
+			
+			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
+				System.out.println("touch up");
+				if(manager.getCurrentLevel() < 3){
+					manager.setCurrentLevel(manager.getCurrentLevel() + 1);
+					try {
+						manager.loadLevel("data/levels/level" + manager.getCurrentLevel() + ".txt");
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				else{
+					game.setScreen(new LevelSelectorScreen(game));
+				}
+			}
+		});
+
+		SequenceAction buttonSequence = new SequenceAction();
+		
+		buttonSequence.addAction(Actions.delay(0.01f));
+
+		buttonSequence.addAction(Actions.run(
+				new Runnable(){
+					public void run() {
+						level2D.getStage().addActor(nextLevel);
+					}
+				}
+		));
+		
+		this.addAction(buttonSequence);
+		
+		Gdx.input.setInputProcessor(level2D.getStage());
 	}
 	
 	public SequenceAction addItemsToSequence(final SequenceAction sequence, final Plane level2D, final String items, final int numItems, final int maxItems, final int startX, final int startY, final int objSize, final int objSpacing){

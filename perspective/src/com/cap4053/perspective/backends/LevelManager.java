@@ -16,6 +16,7 @@ import com.cap4053.perspective.models2D.Avatar;
 import com.cap4053.perspective.models2D.PerspectiveItem;
 import com.cap4053.perspective.models2D.items.Heart;
 import com.cap4053.perspective.models2D.items.Star;
+import com.cap4053.perspective.models2D.tiles.Tile;
 import com.cap4053.perspective.screens.GameScreen2D;
 import com.cap4053.perspective.screens.GameScreen3D;
 import com.cap4053.perspective.screens.LoadingScreen;
@@ -38,7 +39,7 @@ public class LevelManager {
 	
 	// Maintains a reference to the Game object, in order to switch screens
 	private Perspective game;
-	
+
 	// Simple array data structure that contains the 6 2D faces that will be displayed to the user
 	private GameScreen2D[] faces;
 	
@@ -52,6 +53,8 @@ public class LevelManager {
 
 	private Texture tempFace;
 	private int tempFacePos;
+	
+	private int currentLevel;
 
 	// The context menu for the game
 	private Stage menu;
@@ -79,6 +82,8 @@ public class LevelManager {
 		this.game = game;
 		this.faces = new GameScreen2D[6]; 
 		this.p = new Parser();
+		
+		this.currentLevel = 1;
 		
 		// Default the current face to the FRONT face
 		this.currentFace = FACE_FRONT;
@@ -300,12 +305,13 @@ public class LevelManager {
 			game.setScreen(faces[currentFace]);
 						
 			Plane plane = faces[currentFace].getLevel2D();
-			int row = plane.getCharacter().getRow();
-			int col = plane.getCharacter().getColumn();
-			Parser p = new Parser();
-			PerspectiveItem item = p.findItemAt(row, col, plane);
+			Avatar character = plane.getCharacter();
+			PerspectiveItem item = p.findItemAt(character.getRow(), character.getColumn(), plane);
 			if(item != null)
-				item.onMoveOver(plane.getCharacter());
+				item.onMoveOver(character);
+			Tile tile = p.findTileAt(character.getRow(), character.getColumn(), plane);
+			if(tile != null)
+				tile.onMoveOver(character);
 		}
 		else{
 			game.setScreen(view3D);
@@ -536,5 +542,19 @@ public class LevelManager {
 	
 	public Stage getMenu() {
 		return menu;
+	}
+	
+	public void setCurrentLevel(int i) {
+		
+		currentLevel = i;
+	}
+	
+	public int getCurrentLevel() {
+		
+		return currentLevel;
+	}
+
+	public Perspective getGame() {
+		return game;
 	}
 }

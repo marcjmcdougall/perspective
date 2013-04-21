@@ -12,9 +12,11 @@ public class FloorTile extends Tile {
 		super(texture, row, column, level2D);
 	}
 	
-	public static FloorTile create(int row, int column, Plane level2D){
+	public static FloorTile create(int row, int column, Plane level2D, String imageName){
 		
-		Texture texture = new Texture(Gdx.files.internal("data/tiles/tile_blue.png"));
+		String path = "data/tiles/" + imageName;
+		
+		Texture texture = new Texture(Gdx.files.internal(path));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		FloorTile output = new FloorTile(texture, row, column, level2D);
