@@ -40,7 +40,7 @@ public class GameScreen extends PerspectiveScreen {
 		
 		black = new BitmapFont(Gdx.files.internal("data/fonts/myriadpro.fnt"),false);
 		//black = new BitmapFont(Gdx.files.internal("data/blackfont.fnt"),false);
-		//clockTexture = new Texture(Gdx.files.internal("data/items/item_clock256.png"));
+		//clockTexture = new Texture(Gdx.files.internal("data/Items/item_clock256.png"));
 		//clockImg = new Image(clockTexture);
 	}
 	

@@ -27,7 +27,7 @@ public class SummaryScreen extends Image {
 	
 	private Button nextLevel;
 	
-	private SummaryScreen(final Perspective game, final LevelManager manager, Texture texture, final Plane level2D, final int stars, final int hearts) {
+	private SummaryScreen(Texture texture, final Plane level2D, final int stars, final int hearts) {
 		
 		// Call the super constructor
 		super(texture);	
@@ -35,6 +35,9 @@ public class SummaryScreen extends Image {
 		this.level2D = level2D;
 		this.stars = stars;
 		this.hearts = hearts;
+		
+		final LevelManager manager = level2D.getManager();
+		final Perspective game = manager.getGame();
 		
 		SequenceAction sequence = new SequenceAction();
 		
@@ -46,6 +49,8 @@ public class SummaryScreen extends Image {
 		
 		
 		this.addAction(sequence);
+		
+		
 		
 		int width = Gdx.graphics.getWidth();
 		int height = Gdx.graphics.getHeight();
@@ -62,19 +67,20 @@ public class SummaryScreen extends Image {
 		nextLevel = new TextButton("", style);
 		nextLevel.setWidth(120);
 		nextLevel.setHeight(50);
-		nextLevel.setX((width/2)-(nextLevel.getWidth()*5)/4);
-		nextLevel.setY(height);
+		nextLevel.setX(50);
+		nextLevel.setY(50);
 		
 		nextLevel.addListener(new InputListener()
 		{
+
 			public boolean touchDown(InputEvent even, float x, float y,int pointer, int button){
-				
+				System.out.println("touch down");
 				return true;
 			}
 			
 			public void touchUp(InputEvent event, float x, float y,int pointer, int button){
-				
-				if(manager.getCurrentLevel() < 2){
+				System.out.println("touch up");
+				if(manager.getCurrentLevel() < 3){
 					try {
 						manager.loadLevel("data/levels/level" + (manager.getCurrentLevel() + 1) + ".txt");
 					} catch (InterruptedException e) {
@@ -87,8 +93,22 @@ public class SummaryScreen extends Image {
 				}
 			}
 		});
+
+		SequenceAction buttonSequence = new SequenceAction();
 		
-		manager.getStage().addActor(nextLevel);
+		buttonSequence.addAction(Actions.delay(0.8f));
+
+		buttonSequence.addAction(Actions.run(
+				new Runnable(){
+					public void run() {
+						level2D.getStage().addActor(nextLevel);
+					}
+				}
+		));
+		
+		this.addAction(buttonSequence);
+		
+		Gdx.input.setInputProcessor(level2D.getStage());
 	}
 	
 	public SequenceAction addItemsToSequence(final SequenceAction sequence, final Plane level2D, final String items, final int numItems, final int maxItems, final int startX, final int startY, final int objSize, final int objSpacing){
@@ -143,7 +163,7 @@ public class SummaryScreen extends Image {
 		return sequence;
 	}
 	
-	public static SummaryScreen create(Perspective game, LevelManager manager, Plane level2D, int stars, int hearts){
+	public static SummaryScreen create(Plane level2D, int stars, int hearts){
 		
 		// Create the new Texture 
 		Texture texture = new Texture(Gdx.files.internal("data/Summary-BG.png"));
@@ -152,7 +172,7 @@ public class SummaryScreen extends Image {
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		// Return the Texture
-		return new SummaryScreen(game, manager, texture, level2D, stars, hearts);
+		return new SummaryScreen(texture, level2D, stars, hearts);
 	}
 
 }

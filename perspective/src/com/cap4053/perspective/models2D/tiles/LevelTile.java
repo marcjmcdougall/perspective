@@ -35,14 +35,14 @@ public class LevelTile extends Tile {
 		return output;
 	}
 	
-	public void onMoveOver(Perspective game, LevelManager manager, Avatar collidedObject){
+	public void onMoveOver(Avatar collidedObject){
 		// Prevents being called multiple times
 		if(!this.isLevelingUp){
 			this.isLevelingUp = true;
 			
 			int stars = collidedObject.getManager().getStars().size();
 			int hearts = collidedObject.getManager().getHearts().size();
-			SummaryScreen summary = SummaryScreen.create(game, manager, this.plane, stars, hearts);
+			SummaryScreen summary = SummaryScreen.create(this.plane, stars, hearts);
 			
 			summary.addAction(Actions.alpha(0.0f));
 			this.plane.getStage().addActor(summary);

@@ -9,7 +9,6 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.cap4053.perspective.Perspective;
@@ -17,6 +16,7 @@ import com.cap4053.perspective.models2D.Avatar;
 import com.cap4053.perspective.models2D.PerspectiveItem;
 import com.cap4053.perspective.models2D.items.Heart;
 import com.cap4053.perspective.models2D.items.Star;
+import com.cap4053.perspective.models2D.tiles.Tile;
 import com.cap4053.perspective.screens.GameScreen2D;
 import com.cap4053.perspective.screens.GameScreen3D;
 import com.cap4053.perspective.screens.LoadingScreen;
@@ -309,6 +309,9 @@ public class LevelManager {
 			PerspectiveItem item = p.findItemAt(character.getRow(), character.getColumn(), plane);
 			if(item != null)
 				item.onMoveOver(character);
+			Tile tile = p.findTileAt(character.getRow(), character.getColumn(), plane);
+			if(tile != null)
+				tile.onMoveOver(character);
 		}
 		else{
 			game.setScreen(view3D);
@@ -553,10 +556,5 @@ public class LevelManager {
 
 	public Perspective getGame() {
 		return game;
-	}
-
-	public Stage getStage() {
-		// TODO Auto-generated method stub
-		return menu;
 	}
 }

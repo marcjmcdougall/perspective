@@ -20,7 +20,7 @@ public class Star extends PerspectiveItem {
 
 	public static Star create(int row, int column, Plane level2D){
 		
-		Texture texture = new Texture(Gdx.files.internal("data/items/item_star.png"));
+		Texture texture = new Texture(Gdx.files.internal("data/Items/item_star.png"));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		return new Star(texture, row, column, level2D);
@@ -42,7 +42,7 @@ public class Star extends PerspectiveItem {
 	@Override
 	public Drawable getZenDrawable() {
 		
-		TextureRegion tr = new TextureRegion(new Texture(Gdx.files.internal("data/items/alternate_star.png")));
+		TextureRegion tr = new TextureRegion(new Texture(Gdx.files.internal("data/Items/alternate_star.png")));
 		
 		TextureRegionDrawable drawable = new TextureRegionDrawable(tr);
 		

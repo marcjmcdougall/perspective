@@ -23,7 +23,7 @@ public class Heart extends PerspectiveItem {
 //		DEBUG
 		Gdx.app.log(Perspective.TAG, "**CREATING NOW**");
 		
-		Texture texture = new Texture(Gdx.files.internal("data/items/item_heart.png"));
+		Texture texture = new Texture(Gdx.files.internal("data/Items/item_heart.png"));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		return new Heart(texture, row, column, level2D);
@@ -43,7 +43,7 @@ public class Heart extends PerspectiveItem {
 	@Override
 	public Drawable getZenDrawable() {
 		
-		TextureRegion tr = new TextureRegion(new Texture(Gdx.files.internal("data/items/alternate_heart.png")));
+		TextureRegion tr = new TextureRegion(new Texture(Gdx.files.internal("data/Items/alternate_heart.png")));
 		
 		TextureRegionDrawable drawable = new TextureRegionDrawable(tr);
 		

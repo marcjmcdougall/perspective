@@ -52,7 +52,7 @@ public class AvatarMoveToAction extends MoveToAction {
 		Tile tile = detectTile();
 		
 		if(tile != null){
-			tile.onMoveOver(plane.getManager().getGame(), plane.getManager(), avatar);
+			tile.onMoveOver(avatar);
 		}
 		
 		return super.act(delta);
