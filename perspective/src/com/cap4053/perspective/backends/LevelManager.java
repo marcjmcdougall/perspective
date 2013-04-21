@@ -71,7 +71,7 @@ public class LevelManager {
 	private boolean canZoomOut;
 	
 	private ArrayList<Star> stars;
-	private ArrayList<Heart> hearts;
+	private static ArrayList<Heart> hearts;
 	 
 	/**
 	 * Simple constructor that associates the main Game with the local variable.
@@ -134,6 +134,9 @@ public class LevelManager {
 	public void loadLevel(String levelFileName) throws InterruptedException{
 		
 		canZoomOut = false;
+		stars.clear();
+		hearts.clear();
+		Perspective.setTime(30);
 		
 		// Temporary variables holding empty memory space for the Strings that represent each face
 		String[] tileMaps = new String[6]; 

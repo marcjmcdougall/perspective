@@ -84,8 +84,8 @@ public class MenuScreen extends PerspectiveScreen{
 		style1.font = black;
 		
 		button = new TextButton("",style1);
-		button.setWidth(120);
-		button.setHeight(50);
+		button.setWidth(Gdx.graphics.getWidth()*.375f);
+		button.setHeight(Gdx.graphics.getHeight()*.104f);
 		button.setX((width/2)-(button.getWidth()*5)/4);
 		button.setY(height);
 		
@@ -100,8 +100,8 @@ public class MenuScreen extends PerspectiveScreen{
 		style2.font = black;
 		
 		options = new TextButton("",style2);
-		options.setWidth(120);
-		options.setHeight(50);
+		options.setWidth(Gdx.graphics.getWidth()*.375f);
+		options.setHeight(Gdx.graphics.getHeight()*.104f);
 		options.setX((width/2)+(button.getWidth()*1)/4);
 		options.setY(height);
 		

@@ -114,7 +114,7 @@ public class Avatar extends PerspectiveObject {
 	public void addHeart(Heart heart) {
 		
 		if(!manager.getHearts().contains(heart)){
-			
+			Perspective.addTime(20);
 			manager.getHearts().add(heart);
 			heartCollection.update(manager.getHearts().size());
 		}

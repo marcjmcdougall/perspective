@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.OrderedMap;
+import com.cap4053.perspective.backends.LevelManager;
 import com.cap4053.perspective.backends.TimerManager;
 import com.cap4053.perspective.screens.PerspectiveScreen;
 import com.cap4053.perspective.screens.SplashScreen;
@@ -33,7 +34,7 @@ public class Perspective extends Game implements Json.Serializable {
 	// Music variable that handles the playing of music for the application
 	private Music musicPlayer;
 	
-	private int time = 59;
+	private static int time = 30;
 	private float elapsed = 0;
 	
 	private static final String TIME = "time";
@@ -124,21 +125,21 @@ public class Perspective extends Game implements Json.Serializable {
 		return currentScreen;
 	}
 	
-	public int getTime()
+	public static int getTime()
 	{
-		return this.time;
+		return time;
 	}
 	
 	public void decTime()
 	{
 		if(TimerManager.shouldRunTimer)
-			this.time--;
+			Perspective.time--;
 	}
 	
-	public void addTime(int add)
+	public static void addTime(int add)
 	{
 		if(TimerManager.shouldRunTimer)
-			this.time+=add;
+			time+=add;
 	}
 	
 	public void continueTime(float delta)
@@ -153,19 +154,19 @@ public class Perspective extends Game implements Json.Serializable {
 				this.elapsed = 0;
 			}
 			
-			if(this.getTime()==0)
-				this.addTime(59);
+			if(Perspective.getTime()==0)
+				Perspective.setTime(30);
 		}
 	}
 	
-	public void setTime(int time)
+	public static void setTime(int t)
 	{
-		this.time = time;
+		time = t;
 	}
 
 	@Override
 	public void write(Json json) {
-		json.writeValue(TIME, this.getTime());
+		json.writeValue(TIME, Perspective.getTime());
 	}
 
 	@Override
