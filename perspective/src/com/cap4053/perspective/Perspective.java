@@ -40,6 +40,7 @@ public class Perspective extends Game implements Json.Serializable {
 	private static final String TIME = "time";
 	
 	public float SFXVolume = 1.0f;
+	public float musicVolume = 0.15f;
 	
 	
 	@Override
@@ -52,7 +53,7 @@ public class Perspective extends Game implements Json.Serializable {
 		musicPlayer.setLooping(true);
 		
 		// Set the volume to be very quiet
-		musicPlayer.setVolume(0.15f);
+		musicPlayer.setVolume(musicVolume);
 		
 		// Only play the music if you are NOT in developer mode
 		if(!DEVELOPER_MODE){
@@ -167,7 +168,7 @@ public class Perspective extends Game implements Json.Serializable {
 	public void read(Json json, OrderedMap<String, Object> jsonData) {
 	}
 	
-	public Music getmusicPlayer(){
+	public Music getMusicPlayer(){
 		return musicPlayer;
 	}
 }
