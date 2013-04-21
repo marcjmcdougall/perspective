@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.backends.LevelManager;
+import com.cap4053.perspective.backends.TimerManager;
 
 public class LoadingScreen extends PerspectiveScreen {
 
@@ -37,6 +38,8 @@ public class LoadingScreen extends PerspectiveScreen {
 
 		super.render(delta);
 		
+		TimerManager.shouldRunTimer = false;
+		
 		if (counter++ < 6) {
 			manager.get2DScreen(counter % 6).show();
 			manager.get2DScreen(counter % 6).resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -60,6 +63,8 @@ public class LoadingScreen extends PerspectiveScreen {
 			manager.loadScreens(textures);
 			manager.setScreen(0);
 			manager.showScreen();
+			
+			TimerManager.shouldRunTimer = true;
 		}
 	}
 }

@@ -48,8 +48,7 @@ public class LevelTile extends Tile {
 			this.plane.getStage().addActor(summary);
 			summary.addAction(Actions.alpha(1, 0.7f));
 			
-			TimerManager timerManager = TimerManager.getInstance();
-			timerManager.shouldRunTimer = false;
+			TimerManager.shouldRunTimer = false;
 			
 			System.out.println("LEVEL UP!");
 			
