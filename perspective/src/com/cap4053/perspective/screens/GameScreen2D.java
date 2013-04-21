@@ -1,6 +1,7 @@
 package com.cap4053.perspective.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.cap4053.perspective.Perspective;
@@ -11,6 +12,17 @@ import com.cap4053.perspective.models2D.PerspectiveObject;
 import com.cap4053.perspective.view.GameInputProcessor2D;
 
 public class GameScreen2D extends GameScreen{
+
+	@Override
+	public void render(float delta) {
+		if(Gdx.input.isKeyPressed(Keys.M)||Gdx.input.isKeyPressed(Keys.MENU))
+			manager.toggleMenu();
+		
+		else
+			super.render(delta);
+		
+		
+	}
 
 	public static float HORIZONTAL_MARGIN = 20.0f;
 	public static float VERTICAL_MARGIN = 100.0f;
@@ -46,6 +58,7 @@ public class GameScreen2D extends GameScreen{
 		
 		// TODO: Set input processor to just the stage?
 		Gdx.input.setInputProcessor(new GestureDetector(new GameInputProcessor2D(game, manager, this)));
+		Gdx.input.setCatchMenuKey(true);
 	}
 	
 	@Override

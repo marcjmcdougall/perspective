@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -18,6 +19,7 @@ import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.backends.LevelManager;
 import com.cap4053.perspective.backends.Plane;
 import com.cap4053.perspective.models2D.PerspectiveCollection;
+import com.cap4053.perspective.view.SummaryScreenInputProcessor;
 
 public class SummaryScreen extends Image {
 	
@@ -52,7 +54,7 @@ public class SummaryScreen extends Image {
 		
 		
 		
-		int width = Gdx.graphics.getWidth();
+		/*int width = Gdx.graphics.getWidth();
 		int height = Gdx.graphics.getHeight();
 		TextureAtlas atlas = new TextureAtlas("data/Next_Level_Button.pack");
 		Skin skin = new Skin();
@@ -107,9 +109,9 @@ public class SummaryScreen extends Image {
 				}
 		));
 		
-		this.addAction(buttonSequence);
+		this.addAction(buttonSequence);*/
 		
-		Gdx.input.setInputProcessor(level2D.getStage());
+		Gdx.input.setInputProcessor(new GestureDetector(new SummaryScreenInputProcessor(game,manager)));
 	}
 	
 	public SequenceAction addItemsToSequence(final SequenceAction sequence, final Plane level2D, final String items, final int numItems, final int maxItems, final int startX, final int startY, final int objSize, final int objSpacing){
