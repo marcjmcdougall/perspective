@@ -2,6 +2,7 @@ package com.cap4053.perspective.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Vector2;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.backends.LevelManager;
 import com.cap4053.perspective.screens.GameScreen3D;
@@ -25,7 +26,7 @@ public class GameInputProcessor3D extends PerspectiveInputProcessor {
 		this.screen = (GameScreen3D) game.getScreen();
 	}
 
-	@Override
+	/*@Override
 	public boolean keyDown(int keycode) {
 
 		return false;
@@ -172,6 +173,64 @@ public class GameInputProcessor3D extends PerspectiveInputProcessor {
 	@Override
 	public boolean scrolled(int amount) {
 
+		return false;
+	}
+*/
+	@Override
+	public boolean touchDown(float x, float y, int pointer, int button) {
+		
+		return true;
+	}
+
+	@Override
+	public boolean tap(float x, float y, int count, int button) {
+		if(count>=2)
+			screen.getCube().zoomTransition();
+		else
+			screen.getCube().transitionTo2D();
+		return false;
+	}
+
+	@Override
+	public boolean longPress(float x, float y) {
+		screen.getCube().transitionTo2D();
+		return false;
+	}
+
+	@Override
+	public boolean fling(float velocityX, float velocityY, int button) {
+		screen.getCube().transitionTo2D();
+		return true;
+	}
+
+	@Override
+	public boolean pan(float x, float y, float deltaX, float deltaY) {
+		
+		float currentAngleX = screen.getCube().getAngleX();
+		float currentAngleY = screen.getCube().getAngleY();
+    
+		screen.getCube().setAngleX(currentAngleX + deltaX * TOUCH_SCALE_FACTOR);
+		screen.getCube().setAngleY(currentAngleY + deltaY * TOUCH_SCALE_FACTOR);
+		
+		return false;
+	}
+
+	@Override
+	public boolean zoom(float initialDistance, float distance) {
+		
+		/*if(initialDistance<distance*4)
+		{
+			screen.getCube().zoomTransition();
+			return true;
+		}*/
+		
+		return false;
+	}
+
+	@Override
+	public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2,
+			Vector2 pointer1, Vector2 pointer2) {
+		
 		return false;
 	}
 }

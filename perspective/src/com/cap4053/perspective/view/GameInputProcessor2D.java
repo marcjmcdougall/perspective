@@ -22,59 +22,8 @@ public class GameInputProcessor2D extends PerspectiveInputProcessor{
 		this.gameScreen = gameScreen;
 		this.manager = manager;
 	}
-	
-	@Override
-	public boolean keyDown(int keycode) {
-		
-		return false;
-	}
 
-	@Override
-	public boolean keyTyped(char character) {
-		
-		return false;
-	}
-
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		
-//		DEBUG
-//		Gdx.app.log(Perspective.TAG, "Touch down received! X: " + screenX + ", Y: " + screenY);
-		
-		Plane plane = gameScreen.getLevel2D();
-		
-		Vector2 coords = gameScreen.getStage().screenToStageCoordinates(new Vector2(screenX, screenY));
-		
-		plane.onTouch(coords.x, coords.y, gameScreen.getStage());
-		
-		return true;
-	}
-
-	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		
-		return false;
-	}
-
-	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int amount) {
-		
-		return false;
-	}
-
-	@Override
+	/*@Override
 	public boolean keyUp(int keycode) {
 		
 		if(keycode == Input.Keys.BACK | keycode == Input.Keys.BACKSPACE){
@@ -118,5 +67,61 @@ public class GameInputProcessor2D extends PerspectiveInputProcessor{
 		}
 		
 		return true;
+	}*/
+
+	@Override
+	public boolean touchDown(float x, float y, int pointer, int button) {
+		
+		Plane plane = gameScreen.getLevel2D();
+		
+		Vector2 coords = gameScreen.getStage().screenToStageCoordinates(new Vector2(x, y));
+		
+		plane.onTouch(coords.x, coords.y, gameScreen.getStage());
+		
+		return true;
+	}
+
+	@Override
+	public boolean tap(float x, float y, int count, int button) {
+		if(count>=2)
+			manager.togglePerspective();
+		return false;
+	}
+
+	@Override
+	public boolean longPress(float x, float y) {
+		manager.togglePerspective();
+		return false;
+	}
+
+	@Override
+	public boolean fling(float velocityX, float velocityY, int button) {
+		
+		return false;
+	}
+
+	@Override
+	public boolean pan(float x, float y, float deltaX, float deltaY) {
+		
+		return false;
+	}
+
+	@Override
+	public boolean zoom(float initialDistance, float distance) {
+
+		if(initialDistance>distance*2)
+		{
+			//manager.togglePerspective();
+			return true;
+		}
+		
+		return false;
+	}
+
+	@Override
+	public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2,
+			Vector2 pointer1, Vector2 pointer2) {
+		
+		return false;
 	}
 }

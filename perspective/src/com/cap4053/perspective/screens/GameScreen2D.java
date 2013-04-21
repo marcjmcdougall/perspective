@@ -1,6 +1,7 @@
 package com.cap4053.perspective.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.backends.LevelManager;
@@ -44,7 +45,7 @@ public class GameScreen2D extends GameScreen{
 		super.show();
 		
 		// TODO: Set input processor to just the stage?
-		Gdx.input.setInputProcessor(new GameInputProcessor2D(game, manager, this));
+		Gdx.input.setInputProcessor(new GestureDetector(new GameInputProcessor2D(game, manager, this)));
 	}
 	
 	@Override

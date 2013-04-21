@@ -1,15 +1,11 @@
 package com.cap4053.perspective.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.backends.LevelManager;
 import com.cap4053.perspective.models3D.MoveableTexturedCube;
@@ -85,7 +81,7 @@ public class GameScreen3D extends GameScreen {
 //		DEBUG
 		Gdx.app.log(Perspective.TAG, "**Showing Game Screen Now**");
 		
-		Gdx.input.setInputProcessor(new GameInputProcessor3D(game, manager));
+		Gdx.input.setInputProcessor(new GestureDetector(new GameInputProcessor3D(game, manager)));
 		
 		cube = new MoveableTexturedCube(front, back, left, right, top, bottom);
 		
