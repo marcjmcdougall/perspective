@@ -3,6 +3,7 @@ package com.cap4053.perspective.view;
 import com.badlogic.gdx.math.Vector2;
 import com.cap4053.perspective.Perspective;
 import com.cap4053.perspective.backends.LevelManager;
+import com.cap4053.perspective.screens.LevelSelectorScreen;
 
 public class SummaryScreenInputProcessor extends PerspectiveInputProcessor {
 
@@ -29,6 +30,9 @@ public class SummaryScreenInputProcessor extends PerspectiveInputProcessor {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		else{
+			manager.getGame().setScreen(new LevelSelectorScreen(manager.getGame()));
 		}
 		
 		return true;
