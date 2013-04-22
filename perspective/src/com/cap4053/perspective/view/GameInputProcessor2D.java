@@ -2,6 +2,7 @@ package com.cap4053.perspective.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Json;
 import com.cap4053.perspective.Perspective;
@@ -72,20 +73,23 @@ public class GameInputProcessor2D extends PerspectiveInputProcessor{
 	@Override
 	public boolean touchDown(float x, float y, int pointer, int button) {
 		
-		Plane plane = gameScreen.getLevel2D();
-		
-		Vector2 coords = gameScreen.getStage().screenToStageCoordinates(new Vector2(x, y));
-		
-		plane.onTouch(coords.x, coords.y, gameScreen.getStage());
-		
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean tap(float x, float y, int count, int button) {
-		if(count>=2)
+		if(count==2&&manager.getCanZoomOut())
 			manager.togglePerspective();
-		return false;
+		
+		else if(count==1)
+		{
+			Plane plane = gameScreen.getLevel2D();
+			
+			Vector2 coords = gameScreen.getStage().screenToStageCoordinates(new Vector2(x, y));
+			
+			plane.onTouch(coords.x, coords.y, gameScreen.getStage());
+		}
+		return true;
 	}
 
 	@Override

@@ -63,7 +63,7 @@ public class LoadingScreen extends PerspectiveScreen {
 			manager.loadScreens(textures);
 			manager.setScreen(0);
 			manager.showScreen();
-			
+			manager.setCanZoomOut(true);
 			TimerManager.shouldRunTimer = true;
 		}
 	}

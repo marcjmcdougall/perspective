@@ -68,8 +68,10 @@ public class LevelManager {
 	// Variable that determines whether or not to display the game menu
 	private boolean displayMenu;
 	
+	private boolean canZoomOut;
+	
 	private ArrayList<Star> stars;
-	private ArrayList<Heart> hearts;
+	private static ArrayList<Heart> hearts;
 	 
 	/**
 	 * Simple constructor that associates the main Game with the local variable.
@@ -93,6 +95,8 @@ public class LevelManager {
 		
 		// Default the menu state of off
 		this.displayMenu = false;
+		
+		this.canZoomOut = false;
 		
 		// Sets up the menu Stage
 		this.menu = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
@@ -128,6 +132,11 @@ public class LevelManager {
 	 * @throws InterruptedException 
 	 */
 	public void loadLevel(String levelFileName) throws InterruptedException{
+		
+		canZoomOut = false;
+		stars.clear();
+		hearts.clear();
+		Perspective.setTime(30);
 		
 		// Temporary variables holding empty memory space for the Strings that represent each face
 		String[] tileMaps = new String[6]; 
@@ -556,5 +565,15 @@ public class LevelManager {
 
 	public Perspective getGame() {
 		return game;
+	}
+	
+	public void setCanZoomOut(boolean val)
+	{
+		canZoomOut = val;
+	}
+
+	public boolean getCanZoomOut() {
+		
+		return canZoomOut;
 	}
 }

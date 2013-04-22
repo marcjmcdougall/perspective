@@ -45,6 +45,8 @@ public class LevelTile extends Tile {
 			SummaryScreen summary = SummaryScreen.create(this.plane, stars, hearts);
 			
 			summary.addAction(Actions.alpha(0.0f));
+			//summary.setX(Gdx.graphics.getWidth()/2-summary.getWidth()/4);
+			//summary.setY(Gdx.graphics.getHeight()/2-summary.getHeight()/2);
 			this.plane.getStage().addActor(summary);
 			summary.addAction(Actions.alpha(1, 0.7f));
 			

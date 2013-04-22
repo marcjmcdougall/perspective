@@ -2,6 +2,7 @@ package com.cap4053.perspective.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -36,7 +37,7 @@ public abstract class PerspectiveScreen implements Screen {
 			
 		
 	    Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
-	
+	    
 	    // draw the actors
 	    stage.draw();
 	}
@@ -57,6 +58,7 @@ public abstract class PerspectiveScreen implements Screen {
 		Gdx.app.log(Perspective.TAG, "Showing screen: " + getName());
 		
 		Gdx.input.setInputProcessor(stage);
+		Gdx.input.setCatchMenuKey(true);
 	}
 
 	@Override
